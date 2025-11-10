@@ -1,0 +1,1219 @@
+<!-- #102e62 
+ #f5a222-->
+<!DOCTYPE html>
+<html lang="en" x-data="{ open: false, dropdowns: {company: false, products: false, services: false}, scrolled: false }"
+    x-init="window.addEventListener('scroll', () => { scrolled = window.scrollY > 50 })">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GVR Infosystem</title>
+    <link rel="icon" href="./assests/fav-removebg-preview.png" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- EB Garamond Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/alpinejs" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MotionPathPlugin.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'EB Garamond', serif;
+        }
+
+        [x-cloak] {
+            display: none !important;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .animate-slide-down {
+            animation: slideDown 0.7s ease-out forwards;
+        }
+
+        @keyframes dropdownSlide {
+            from {
+                transform: translateY(-10px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .dropdown-animate {
+            animation: dropdownSlide 0.3s ease-out forwards;
+        }
+
+        @keyframes staggerFade {
+            from {
+                transform: translateY(-5px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .stagger-item {
+            opacity: 0;
+            animation: staggerFade 0.3s ease forwards;
+        }
+
+        .stagger-item:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .stagger-item:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .stagger-item:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+    </style>
+</head>
+
+<body class="relative min-h-screen bg-gray-200 text-white">
+    <nav x-data="{ 
+        open: false, 
+        dropdowns: { company: false, products: false, services: false }, 
+        activeLink: '', 
+        scrolled: false 
+    }" x-init="window.addEventListener('scroll', () => { scrolled = window.scrollY > 50 })"
+        class="fixed top-0 left-0 w-full z-50 animate-slide-down transition-all duration-500 shadow-md" :style="scrolled
+        ? (window.innerWidth >= 768 
+            ? 'background: linear-gradient(135deg, white 25%, #f5a222 25% 100%); box-shadow: 0 4px 6px rgba(0,0,0,0.1);'
+            : 'background: linear-gradient(135deg, white 45%, #f5a222 45% 100%); box-shadow: 0 4px 6px rgba(0,0,0,0.1);')
+        : (window.innerWidth >= 768
+            ? 'background: linear-gradient(135deg, white 25%, #f5a222 25% 100%);'
+            : 'background: linear-gradient(135deg, white 45%, #f5a222 45% 100%);')">
+
+        <div class="max-w-7xl mx-auto px-4 lg:px-8 flex items-center justify-between h-16"
+            :class="scrolled ? 'text-[#102e62]' : 'text-[#102e62]'">
+            <!-- Logo -->
+            <a href="./" class="text-xl font-bold">
+                <img src="./assests/upscalemedia-transformed.png" alt="MyLogo" class="h-10 w-auto">
+            </a>
+
+            <!-- Desktop Nav -->
+            <div class="hidden lg:flex items-center space-x-8">
+                <!-- Company -->
+                <div class="group h-16 flex items-center relative">
+                    <button
+                        class="flex items-center gap-1 group-hover:text-black text-xl transition-colors duration-300">
+                        Company
+                        <svg class="w-4 h-4 transition-transform duration-300 group-hover:rotate-180"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div
+                        class="absolute left-0 top-full hidden group-hover:block bg-gray-900 rounded-lg shadow-lg p-2 text-white z-50 min-w-[28rem] dropdown-animate">
+                        <a href="aboutus"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">About
+                            Us</a>
+                        <a href="portfolio"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">Portfolio
+                            - <span class="text-white/50">Explore our all overview</span></a>
+                        <a href="team"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">Team -
+                            <span class="text-white/50">We are friendly join our team</span></a>
+                        <a href="service"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">Services
+                            - <span class="text-white/50">Happy to help you</span></a>
+                        <a href="case-study"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">Case
+                            Study - <span class="text-white/50">Know more about our case study</span></a>
+                    </div>
+                </div>
+
+                <!-- Services -->
+                <div class="group h-16 flex items-center relative">
+                    <button
+                        class="flex items-center gap-1 group-hover:text-black text-xl transition-colors duration-300">
+                        Services
+                        <svg class="w-4 h-4 transition-transform duration-300 group-hover:rotate-180"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div
+                        class="absolute left-0 top-full hidden group-hover:block bg-gray-900 rounded-lg shadow-lg p-2 text-white z-50 min-w-[28rem] dropdown-animate">
+                        <a href="cloud-migration-maintenance-deployment"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">Cloud
+                            Migration, Maintenance & Deployment</a>
+                        <a href="data-center-operations"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">Data
+                            Center Operations</a>
+                        <a href="mobile-applications-development"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">Mobile
+                            Applications Development</a>
+                        <a href="security-solutions"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">Security
+                            Solutions</a>
+                        <a href="ai-ml-solutions"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">AI & ML
+                            Solutions</a>
+                        <a href="web-based-community-solutions"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">Web
+                            Based Community Solutions</a>
+                        <a href="enterprise-applications-integration"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">Enterprise
+                            Applications Integration</a>
+                    </div>
+                </div>
+
+                <!-- Products -->
+                <div class="group h-16 flex items-center relative">
+                    <button
+                        class="flex items-center gap-1 group-hover:text-black text-xl transition-colors duration-300">
+                        Products
+                        <svg class="w-4 h-4 transition-transform duration-300 group-hover:rotate-180"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div
+                        class="absolute left-0 top-full hidden group-hover:block bg-gray-900 rounded-lg shadow-lg p-2 text-white z-50 min-w-[28rem] dropdown-animate">
+                        <a href="ayucare(hms)"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">AYUCARE
+                            (HMS)</a>
+                        <a href="burserele"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">BURSERELE</a>
+                        <a href="empora(hrm)"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">EMPORA
+                            (HRM)</a>
+                    </div>
+                </div>
+
+                <a href="careers" class="hover:text-black text-xl transition-colors duration-300">Careers</a>
+                <a href="blog" class="hover:text-black text-xl transition-colors duration-300">Blog</a>
+            </div>
+
+            <!-- Get Started Button -->
+            <div class="hidden lg:block">
+                <a href="contact"
+                    class="relative flex items-center hover:bg-transparent hover:text-[#102e62] gap-2 px-6 py-2 border border-2 border-[#102e62] text-[#fff] bg-[#102e62] rounded-full font-semibold overflow-hidden group">
+                    <span class="flex items-center gap-2 group-hover:animate-roll-up-down">
+                        Get Started
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                            <line x1="4" y1="12" x2="20" y2="12" />
+                            <polyline points="14 6 20 12 14 18" />
+                        </svg>
+                    </span>
+                </a>
+            </div>
+
+            <!-- Mobile Toggle -->
+            <button @click="open = !open"
+                class="lg:hidden w-10 h-10 flex items-center justify-center rounded-full border border-[#102e62] text-[#102e62]">
+                <svg x-show="!open" x-cloak xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                    stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+                <svg x-show="open" x-cloak xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                    stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+        <!-- Mobile Nav -->
+        <div x-show="open" x-transition.opacity x-cloak class="lg:hidden absolute top-16 left-0 w-full 
+            bg-gray-900
+            border-t border-white/20 text-white dropdown-animate rounded-b-xl shadow-lg">
+            <div class="flex flex-col p-4 space-y-1">
+
+                <!-- Company -->
+                <div class="space-y-1">
+                    <button @click="dropdowns.company = !dropdowns.company"
+                        class="w-full text-left flex justify-between items-center px-3 py-2 rounded-lg hover:bg-white/10"
+                        :class="dropdowns.company ? 'text-yellow-400' : 'text-white'">
+                        Company
+                        <span x-show="!dropdowns.company">+</span>
+                        <span x-show="dropdowns.company">-</span>
+                    </button>
+                    <div x-show="dropdowns.company" x-transition.opacity x-transition.duration.300ms
+                        class="ml-4 mt-2 space-y-2 px-1 py-1 dropdown-animate border border-white/50 rounded-lg">
+                        <a href="aboutus"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">About
+                            Us</a>
+                        <a href="portfolio"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">Portfolio
+                            - <span class="text-white/50">Explore our all overview</span></a>
+                        <a href="team"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">Team
+                            - <span class="text-white/50">We are friendly join our team</span></a>
+                        <a href="service"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">Services
+                            - <span class="text-white/50">Happy to help you</span></a>
+                        <a href="case-study"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">Case
+                            Study - <span class="text-white/50">Know more about our case study</span></a>
+                    </div>
+                </div>
+
+                <!-- Services -->
+                <div class="space-y-3">
+                    <button @click="dropdowns.services = !dropdowns.services"
+                        class="w-full text-left flex justify-between items-center px-3 py-2 rounded-lg hover:bg-white/10"
+                        :class="dropdowns.services ? 'text-yellow-400' : 'text-white'">
+                        Services
+                        <span x-show="!dropdowns.services">+</span>
+                        <span x-show="dropdowns.services">-</span>
+                    </button>
+                    <div x-show="dropdowns.services" x-transition.opacity x-transition.duration.300ms
+                        class="ml-4 mt-2 space-y-2 px-1 py-1 dropdown-animate border border-white/50 rounded-lg">
+                        <a href="cloud-migration-maintenance-deployment"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400stagger-item">Cloud
+                            Migration, Maintenance & Deployment</a>
+                        <a href="data-center-operations"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">Data
+                            Center Operations</a>
+                        <a href="mobile-applications-development"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">Mobile
+                            Applications Development</a>
+                        <a href="security-solutions"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">Security
+                            Solutions</a>
+                        <a href="ai-ml-solutions"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">AI &
+                            ML Solutions</a>
+                        <a href="web-based-community-solutions"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">Web
+                            Based Community Solutions</a>
+                        <a href="enterprise-applications-integration"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">Enterprise
+                            Applications Integration</a>
+                    </div>
+                </div>
+
+                <!-- Products -->
+                <div class="space-y-3">
+                    <button @click="dropdowns.products = !dropdowns.products"
+                        class="w-full text-left flex justify-between items-center px-3 py-2 rounded-lg hover:bg-white/10"
+                        :class="dropdowns.products ? 'text-yellow-400' : 'text-white'">
+                        Products
+                        <span x-show="!dropdowns.products">+</span>
+                        <span x-show="dropdowns.products">-</span>
+                    </button>
+                    <div x-show="dropdowns.products" x-transition.opacity x-transition.duration.300ms
+                        class="ml-4 mt-2 px-1 py-1 space-y-2 dropdown-animate border border-white/50 rounded-lg">
+                        <a href="ayucare(hms)"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">AYUCARE
+                            (HMS)</a>
+                        <a href="burserele"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">BURSERELE</a>
+                        <a href="empora(hrm)"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">EMPORA
+                            (HRM)</a>
+                    </div>
+                </div>
+
+                <!-- Single links -->
+                <a href="careers" @click="activeLink = 'careers'" class="block px-3 py-2 rounded-lg hover:bg-white/10"
+                    :class="activeLink === 'careers' ? 'text-yellow-400' : 'text-white'">
+                    Careers
+                </a>
+
+                <a href="blog" @click="activeLink = 'blog'" class="block px-3 py-2 rounded-lg hover:bg-white/10"
+                    :class="activeLink === 'blog' ? 'text-yellow-400' : 'text-white'">
+                    Blog
+                </a>
+
+                <!-- Get Started (Mobile with click animation) -->
+                <!-- Get Started (Mobile) -->
+                <div class="block lg:hidden">
+                    <a href="contact" id="mobile-get-started"
+                        class="relative flex items-center justify-center gap-2 px-6 py-2 bg-[#f5a222] text-[#102e62] border border-[#f5a222] rounded-full font-semibold overflow-hidden transition-all duration-300 ease-in-out">
+                        Get Started
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                            <line x1="4" y1="12" x2="20" y2="12" />
+                            <polyline points="14 6 20 12 14 18" />
+                        </svg>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+        </div>
+    </nav>
+    <script>
+        const mobileBtn = document.getElementById('mobile-get-started');
+
+        mobileBtn.addEventListener('click', (e) => {
+            // Optional: prevent immediate redirect for visual feedback
+            e.preventDefault();
+
+            // Change background to transparent and text color to #f5a222
+            mobileBtn.style.backgroundColor = 'transparent';
+            mobileBtn.style.color = '#f5a222';
+
+            // Navigate after a small delay (for user to see effect)
+            setTimeout(() => {
+                window.location.href = mobileBtn.getAttribute('href');
+            }, 200);
+        });
+    </script>
+
+
+
+    <!-- TEAM MEMBERS SECTION -->
+<section id="team-banner"
+  class="relative w-full pt-10 pb-5 md:py-20 mb-5 bg-cover bg-center bg-no-repeat md:h-[600px] 
+  flex flex-col items-center justify-center text-center overflow-hidden">
+
+  <!-- Background Video -->
+  <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover z-0">
+    <source src="./assests/bannervideo.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- Dark Gradient Overlay -->
+  <div class="absolute inset-0 bg-gradient-to-b from-[#102e62]/90 via-[#0b1e43]/85 to-[#000000]/90 z-0"></div>
+
+  <!-- Content -->
+  <div class="relative z-10 max-w-3xl px-6 py-14 md:pt-0 md:pb-0">
+    <h2
+      class="team-banner-title text-3xl sm:text-4xl md:text-5xl font-bold text-[#f5a222] drop-shadow-lg mt-8 mb-2 md:mb-4 opacity-0">
+      Meet Our Visionaries
+    </h2>
+
+    <p
+      class="team-banner-subtitle text-md sm:text-lg md:text-xl italic text-gray-100 opacity-0">
+      The talented minds driving innovation, growth, and excellence every day.
+    </p>
+  </div>
+</section>
+
+<style>
+  /* ---------------- Entrance Animation ---------------- */
+  @keyframes teamBannerSlideInTop {
+    0% {
+      opacity: 0;
+      transform: translateY(-50px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .team-banner-animate {
+    animation: teamBannerSlideInTop 1s ease-out forwards;
+  }
+
+  /* ---------------- Optional Overlay (for video blend) ---------------- */
+  #team-banner::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+  }
+</style>
+
+<script>
+  // Animate text on scroll (slide in from top with stagger)
+  const teamBannerObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const title = entry.target.querySelector('.team-banner-title');
+        const subtitle = entry.target.querySelector('.team-banner-subtitle');
+
+        // Animate title first
+        setTimeout(() => title.classList.add('team-banner-animate'), 200);
+
+        // Animate subtitle after title
+        setTimeout(() => subtitle.classList.add('team-banner-animate'), 800);
+
+        // Unobserve after animation runs once
+        teamBannerObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  teamBannerObserver.observe(document.querySelector('#team-banner'));
+</script>
+
+
+
+
+    <!-- TEAM SECTION -->
+    <section id="dedicated-team" class="relative w-full pt-5 pb-5 overflow-hidden">
+        <div class="relative z-10 max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-10 items-center">
+            <div class="space-y-3 md:space-y-6 text-left">
+                <p id="subtitle" class="text-lg md:text-xl text-black font-medium opacity-0 translate-y-10">
+                    Our Dedicated <span id="team-word" class="text-[#f5a222] inline-block">Team</span>
+                </p>
+                <h2 id="title" class="text-xl md:text-2xl lg:text-5xl font-bold text-black opacity-0 translate-y-10">
+                    Get to Know Our Expert GVR Team
+                </h2>
+                <p id="paragraph" class="text-gray-800 md:text-lg text-md leading-relaxed opacity-0">
+                    Get acquainted with the powerhouse behind GVR – our expert team of professionals dedicated to
+                    revolutionizing the IT landscape Comprising.
+                </p>
+                <a id="cta-btn" href="contact"
+                    class="teammembersection-button group relative inline-flex items-center px-3 py-2 md:px-6 md:py-3 rounded-full backdrop-blur-md border border-[#f5a222] bg-[#102e62] text-[#f5a222] font-bold overflow-hidden opacity-0 transition-all duration-500">
+                    <span class="teammembersection-roll-text inline-block">Talk To An Expert</span>
+                    <span class="teammembersection-roll-arrow inline-block ml-3">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 19V5m0 0l-6 6m6-6l6 6" />
+                        </svg>
+                    </span>
+                </a>
+            </div>
+            <!-- Right Part (Image) -->
+            <div class="flex justify-center md:justify-end">
+                <img src="./assests/teambannerimg.jpg" alt="Team Image"
+                    class="rounded-[25px] shadow-[5px_5px_10px_#102e62,_5px_5px_10px_black] max-w-full">
+            </div>
+        </div>
+    </section>
+    <style>
+        #dedicated-team .teammembersection-roll-text,
+        #dedicated-team .teammembersection-roll-arrow {
+            display: inline-block;
+            transform-origin: center;
+        }
+
+        @keyframes teammembersection-rollUpOut {
+            0% {
+                transform: translateY(0) rotateX(0deg);
+                opacity: 1;
+            }
+
+            50% {
+                transform: translateY(-100%) rotateX(90deg);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateY(100%) rotateX(0deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes teammembersection-rollIn {
+            0% {
+                transform: translateY(100%) rotateX(0deg);
+                opacity: 0;
+            }
+
+            50% {
+                transform: translateY(-20%) rotateX(-10deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(0) rotateX(0deg);
+                opacity: 1;
+            }
+        }
+
+        #dedicated-team .teammembersection-button.group:hover .teammembersection-roll-text,
+        #dedicated-team .teammembersection-button.group:hover .teammembersection-roll-arrow {
+            animation: teammembersection-rollUpOut 0.4s ease forwards,
+                teammembersection-rollIn 0.4s ease 0.4s forwards;
+        }
+
+        #dedicated-team .teammembersection-roll-arrow {
+            transform: rotate(45deg);
+        }
+
+        @keyframes slideUp {
+            0% {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes rollDown {
+            0% {
+                transform: rotateX(-90deg);
+                opacity: 0;
+            }
+
+            50% {
+                transform: rotateX(0deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: rotateX(0deg);
+                opacity: 1;
+            }
+        }
+
+        @keyframes floatUpDown {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-6px);
+            }
+        }
+
+        .show {
+            opacity: 1 !important;
+        }
+
+        .animate-slideUp {
+            animation: slideUp 0.8s ease-out forwards;
+        }
+
+        .animate-fadeIn {
+            animation: fadeIn 1s ease forwards;
+        }
+
+        .animate-roll-down {
+            display: inline-block;
+            animation: rollDown 3s ease-in-out infinite;
+        }
+
+        .animate-float {
+            animation: floatUpDown 3s ease-in-out infinite;
+        }
+
+        .gvr-button:hover .gvr-roll-text {
+            transform: translateX(-5px);
+            transition: transform 0.3s ease;
+        }
+
+        .gvr-button:hover .gvr-roll-arrow {
+            transform: rotate(90deg) translateX(3px);
+            transition: transform 0.3s ease;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const section = document.getElementById("dedicated-team");
+            const subtitle = document.getElementById("subtitle");
+            const teamWord = document.getElementById("team-word");
+            const title = document.getElementById("title");
+            const paragraph = document.getElementById("paragraph");
+            const btn = document.getElementById("cta-btn");
+
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            subtitle.classList.add("animate-slideUp", "show");
+                            setTimeout(() => teamWord.classList.add("animate-roll-down", "show"), 800);
+                            setTimeout(() => title.classList.add("animate-slideUp", "show"), 1000);
+                            setTimeout(() => paragraph.classList.add("animate-fadeIn", "show"), 1500);
+                            setTimeout(() => {
+                                btn.classList.add("animate-fadeIn", "show");
+                                setTimeout(() => btn.classList.add("animate-float"), 1000);
+                            }, 2000);
+
+                        } else {
+                            subtitle.classList.remove("animate-slideUp", "show");
+                            teamWord.classList.remove("animate-roll-down", "show");
+                            title.classList.remove("animate-slideUp", "show");
+                            paragraph.classList.remove("animate-fadeIn", "show");
+                            btn.classList.remove("animate-fadeIn", "animate-float", "show");
+                        }
+                    });
+                },
+                { threshold: 0.3 }
+            );
+
+
+
+            observer.observe(section);
+        });
+    </script>
+
+
+    <!-- TEAM MEMBERS PERSONS SECTION -->
+    <section class="relative w-full pt-10 pb-20 overflow-hidden" id="team-section">
+        <div class="relative z-10 px-5 md:px-[10%] text-center">
+            <h2 id="team-section-title"
+                class="text-2xl md:text-4xl font-extrabold text-[#000] drop-shadow-lg mb-2 md:mb-4 opacity-0 translate-x-[-50px] transition-all duration-700 ease-[cubic-bezier(0.25,1,0.3,1)]">
+                Meet Our Professionals
+            </h2>
+            <h3 id="team-section-subtitle"
+                class="text-md md:text-xl font-semibold text-[#f5a222] mb-2 opacity-0 translate-x-[-50px] transition-all duration-700 ease-[cubic-bezier(0.25,1,0.3,1)] delay-[150ms]">
+                The Minds Behind Our Success
+            </h3>
+            <p id="team-section-para"
+                class="text-gray-600 md:text-xl mb-4 md:mb-8 opacity-0 translate-x-[-50px] transition-all duration-700 ease-[cubic-bezier(0.25,1,0.3,1)] delay-[300ms]">
+                Our team is a blend of talented developers, designers, and innovators dedicated to delivering
+                exceptional results.
+                With expertise and passion, we work together to turn challenges into opportunities and ideas into
+                impactful
+                solutions.
+            </p>
+
+            <div id="team-section-cards" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
+
+                <!-- Card 1 -->
+                <div
+                    class="team-card relative rounded-2xl overflow-hidden cursor-pointer group opacity-0 translate-y-10 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.3,1)]">
+                    <div class="team-image relative w-full h-[400px] overflow-hidden rounded-2xl">
+                        <img src="./assests/vamshikrishna.png" alt="Team Member"
+                            class="original-img w-full h-full object-cover transition-all duration-700 ease-[cubic-bezier(0.25,1,0.3,1)]">
+                        <img src="./assests/vamshikrishna (1).jpg" alt="Team Hover"
+                            class="hover-img absolute top-0 left-0 w-full h-full object-cover opacity-0 translate-y-10 scale-105 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.3,1)]">
+                    </div>
+                    <div
+                        class="original-content absolute inset-0 flex flex-col justify-end items-center text-center bg-black/40 p-6">
+                        <h4 class="text-white text-2xl font-semibold mb-1">Govardhan Peluri</h4>
+                        <p class="text-[#f5a222] text-lg font-medium mb-2">Associate Software Engineer</p>
+                        <p class="text-gray-200 text-md mb-4">Specializes in building scalable front-end applications
+                            and creating
+                            sleek UI/UX experiences.</p>
+                    </div>
+                    <div
+                        class="hover-content absolute inset-0 flex flex-col justify-end items-center text-center bg-black/50 p-6 opacity-0 translate-y-10 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.3,1)]">
+                        <h5 class="text-white text-2xl font-semibold mb-1">Govardhan Peluri</h5>
+                        <p class="text-[#f5a222] text-lg font-medium mb-2">Frontend Specialist</p>
+                        <p class="text-gray-200 text-lg md:text-lg mb-2 md:mb-4">Passionate about creating smooth user
+                            experiences and
+                            responsive designs.</p>
+                        <button
+                            class="px-3 md:px-5 py-2 md:py-2 bg-[#f5a222] hover:bg-[#102e62] text-white font-medium rounded-full opacity-0 translate-y-6 transition-all duration-500 ease-[cubic-bezier(0.25,1,0.3,1)]">
+                            View Profile
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div
+                    class="team-card relative rounded-2xl overflow-hidden cursor-pointer group opacity-0 translate-y-10 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.3,1)]">
+                    <div class="team-image relative w-full h-[400px] overflow-hidden rounded-2xl">
+                        <img src="./assests/vamshikrishna (1).jpg" alt="Team Member"
+                            class="original-img w-full h-full object-cover transition-all duration-700 ease-[cubic-bezier(0.25,1,0.3,1)]">
+                        <img src="./assests/vamshikrishna.png" alt="Team Hover"
+                            class="hover-img absolute top-0 left-0 w-full h-full object-cover opacity-0 translate-y-10 scale-105 transition-all duration-700">
+                    </div>
+                    <div
+                        class="original-content absolute inset-0 flex flex-col justify-end items-center text-center bg-black/40 p-6">
+                        <h4 class="text-white text-2xl font-semibold mb-1">Santhosh Kumar</h4>
+                        <p class="text-[#f5a222] text-lg font-medium mb-2">UI/UX Developer</p>
+                        <p class="text-gray-200 text-md mb-4">Expert in creating intuitive user flows and polished
+                            interfaces.</p>
+                    </div>
+                    <div
+                        class="hover-content absolute inset-0 flex flex-col justify-end items-center text-center bg-black/50 p-6 opacity-0 translate-y-10 transition-all duration-700">
+                        <h5 class="text-white text-2xl font-semibold mb-1">Santhosh Kumar</h5>
+                        <p class="text-[#f5a222] text-md md:text-lg font-medium mb-1 md:mb-2">Design Engineer</p>
+                        <p class="text-gray-200 text-md md:text-lg mb-2 md:mb-4">Loves blending creativity and
+                            technology to build
+                            engaging designs.</p>
+                        <button
+                            class="px-3 md:px-5 py-2 md:py-2 bg-[#f5a222] hover:bg-[#102e62] text-white font-medium rounded-full opacity-0 translate-y-6 transition-all duration-500">View
+                            Profile</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <style>
+        /* 🌟 TEAM SECTION ANIMATION STYLES */
+        #team-section .team-card {
+            position: relative;
+            perspective: 1200px;
+            transform-style: preserve-3d;
+            transition: transform 0.7s ease, box-shadow 0.7s ease;
+            border-radius: 1rem;
+            background: #fff;
+        }
+
+        #team-section .team-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 1rem;
+            box-shadow:
+                inset 0 4px 12px rgba(255, 255, 255, 0.15),
+                inset 0 -4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 2;
+            pointer-events: none;
+            transition: all 0.5s ease;
+        }
+
+        #team-section .team-card:hover {
+            transform: translateY(-15px) rotateX(3deg) rotateY(2deg);
+            box-shadow:
+                0 25px 50px rgba(0, 0, 0, 0.4),
+                0 10px 30px rgba(0, 0, 0, 0.3),
+                0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        #team-section .team-card:hover::before {
+            box-shadow:
+                inset 0 8px 20px rgba(255, 255, 255, 0.25),
+                inset 0 -8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        #team-section .team-card:hover .original-img,
+        #team-section .team-card:hover .original-content {
+            opacity: 0;
+            transform: translateY(-15px) scale(0.98);
+        }
+
+        #team-section .team-card:hover .hover-img,
+        #team-section .team-card:hover .hover-content {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        #team-section .team-card:hover .hover-content button {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0.1s;
+        }
+
+        #team-section .team-image img {
+            backface-visibility: hidden;
+            will-change: transform, opacity;
+        }
+    </style>
+
+    <script>
+        // 🌟 Team Section Scroll Animation
+        document.addEventListener("DOMContentLoaded", () => {
+            const teamSection = document.querySelector("#team-section");
+            const textElements = [
+                document.querySelector("#team-section-title"),
+                document.querySelector("#team-section-subtitle"),
+                document.querySelector("#team-section-para")
+            ];
+            const cards = teamSection.querySelectorAll(".team-card");
+
+            const teamobserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Animate text elements (slide-in from left)
+                        textElements.forEach((el, i) => {
+                            setTimeout(() => {
+                                el.classList.remove("opacity-0", "translate-x-[-50px]");
+                                el.classList.add("opacity-100", "translate-x-0");
+                            }, i * 200);
+                        });
+
+                        // Animate cards (slide-in from bottom)
+                        cards.forEach((card, i) => {
+                            setTimeout(() => {
+                                card.classList.remove("opacity-0", "translate-y-10");
+                                card.classList.add("opacity-100", "translate-y-0");
+                            }, 400 + i * 200);
+                        });
+                    } else {
+                        // Reset animation (replay when revisiting)
+                        textElements.forEach(el => {
+                            el.classList.add("opacity-0", "translate-x-[-50px]");
+                            el.classList.remove("opacity-100", "translate-x-0");
+                        });
+                        cards.forEach(card => {
+                            card.classList.add("opacity-0", "translate-y-10");
+                            card.classList.remove("opacity-100", "translate-y-0");
+                        });
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            teamobserver.observe(teamSection);
+        });
+    </script>
+
+
+
+    <!-- GLOBAL TEAM SECTION -->
+    <section id="global-team-section"
+        class="relative w-full h-[550px] overflow-hidden py-10 md:py-20 bg-gray-900 text-white">
+
+        <!-- 🔹 Background Video -->
+        <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover z-0">
+            <source src="./assests/globalteamvideo.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+        </video>
+
+        <!-- 🔹 Gradient Overlay for Readability -->
+        <div class="absolute inset-0 bg-gradient-to-b from-[#102e62]/80 via-[#000]/70 to-[#000]/80 z-0"></div>
+
+        <!-- 🔹 Content -->
+        <div
+            class="relative z-10 max-w-5xl mx-auto px-6 text-center md:text-left flex flex-col items-center md:items-start">
+
+            <h3
+                class="text-[#f5a222] text-lg md:text-xl font-semibold mb-2 opacity-0 translate-y-10 transition-all duration-700 ease-out global-team-subtitle">
+                GVR Company
+            </h3>
+
+            <h2
+                class="text-3xl md:text-5xl font-bold drop-shadow-lg opacity-0 translate-y-10 transition-all duration-700 ease-out global-team-title">
+                Empowering Collaboration Across Borders
+            </h2>
+
+            <p
+                class="mt-4 text-gray-200 text-base md:text-lg max-w-2xl opacity-0 translate-y-10 transition-all duration-700 ease-out global-team-para">
+                At GVR Company, we believe innovation thrives in diversity. Our global teams connect ideas, technology,
+                and
+                cultures to create solutions that redefine industries. With experts working seamlessly across
+                continents, we
+                deliver impactful projects fueled by collaboration and creativity.
+            </p>
+
+            <a id="cta-btn" href="careers"
+                class="cta-btn group inline-flex items-center px-6 py-3 md:px-8 md:py-3 mt-6 rounded-full backdrop-blur-md border border-[#f5a222] bg-[#102e62]/80 text-[#f5a222] font-bold overflow-hidden opacity-0 translate-y-10 transition-all duration-700 ease-out">
+                <span class="cta-roll-text inline-block">Explore Careers</span>
+                <span class="cta-roll-arrow inline-block ml-3">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 19V5m0 0l-6 6m6-6l6 6" />
+                    </svg>
+                </span>
+            </a>
+        </div>
+    </section>
+
+    <style>
+        @keyframes rollUpOut {
+            0% {
+                transform: translateY(0) rotateX(0deg);
+                opacity: 1;
+            }
+
+            50% {
+                transform: translateY(-100%) rotateX(90deg);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateY(100%) rotateX(0deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes rollIn {
+            0% {
+                transform: translateY(100%) rotateX(0deg);
+                opacity: 0;
+            }
+
+            50% {
+                transform: translateY(-20%) rotateX(-10deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(0) rotateX(0deg);
+                opacity: 1;
+            }
+        }
+
+        #global-team-section .cta-btn.group:hover .cta-roll-text,
+        #global-team-section .cta-btn.group:hover .cta-roll-arrow {
+            animation: rollUpOut 0.4s ease forwards, rollIn 0.4s ease 0.4s forwards;
+        }
+
+        #global-team-section .cta-roll-arrow {
+            transform: rotate(45deg);
+        }
+    </style>
+
+    <script>
+        const globalTeamSection = document.getElementById('global-team-section');
+
+        const globalobserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                const subtitle = entry.target.querySelector('.global-team-subtitle');
+                const title = entry.target.querySelector('.global-team-title');
+                const paragraph = entry.target.querySelector('.global-team-para');
+                const cta = entry.target.querySelector('.cta-btn');
+
+                if (entry.isIntersecting) {
+                    subtitle.style.opacity = '1';
+                    subtitle.style.transform = 'translateY(0)';
+
+                    setTimeout(() => {
+                        title.style.opacity = '1';
+                        title.style.transform = 'translateY(0)';
+                    }, 150);
+
+                    setTimeout(() => {
+                        paragraph.style.opacity = '1';
+                        paragraph.style.transform = 'translateY(0)';
+                    }, 300);
+
+                    setTimeout(() => {
+                        if (cta) {
+                            cta.style.opacity = '1';
+                            cta.style.transform = 'translateY(0)';
+                        }
+                    }, 450);
+                } else {
+                    subtitle.style.opacity = '0';
+                    subtitle.style.transform = 'translateY(30px)';
+                    title.style.opacity = '0';
+                    title.style.transform = 'translateY(30px)';
+                    paragraph.style.opacity = '0';
+                    paragraph.style.transform = 'translateY(30px)';
+                    if (cta) {
+                        cta.style.opacity = '0';
+                        cta.style.transform = 'translateY(30px)';
+                    }
+                }
+            });
+        }, { threshold: 0.3 });
+
+        globalobserver.observe(globalTeamSection);
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+    <footer class="relative bg-gradient-to-b from-black to-[#102e62] w-full text-gray-300 pt-10 overflow-hidden">
+        <div class="relative z-10">
+            <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10 pb-10 border-b border-gray-700">
+                <!-- Left: Logo + Address -->
+                <div>
+                    <img src="./assests/upscalemedia-transformed.png" alt="GVR Logo" class="h-12 mb-4">
+                    <p class="text-md mb-4">
+                        Plot No. 3, 3rd Floor, Sri Sai Enclave, Old Bowenpally, HYDERABAD, INDIA
+                    </p>
+                </div>
+                <!-- Middle (Contact Info) -->
+                <div>
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-envelope text-[#f5a222] mr-2"></i>
+                        <a href="mailto:info@gvr.com" class="hover:text-white text-md">info@gvrinfosystems.com</a>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-phone text-[#f5a222] mr-2"></i>
+                        <a href="tel:+911234567890" class="hover:text-white text-md">+916300279339</a>
+                    </div>
+                </div>
+                <!-- Right: Newsletter -->
+                <div>
+                    <h3 class="text-xl font-semibold text-[#fff] mb-2">Newsletter</h3>
+                    <p class="text-md mb-4">
+                        Sign up to GVR weekly newsletter to get the latest updates.
+                    </p>
+                    <form id="newsletter-form" class="flex">
+                        <input type="email" id="user_email" placeholder="Enter your email here.."
+                            class="w-full px-3 py-2 rounded-l-md focus:outline-none text-black" required>
+
+                        <button id="subscribe-btn" type="submit"
+                            class="bg-blue-500 text-white px-4 rounded-r-md hover:bg-blue-600 flex items-center justify-center relative">
+                            <i id="send-icon" class="fas fa-paper-plane"></i>
+                            <span id="loading-spinner"
+                                class="hidden animate-spin ml-2 w-4 h-4 border-2 border-white border-t-transparent rounded-full"></span>
+                        </button>
+                    </form>
+                    <!-- Messages -->
+                    <p id="form-success" class="text-green-400 mt-2 hidden">✅ Thank you! Your email has been sent.</p>
+                    <p id="form-error" class="text-red-400 mt-2 hidden">❌ Failed to send. Please try again later.</p>
+                </div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10 py-10 border-b border-gray-700">
+                <!-- Information -->
+                <div>
+                    <h3 class="text-xl font-semibold text-[#fff] mb-3">Information</h3>
+                    <ul class="space-y-2 text-md">
+                        <li><a href="aboutus" class="hover:text-white">About GVR</a></li>
+                        <li><a href="portfolio" class="hover:text-white">Portfolio</a></li>
+                        <li><a href="team" class="hover:text-white">Team</a></li>
+                        <li><a href="service" class="hover:text-white">Services</a></li>
+                        <li><a href="case-study" class="hover:text-white">Case Study</a></li>
+                        <li><a href="careers" class="hover:text-white">Careers</a></li>
+                        <li><a href="blog" class="hover:text-white">Blog</a></li>
+                        <li><a href="contact" class="hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div>
+                    <h3 class="text-xl font-semibold text-[#fff] mb-3">Services</h3>
+                    <ul class="space-y-2 text-md">
+                        <li><a href="cloud-migration-maintenance-deployment" class="hover:text-white">Cloud
+                                Migration, Maintenance & Deployment</a></li>
+                        <li><a href="data-center-operations" class="hover:text-white">Data Center Operations</a></li>
+                        <li><a href="mobile-applications-development" class="hover:text-white">Mobile Application
+                                Development</a></li>
+                        <li><a href="security-solutions" class="hover:text-white">Security Solutions</a></li>
+                        <li><a href="ai-ml-solutions" class="hover:text-white">AI & ML Solutions</a></li>
+                        <li><a href="web-based-community-solutions" class="hover:text-white">Web Based Community
+                                Solutions</a></li>
+                        <li><a href="enterprise-applications-integration" class="hover:text-white">Enterprise
+                                Application Integration</a></li>
+                    </ul>
+                </div>
+
+                <!-- Products -->
+                <div>
+                    <h3 class="text-xl font-semibold text-[#fff] mb-3">Products</h3>
+                    <ul class="space-y-2 text-md">
+                        <li><a href="ayucare(hms)" class="hover:text-white">AYUCARE(HMS)</a></li>
+                        <li><a href="burserele" class="hover:text-white">BURSERELE</a></li>
+                        <li><a href="empora(hrm)" class="hover:text-white">EMPORA(HRM)</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="text-center text-sm text-gray-300 py-5 px-1 md:px-0">
+                © 2025 GVR. All rights reserved. | Developed by Prodbiz Solutions Private Limited
+            </div>
+        </div>
+    </footer>
+    <!-- EmailJS Script -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script>
+        (function () {
+            emailjs.init("YOUR_USER_ID");
+        })();
+
+        const form = document.getElementById("newsletter-form");
+        const btn = document.getElementById("subscribe-btn");
+        const icon = document.getElementById("send-icon");
+        const spinner = document.getElementById("loading-spinner");
+        const successMsg = document.getElementById("form-success");
+        const errorMsg = document.getElementById("form-error");
+
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            successMsg.classList.add("hidden");
+            errorMsg.classList.add("hidden");
+            btn.disabled = true;
+            icon.classList.add("hidden");
+            spinner.classList.remove("hidden");
+
+            emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+                user_email: document.getElementById("user_email").value
+            }).then(function () {
+                successMsg.classList.remove("hidden");
+                successMsg.classList.add("fade-in");
+                document.getElementById("user_email").value = "";
+                btn.disabled = false;
+                icon.classList.remove("hidden");
+                spinner.classList.add("hidden");
+            }, function (error) {
+                errorMsg.classList.remove("hidden");
+                errorMsg.classList.add("fade-in");
+                btn.disabled = false;
+                icon.classList.remove("hidden");
+                spinner.classList.add("hidden");
+            });
+        });
+    </script>
+
+
+    <!-- WhatsApp Button -->
+    <div class="fixed bottom-20 right-0 z-50 flex flex-col items-center">
+        <div id="whatsapp-tooltip"
+            class="mb-2 px-1 mr-1 py-1 text-[#f5a222] font-bold italic text-sm opacity-0 pointer-events-none flex items-center space-x-1 transition-all duration-300">
+            <span>Click Here </span>
+            <i class="fas fa-hand-point-down"></i>
+        </div>
+        <a href="https://wa.me/916300279321" target="_blank" id="whatsapp-btn"
+            class="w-12 h-12 flex items-center justify-center rounded-full bg-green-500 text-white text-2xl shadow-lg hover:scale-110 transition-transform duration-300 relative">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+    <script>
+        const whatsappBtn = document.getElementById('whatsapp-btn');
+        const tooltip = document.getElementById('whatsapp-tooltip');
+        whatsappBtn.addEventListener('mouseenter', () => {
+            tooltip.style.opacity = '1';
+            tooltip.style.transform = 'translateY(0)';
+            tooltip.style.pointerEvents = 'auto';
+        });
+        whatsappBtn.addEventListener('mouseleave', () => {
+            tooltip.style.opacity = '0';
+            tooltip.style.transform = 'translateY(10px)';
+            tooltip.style.pointerEvents = 'none';
+        });
+        whatsappBtn.addEventListener('click', () => {
+            tooltip.style.opacity = '1';
+            tooltip.style.transform = 'translateY(0)';
+            setTimeout(() => {
+                tooltip.style.opacity = '0';
+                tooltip.style.transform = 'translateY(10px)';
+            }, 2000);
+        });
+    </script>
+
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollTopBtn" class="fixed bottom-5 right-5 bg-[#f5a222] hover:bg-[#102e62] hover:text-[#f5a222] text-[#102e62] w-12 h-12 rounded-full flex items-center justify-center shadow-lg opacity-0 
+  invisible transition-all duration-300 z-[9999]">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <script>
+        const scrollBtn = document.getElementById('scrollTopBtn');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 200) {
+                scrollBtn.classList.remove('opacity-0', 'invisible');
+                scrollBtn.classList.add('opacity-100', 'visible');
+            } else {
+                scrollBtn.classList.add('opacity-0', 'invisible');
+                scrollBtn.classList.remove('opacity-100', 'visible');
+            }
+        });
+
+        scrollBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+
+
+
+</body>

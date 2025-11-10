@@ -1,0 +1,1029 @@
+<!-- #102e62 
+ #f5a222-->
+<!DOCTYPE html>
+<html lang="en" x-data="{ open: false, dropdowns: {company: false, products: false, services: false}, scrolled: false }"
+    x-init="window.addEventListener('scroll', () => { scrolled = window.scrollY > 50 })">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GVR Infosystem</title>
+    <link rel="icon" href="./assests/fav-removebg-preview.png" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- EB Garamond Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/alpinejs" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MotionPathPlugin.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'EB Garamond', serif;
+        }
+
+        [x-cloak] {
+            display: none !important;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .animate-slide-down {
+            animation: slideDown 0.7s ease-out forwards;
+        }
+
+        @keyframes dropdownSlide {
+            from {
+                transform: translateY(-10px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .dropdown-animate {
+            animation: dropdownSlide 0.3s ease-out forwards;
+        }
+
+        @keyframes staggerFade {
+            from {
+                transform: translateY(-5px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .stagger-item {
+            opacity: 0;
+            animation: staggerFade 0.3s ease forwards;
+        }
+
+        .stagger-item:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .stagger-item:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .stagger-item:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+    </style>
+</head>
+
+<body class="relative min-h-screen bg-gray-100 text-white">
+        <nav x-data="{ 
+        open: false, 
+        dropdowns: { company: false, products: false, services: false }, 
+        activeLink: '', 
+        scrolled: false 
+    }" x-init="window.addEventListener('scroll', () => { scrolled = window.scrollY > 50 })"
+        class="fixed top-0 left-0 w-full z-50 animate-slide-down transition-all duration-500 shadow-md" :style="scrolled
+        ? (window.innerWidth >= 768 
+            ? 'background: linear-gradient(135deg, white 25%, #f5a222 25% 100%); box-shadow: 0 4px 6px rgba(0,0,0,0.1);'
+            : 'background: linear-gradient(135deg, white 45%, #f5a222 45% 100%); box-shadow: 0 4px 6px rgba(0,0,0,0.1);')
+        : (window.innerWidth >= 768
+            ? 'background: linear-gradient(135deg, white 25%, #f5a222 25% 100%);'
+            : 'background: linear-gradient(135deg, white 45%, #f5a222 45% 100%);')">
+
+        <div class="max-w-7xl mx-auto px-4 lg:px-8 flex items-center justify-between h-16"
+            :class="scrolled ? 'text-[#102e62]' : 'text-[#102e62]'">
+            <!-- Logo -->
+            <a href="./" class="text-xl font-bold">
+                <img src="./assests/upscalemedia-transformed.png" alt="MyLogo" class="h-10 w-auto">
+            </a>
+
+            <!-- Desktop Nav -->
+            <div class="hidden lg:flex items-center space-x-8">
+                <!-- Company -->
+                <div class="group h-16 flex items-center relative">
+                    <button
+                        class="flex items-center gap-1 group-hover:text-black text-xl transition-colors duration-300">
+                        Company
+                        <svg class="w-4 h-4 transition-transform duration-300 group-hover:rotate-180"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div
+                        class="absolute left-0 top-full hidden group-hover:block bg-gray-900 rounded-lg shadow-lg p-2 text-white z-50 min-w-[28rem] dropdown-animate">
+                        <a href="aboutus"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">About
+                            Us</a>
+                        <a href="portfolio"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">Portfolio
+                            - <span class="text-white/50">Explore our all overview</span></a>
+                        <a href="team"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">Team -
+                            <span class="text-white/50">We are friendly join our team</span></a>
+                        <a href="service"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">Services
+                            - <span class="text-white/50">Happy to help you</span></a>
+                        <a href="case-study"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">Case
+                            Study - <span class="text-white/50">Know more about our case study</span></a>
+                    </div>
+                </div>
+
+                <!-- Services -->
+                <div class="group h-16 flex items-center relative">
+                    <button
+                        class="flex items-center gap-1 group-hover:text-black text-xl transition-colors duration-300">
+                        Services
+                        <svg class="w-4 h-4 transition-transform duration-300 group-hover:rotate-180"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div
+                        class="absolute left-0 top-full hidden group-hover:block bg-gray-900 rounded-lg shadow-lg p-2 text-white z-50 min-w-[28rem] dropdown-animate">
+                        <a href="cloud-migration-maintenance-deployment"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">Cloud
+                            Migration, Maintenance & Deployment</a>
+                        <a href="data-center-operations"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">Data
+                            Center Operations</a>
+                        <a href="mobile-applications-development"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">Mobile
+                            Applications Development</a>
+                        <a href="security-solutions"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">Security
+                            Solutions</a>
+                        <a href="ai-ml-solutions"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">AI & ML
+                            Solutions</a>
+                        <a href="web-based-community-solutions"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">Web
+                            Based Community Solutions</a>
+                        <a href="enterprise-applications-integration"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">Enterprise
+                            Applications Integration</a>
+                    </div>
+                </div>
+
+                <!-- Products -->
+                <div class="group h-16 flex items-center relative">
+                    <button
+                        class="flex items-center gap-1 group-hover:text-black text-xl transition-colors duration-300">
+                        Products
+                        <svg class="w-4 h-4 transition-transform duration-300 group-hover:rotate-180"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div
+                        class="absolute left-0 top-full hidden group-hover:block bg-gray-900 rounded-lg shadow-lg p-2 text-white z-50 min-w-[28rem] dropdown-animate">
+                        <a href="ayucare(hms)"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">AYUCARE
+                            (HMS)</a>
+                        <a href="burserele"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">BURSERELE</a>
+                        <a href="empora(hrm)"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">EMPORA
+                            (HRM)</a>
+                    </div>
+                </div>
+
+                <a href="careers" class="hover:text-black text-xl transition-colors duration-300">Careers</a>
+                <a href="blog" class="hover:text-black text-xl transition-colors duration-300">Blog</a>
+            </div>
+
+            <!-- Get Started Button -->
+            <div class="hidden lg:block">
+                <a href="contact"
+                    class="relative flex items-center hover:bg-transparent hover:text-[#102e62] gap-2 px-6 py-2 border border-2 border-[#102e62] text-[#fff] bg-[#102e62] rounded-full font-semibold overflow-hidden group">
+                    <span class="flex items-center gap-2 group-hover:animate-roll-up-down">
+                        Get Started
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                            <line x1="4" y1="12" x2="20" y2="12" />
+                            <polyline points="14 6 20 12 14 18" />
+                        </svg>
+                    </span>
+                </a>
+            </div>
+
+            <!-- Mobile Toggle -->
+            <button @click="open = !open"
+                class="lg:hidden w-10 h-10 flex items-center justify-center rounded-full border border-[#102e62] text-[#102e62]">
+                <svg x-show="!open" x-cloak xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                    stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+                <svg x-show="open" x-cloak xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                    stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+        <!-- Mobile Nav -->
+        <div x-show="open" x-transition.opacity x-cloak class="lg:hidden absolute top-16 left-0 w-full 
+            bg-gray-900
+            border-t border-white/20 text-white dropdown-animate rounded-b-xl shadow-lg">
+            <div class="flex flex-col p-4 space-y-1">
+
+                <!-- Company -->
+                <div class="space-y-1">
+                    <button @click="dropdowns.company = !dropdowns.company"
+                        class="w-full text-left flex justify-between items-center px-3 py-2 rounded-lg hover:bg-white/10"
+                        :class="dropdowns.company ? 'text-yellow-400' : 'text-white'">
+                        Company
+                        <span x-show="!dropdowns.company">+</span>
+                        <span x-show="dropdowns.company">-</span>
+                    </button>
+                    <div x-show="dropdowns.company" x-transition.opacity x-transition.duration.300ms
+                        class="ml-4 mt-2 space-y-2 px-1 py-1 dropdown-animate border border-white/50 rounded-lg">
+                        <a href="aboutus"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">About
+                            Us</a>
+                        <a href="portfolio"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">Portfolio
+                            - <span class="text-white/50">Explore our all overview</span></a>
+                        <a href="team"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">Team
+                            - <span class="text-white/50">We are friendly join our team</span></a>
+                        <a href="service"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">Services
+                            - <span class="text-white/50">Happy to help you</span></a>
+                        <a href="case-study"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">Case
+                            Study - <span class="text-white/50">Know more about our case study</span></a>
+                    </div>
+                </div>
+
+                <!-- Services -->
+                <div class="space-y-3">
+                    <button @click="dropdowns.services = !dropdowns.services"
+                        class="w-full text-left flex justify-between items-center px-3 py-2 rounded-lg hover:bg-white/10"
+                        :class="dropdowns.services ? 'text-yellow-400' : 'text-white'">
+                        Services
+                        <span x-show="!dropdowns.services">+</span>
+                        <span x-show="dropdowns.services">-</span>
+                    </button>
+                    <div x-show="dropdowns.services" x-transition.opacity x-transition.duration.300ms
+                        class="ml-4 mt-2 space-y-2 px-1 py-1 dropdown-animate border border-white/50 rounded-lg">
+                        <a href="cloud-migration-maintenance-deployment"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400stagger-item">Cloud
+                            Migration, Maintenance & Deployment</a>
+                        <a href="data-center-operations"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">Data
+                            Center Operations</a>
+                        <a href="mobile-applications-development"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">Mobile
+                            Applications Development</a>
+                        <a href="security-solutions"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">Security
+                            Solutions</a>
+                        <a href="ai-ml-solutions"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">AI &
+                            ML Solutions</a>
+                        <a href="web-based-community-solutions"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">Web
+                            Based Community Solutions</a>
+                        <a href="enterprise-applications-integration"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">Enterprise
+                            Applications Integration</a>
+                    </div>
+                </div>
+
+                <!-- Products -->
+                <div class="space-y-3">
+                    <button @click="dropdowns.products = !dropdowns.products"
+                        class="w-full text-left flex justify-between items-center px-3 py-2 rounded-lg hover:bg-white/10"
+                        :class="dropdowns.products ? 'text-yellow-400' : 'text-white'">
+                        Products
+                        <span x-show="!dropdowns.products">+</span>
+                        <span x-show="dropdowns.products">-</span>
+                    </button>
+                    <div x-show="dropdowns.products" x-transition.opacity x-transition.duration.300ms
+                        class="ml-4 mt-2 px-1 py-1 space-y-2 dropdown-animate border border-white/50 rounded-lg">
+                        <a href="ayucare(hms)"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">AYUCARE
+                            (HMS)</a>
+                        <a href="burserele"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">BURSERELE</a>
+                        <a href="empora(hrm)"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">EMPORA
+                            (HRM)</a>
+                    </div>
+                </div>
+
+                <!-- Single links -->
+                <a href="careers" @click="activeLink = 'careers'" class="block px-3 py-2 rounded-lg hover:bg-white/10"
+                    :class="activeLink === 'careers' ? 'text-yellow-400' : 'text-white'">
+                    Careers
+                </a>
+
+                <a href="blog" @click="activeLink = 'blog'" class="block px-3 py-2 rounded-lg hover:bg-white/10"
+                    :class="activeLink === 'blog' ? 'text-yellow-400' : 'text-white'">
+                    Blog
+                </a>
+
+                <!-- Get Started (Mobile with click animation) -->
+                <!-- Get Started (Mobile) -->
+                <div class="block lg:hidden">
+                    <a href="contact" id="mobile-get-started"
+                        class="relative flex items-center justify-center gap-2 px-6 py-2 bg-[#f5a222] text-[#102e62] border border-[#f5a222] rounded-full font-semibold overflow-hidden transition-all duration-300 ease-in-out">
+                        Get Started
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                            <line x1="4" y1="12" x2="20" y2="12" />
+                            <polyline points="14 6 20 12 14 18" />
+                        </svg>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+        </div>
+    </nav>
+    <script>
+        const mobileBtn = document.getElementById('mobile-get-started');
+
+        mobileBtn.addEventListener('click', (e) => {
+            // Optional: prevent immediate redirect for visual feedback
+            e.preventDefault();
+
+            // Change background to transparent and text color to #f5a222
+            mobileBtn.style.backgroundColor = 'transparent';
+            mobileBtn.style.color = '#f5a222';
+
+            // Navigate after a small delay (for user to see effect)
+            setTimeout(() => {
+                window.location.href = mobileBtn.getAttribute('href');
+            }, 200);
+        });
+    </script>
+
+
+    <!-- Careers Section -->
+    <section id="careers"
+        class="relative w-full pt-10 pb-5 md:py-20 mb-5 flex flex-col items-center justify-center text-center overflow-hidden bg-cover bg-center bg-no-repeat"
+        style="background-image: url('./assests/gvrbackground.jpg');">
+
+        <!-- Dim Gradient Overlay -->
+        <div class="absolute inset-0 bg-[#102e62]/90 z-0"></div>
+
+        <div class="relative z-10 max-w-3xl px-6 py-14 md:pt-10 md:pb-0">
+            <!-- Title -->
+            <h2 class="text-3xl md:text-5xl font-bold text-[#f5a222] drop-shadow-lg mt-8 mb-2 md:mb-4 careers-slide-down">
+                Careers@GVR
+            </h2>
+            <!-- Subtitle -->
+            <p class="text-md sm:text-lg md:text-xl italic text-gray-100 careers-slide-down delay-200">
+                Unlock your potential with us. Join a team that values innovation, collaboration, and growth. We’re
+                shaping the future, one step at a time.
+            </p>
+        </div>
+    </section>
+    <style>
+        .careers-slide-down {
+            opacity: 0;
+            transform: translateY(-40px);
+            transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.9s ease;
+        }
+
+        .delay-200 {
+            transition-delay: 0.2s;
+        }
+
+        .careers-visible {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+    </style>
+    <script>
+        const careersObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const children = entry.target.querySelectorAll('.careers-slide-down');
+                    children.forEach((el, i) => {
+                        setTimeout(() => el.classList.add('careers-visible'), i * 200);
+                    });
+
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+        careersObserver.observe(document.querySelector('#careers'));
+    </script>
+
+    <!-- Features Section Full Width -->
+    <section id="features"
+        class="relative w-full overflow-hidden pb-5 md:pb-0 md:px-20 flex items-center justify-center">
+        <div class="relative w-full max-w-6xl flex flex-col md:flex-row items-center gap-5 md:gap-10">
+
+            <!-- Text Content (7/12) -->
+            <div class="w-full md:w-7/12 space-y-3 md:space-y-6 px-6 md:pl-[8%] order-2 md:order-1">
+                <h2 class="text-2xl md:text-4xl font-bold text-black features-fade-up">
+                    Why Work With Us?
+                </h2>
+                <ul class="list-disc text-md md:text-xl list-inside space-y-3 text-gray-800">
+                    <li class="features-fade-up">Work on cutting-edge projects with top brands</li>
+                    <li class="features-slide-left">Collaborate with industry leaders</li>
+                    <li class="features-slide-right">Accelerate your career growth</li>
+                    <li class="features-fade-up">Culture that fosters innovation & teamwork</li>
+                </ul>
+            </div>
+
+            <!-- Image (5/12) -->
+            <div class="w-full md:w-6/12 px-6 md:px-0 order-1 md:order-2 py-5 rounded-[25px]">
+                <img src="./assests/whyjoinusimg.jpg" alt="Teamwork"
+                    class="rounded-[25px] shadow-[5px_5px_10px_#102e62,_5px_5px_10px_black] features-slide-right w-full h-auto object-cover">
+            </div>
+
+        </div>
+    </section>
+    <style>
+        .features-fade-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.9s ease;
+        }
+
+        .features-slide-left {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.9s ease;
+        }
+
+        .features-slide-right {
+            opacity: 0;
+            transform: translateX(40px);
+            transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.9s ease;
+        }
+
+        .features-visible {
+            opacity: 1 !important;
+            transform: translateX(0) translateY(0) !important;
+        }
+    </style>
+    <script>
+        const featuresObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                const children = entry.target.querySelectorAll(
+                    '.features-fade-up, .features-slide-left, .features-slide-right'
+                );
+                if (entry.isIntersecting) {
+                    children.forEach((el, i) => {
+                        setTimeout(() => {
+                            el.classList.add('features-visible');
+                        }, i * 200);
+                    });
+                } else {
+                    children.forEach(el => {
+                        el.classList.remove('features-visible');
+                    });
+                }
+            });
+        }, { threshold: 0.3 });
+
+        featuresObserver.observe(document.querySelector('#features'));
+    </script>
+
+
+    <!-- Our Technologies Section -->
+    <section id="technologies"
+        class="relative w-full overflow-hidden py-0 md:py-5 flex flex-col items-center justify-center">
+        <img src="https://images.unsplash.com/photo-1612831455543-cd4d2a1b8e0e?w=1600&q=80"
+            class="absolute inset-0 w-full h-full object-cover opacity-10 pointer-events-none" alt="Technologies">
+        <!-- Content -->
+        <div class="relative z-10 max-w-7xl w-full px-6 text-center space-y-3 md:space-y-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-black tech-fade-up">Our Technologies</h2>
+            <p class="text-gray-800 text-md md:text-xl tech-fade-up delay-200">
+                We work with modern tools and frameworks to deliver the best solutions.
+            </p>
+
+            <div class="grid grid-cols-2 text-white text-md md:text-lg md:grid-cols-4 gap-6 mt-6">
+                <div class="tech-fade-up bg-[#102e62] p-6 rounded-lg shadow hover:scale-105 transition-transform">Web
+                    Platform</div>
+                <div class="tech-slide-left bg-[#102e62] p-6 rounded-lg shadow hover:scale-105 transition-transform">
+                    Databases</div>
+                <div class="tech-slide-right bg-[#102e62] p-6 rounded-lg shadow hover:scale-105 transition-transform">
+                    Cloud & DevOps</div>
+                <div class="tech-fade-up bg-[#102e62] p-6 rounded-lg shadow hover:scale-105 transition-transform">Mobile
+                    Apps</div>
+                <div class="tech-slide-left bg-[#102e62] p-6 rounded-lg shadow hover:scale-105 transition-transform">
+                    .NET Core</div>
+                <div class="tech-slide-right bg-[#102e62] p-6 rounded-lg shadow hover:scale-105 transition-transform">
+                    C-Sharp</div>
+                <div class="tech-fade-up bg-[#102e62] p-6 rounded-lg shadow hover:scale-105 transition-transform">
+                    JavaScript</div>
+                <div class="tech-slide-left bg-[#102e62] p-6 rounded-lg shadow hover:scale-105 transition-transform">
+                    Python</div>
+            </div>
+        </div>
+    </section>
+    <style>
+        .tech-fade-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.9s ease;
+        }
+
+        .tech-slide-left {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.9s ease;
+        }
+
+        .tech-slide-right {
+            opacity: 0;
+            transform: translateX(40px);
+            transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.9s ease;
+        }
+
+        .tech-visible {
+            opacity: 1 !important;
+            transform: translateX(0) translateY(0) !important;
+        }
+    </style>
+    <script>
+        const techObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                const children = entry.target.querySelectorAll(
+                    '.tech-fade-up, .tech-slide-left, .tech-slide-right'
+                );
+                if (entry.isIntersecting) {
+                    children.forEach((el, i) => {
+                        setTimeout(() => {
+                            el.classList.add('tech-visible');
+                        }, i * 150);
+                    });
+                } else {
+                    children.forEach(el => {
+                        el.classList.remove('tech-visible');
+                    });
+                }
+            });
+        }, { threshold: 0.3 });
+
+        techObserver.observe(document.querySelector('#technologies'));
+    </script>
+
+    <!-- Open Positions Section -->
+    <section id="open-positions"
+        class="relative w-full overflow-hidden py-8 md:py-16 flex flex-col items-center justify-center">
+        <div class="relative z-10 max-w-7xl w-full px-6 text-center space-y-2 md:space-y-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-black positions-fade-up">Open Positions</h2>
+            <p class="text-gray-800 text-md md:text-xl positions-fade-up delay-200 mb-">
+                Currently no open positions. Check back soon!
+            </p>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="positions-fade-up bg-gray-800 rounded-xl p-6 shadow hover:scale-105 transition-transform">
+                    <img src="./assests/softwareengineerimg.jpg" alt="Developer" class="rounded-lg mb-4">
+                    <h3 class="text-xl text-[#f5a222] font-bold">Software Engineer</h3>
+                    <p class="text-gray-300 mt-2">Work with modern technologies and innovate solutions for our clients.
+                    </p>
+                </div>
+                <div
+                    class="positions-slide-left bg-gray-800 rounded-xl p-6 shadow hover:scale-105 transition-transform">
+                    <img src="./assests/productmanagerimg.jpg" alt="Project Manager" class="rounded-lg mb-4">
+                    <h3 class="text-xl text-[#f5a222] font-bold">Project Manager</h3>
+                    <p class="text-gray-300 mt-2">Lead projects with top brands and coordinate cross-functional teams.
+                    </p>
+                </div>
+                <div
+                    class="positions-slide-right bg-gray-800 rounded-xl p-6 shadow hover:scale-105 transition-transform">
+                    <img src="./assests/uiuximage.jpg" alt="UI/UX Designer" class="rounded-lg mb-4">
+                    <h3 class="text-xl text-[#f5a222] font-bold">UI/UX Designer</h3>
+                    <p class="text-gray-300 mt-2">Design engaging user experiences for web and mobile applications.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <style>
+        .positions-fade-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.9s ease;
+        }
+
+        .positions-slide-left {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.9s ease;
+        }
+
+        .positions-slide-right {
+            opacity: 0;
+            transform: translateX(40px);
+            transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.9s ease;
+        }
+
+        .positions-visible {
+            opacity: 1 !important;
+            transform: translateX(0) translateY(0) !important;
+        }
+    </style>
+    <script>
+        const positionsObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                const children = entry.target.querySelectorAll(
+                    '.positions-fade-up, .positions-slide-left, .positions-slide-right'
+                );
+                if (entry.isIntersecting) {
+                    children.forEach((el, i) => {
+                        setTimeout(() => {
+                            el.classList.add('positions-visible');
+                        }, i * 150);
+                    });
+                } else {
+                    children.forEach(el => {
+                        el.classList.remove('positions-visible');
+                    });
+                }
+            });
+        }, { threshold: 0.3 });
+
+        positionsObserver.observe(document.querySelector('#open-positions'));
+    </script>
+
+    <section class="max-w-4xl mx-auto px-4 py-5 text-center space-y-2 md:space-y-4 section-journey">
+
+        <!-- Heading -->
+        <h2 class="text-2xl md:text-4xl font-bold text-gray-900 section-journey-heading">You Are Here</h2>
+
+        <!-- Subheading -->
+        <h3 class="text-xl md:text-2xl font-semibold text-[#f5a222] section-journey-subheading">Let's Start</h3>
+
+        <!-- Description -->
+        <p class="text-gray-600 text-md md:text-xl section-journey-description">Initiating Your Journey to Success and
+            Growth.</p>
+
+        <!-- Steps -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-3 md:gap-6 md:mt-12 section-journey-steps">
+
+            <!-- Step 1 -->
+            <div class="flex flex-col items-center p-6 bg-[#f5a222] rounded-lg shadow section-journey-step">
+                <div
+                    class="w-12 h-12 flex items-center justify-center rounded-full bg-[#102e62] text-white font-bold text-lg">
+                    01</div>
+                <h4 class="mt-4 font-semibold text-gray-900">Share your requirements</h4>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="flex flex-col items-center p-6 bg-[#f5a222] rounded-lg shadow section-journey-step">
+                <div
+                    class="w-12 h-12 flex items-center justify-center rounded-full bg-[#102e62] text-white font-bold text-lg">
+                    02</div>
+                <h4 class="mt-4 font-semibold text-gray-900">Discuss them with our experts</h4>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="flex flex-col items-center p-6 bg-[#f5a222] rounded-lg shadow section-journey-step">
+                <div
+                    class="w-12 h-12 flex items-center justify-center rounded-full bg-[#102e62] text-white font-bold text-lg">
+                    03</div>
+                <h4 class="mt-4 font-semibold text-gray-900">Get a free quote</h4>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="flex flex-col items-center p-6 bg-[#f5a222] rounded-lg shadow section-journey-step">
+                <div
+                    class="w-12 h-12 flex items-center justify-center rounded-full bg-[#102e62] text-white font-bold text-lg">
+                    04</div>
+                <h4 class="mt-4 font-semibold text-gray-900">Start the project</h4>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- JS for Section-Specific Staggered Animation -->
+    <script>
+        const journeyElements = document.querySelectorAll('.section-journey-heading, .section-journey-subheading, .section-journey-description, .section-journey-step');
+
+        const journeyObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Get all elements in order
+                    journeyElements.forEach((el, index) => {
+                        setTimeout(() => {
+                            el.classList.add('section-journey-visible');
+                        }, index * 150); // stagger delay: 150ms
+                    });
+                } else {
+                    // Remove visible class when section leaves viewport to repeat animation
+                    journeyElements.forEach(el => el.classList.remove('section-journey-visible'));
+                }
+            });
+        }, { threshold: 0.2 });
+
+        journeyElements.forEach(el => {
+            el.classList.add('section-journey-init'); // initial hidden state
+            journeyObserver.observe(el);
+        });
+    </script>
+
+    <!-- Tailwind Custom CSS -->
+    <style>
+        .section-journey-init {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.7s ease-out;
+        }
+
+        .section-journey-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+
+    <!-- Join Our Team Section -->
+    <section id="join-team"
+        class="relative w-full bg-[#102e62] md:rounded-t-[50%] overflow-hidden pb-4 md:pt-[5%] px-4 pt-5 flex items-center justify-center">
+
+        <!-- Centered Form -->
+        <form class="space-y-4 join-fade-up bg-transparent p-8 rounded-2xl shadow-[0_0_5px_#333] max-w-lg w-full">
+            <h2 class="text-3xl md:text-4xl font-bold text-white text-center">Let's Connect!</h2>
+            <p class="text-gray-300 text-md md:text-lg text-center">Send us a message, and we'll promptly discuss your
+                project with you.</p>
+            <input type="text" placeholder="Your Name"
+                class="input-field join-scroll-letter w-full p-3 rounded-md bg-gray-700 text-gray-200 focus:outline-none">
+            <input type="email" placeholder="Your Email"
+                class="input-field join-scroll-letter w-full p-3 rounded-md bg-gray-700 text-gray-200 focus:outline-none">
+            <input type="text" placeholder="Phone Number"
+                class="input-field join-scroll-letter w-full p-3 rounded-md bg-gray-700 text-gray-200 focus:outline-none">
+            <input type="text" placeholder="Company Name"
+                class="input-field join-scroll-letter w-full p-3 rounded-md bg-gray-700 text-gray-200 focus:outline-none">
+            <textarea placeholder="How can we help you?"
+                class="input-field join-scroll-letter w-full p-3 rounded-md bg-gray-700 text-gray-200 focus:outline-none"></textarea>
+            <button type="submit"
+                class="submit-btn join-scroll-letter w-full py-3 font-bold rounded-md text-black hover:border border-[#f5a222] hover:text-white hover:bg-transparent bg-[#f5a222] transition-colors">
+                Ready to Work, Let's Chat
+            </button>
+        </form>
+    </section>
+
+    <style>
+        .join-fade-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.9s ease;
+        }
+
+        .join-scroll-letter {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: transform 0.7s ease, opacity 0.7s ease;
+        }
+
+        .join-fade-up.show,
+        .join-scroll-letter.show-letter {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const scrollItems = document.querySelectorAll('.join-fade-up, .join-scroll-letter');
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.classList.add('show');
+                            entry.target.classList.add('show-letter');
+                        }, index * 100);
+                    } else {
+                        entry.target.classList.remove('show');
+                        entry.target.classList.remove('show-letter');
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            scrollItems.forEach(item => observer.observe(item));
+        });
+    </script>
+
+
+    <footer class="relative bg-gradient-to-b from-black to-[#102e62] w-full text-gray-300 pt-10 overflow-hidden">
+        <div class="relative z-10">
+            <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10 pb-10 border-b border-gray-700">
+                <!-- Left: Logo + Address -->
+                <div>
+                    <img src="./assests/upscalemedia-transformed.png" alt="GVR Logo" class="h-12 mb-4">
+                    <p class="text-md mb-4">
+                        Plot No. 3, 3rd Floor, Sri Sai Enclave, Old Bowenpally, HYDERABAD, INDIA
+                    </p>
+                </div>
+                <!-- Middle (Contact Info) -->
+                <div>
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-envelope text-[#f5a222] mr-2"></i>
+                        <a href="mailto:info@gvr.com" class="hover:text-white text-md">info@gvrinfosystems.com</a>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-phone text-[#f5a222] mr-2"></i>
+                        <a href="tel:+911234567890" class="hover:text-white text-md">+916300279339</a>
+                    </div>
+                </div>
+                <!-- Right: Newsletter -->
+                <div>
+                    <h3 class="text-xl font-semibold text-[#fff] mb-2">Newsletter</h3>
+                    <p class="text-md mb-4">
+                        Sign up to GVR weekly newsletter to get the latest updates.
+                    </p>
+                    <form id="newsletter-form" class="flex">
+                        <input type="email" id="user_email" placeholder="Enter your email here.."
+                            class="w-full px-3 py-2 rounded-l-md focus:outline-none text-black" required>
+
+                        <button id="subscribe-btn" type="submit"
+                            class="bg-blue-500 text-white px-4 rounded-r-md hover:bg-blue-600 flex items-center justify-center relative">
+                            <i id="send-icon" class="fas fa-paper-plane"></i>
+                            <span id="loading-spinner"
+                                class="hidden animate-spin ml-2 w-4 h-4 border-2 border-white border-t-transparent rounded-full"></span>
+                        </button>
+                    </form>
+                    <!-- Messages -->
+                    <p id="form-success" class="text-green-400 mt-2 hidden">✅ Thank you! Your email has been sent.</p>
+                    <p id="form-error" class="text-red-400 mt-2 hidden">❌ Failed to send. Please try again later.</p>
+                </div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10 py-10 border-b border-gray-700">
+                <!-- Information -->
+                <div>
+                    <h3 class="text-xl font-semibold text-[#fff] mb-3">Information</h3>
+                    <ul class="space-y-2 text-md">
+                        <li><a href="aboutus" class="hover:text-white">About GVR</a></li>
+                        <li><a href="portfolio" class="hover:text-white">Portfolio</a></li>
+                        <li><a href="team" class="hover:text-white">Team</a></li>
+                        <li><a href="service" class="hover:text-white">Services</a></li>
+                        <li><a href="case-study" class="hover:text-white">Case Study</a></li>
+                        <li><a href="careers" class="hover:text-white">Careers</a></li>
+                        <li><a href="blog" class="hover:text-white">Blog</a></li>
+                        <li><a href="contact" class="hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div>
+                    <h3 class="text-xl font-semibold text-[#fff] mb-3">Services</h3>
+                    <ul class="space-y-2 text-md">
+                        <li><a href="cloud-migration-maintenance-deployment" class="hover:text-white">Cloud
+                                Migration, Maintenance & Deployment</a></li>
+                        <li><a href="data-center-operations" class="hover:text-white">Data Center Operations</a></li>
+                        <li><a href="mobile-applications-development" class="hover:text-white">Mobile Application
+                                Development</a></li>
+                        <li><a href="security-solutions" class="hover:text-white">Security Solutions</a></li>
+                        <li><a href="ai-ml-solutions" class="hover:text-white">AI & ML Solutions</a></li>
+                        <li><a href="web-based-community-solutions" class="hover:text-white">Web Based Community
+                                Solutions</a></li>
+                        <li><a href="enterprise-applications-integration" class="hover:text-white">Enterprise
+                                Application Integration</a></li>
+                    </ul>
+                </div>
+
+                <!-- Products -->
+                <div>
+                    <h3 class="text-xl font-semibold text-[#fff] mb-3">Products</h3>
+                    <ul class="space-y-2 text-md">
+                        <li><a href="ayucare(hms)" class="hover:text-white">AYUCARE(HMS)</a></li>
+                        <li><a href="burserele" class="hover:text-white">BURSERELE</a></li>
+                        <li><a href="empora(hrm)" class="hover:text-white">EMPORA(HRM)</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="text-center text-sm text-gray-300 py-5 px-1 md:px-0">
+                © 2025 GVR. All rights reserved. | Developed by Prodbiz Solutions Private Limited
+            </div>
+        </div>
+    </footer>
+
+    <!-- EmailJS Script -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script>
+        (function () {
+            emailjs.init("YOUR_USER_ID");
+        })();
+
+        const form = document.getElementById("newsletter-form");
+        const btn = document.getElementById("subscribe-btn");
+        const icon = document.getElementById("send-icon");
+        const spinner = document.getElementById("loading-spinner");
+        const successMsg = document.getElementById("form-success");
+        const errorMsg = document.getElementById("form-error");
+
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            successMsg.classList.add("hidden");
+            errorMsg.classList.add("hidden");
+            btn.disabled = true;
+            icon.classList.add("hidden");
+            spinner.classList.remove("hidden");
+
+            emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+                user_email: document.getElementById("user_email").value
+            }).then(function () {
+                successMsg.classList.remove("hidden");
+                successMsg.classList.add("fade-in");
+                document.getElementById("user_email").value = "";
+                btn.disabled = false;
+                icon.classList.remove("hidden");
+                spinner.classList.add("hidden");
+            }, function (error) {
+                errorMsg.classList.remove("hidden");
+                errorMsg.classList.add("fade-in");
+                btn.disabled = false;
+                icon.classList.remove("hidden");
+                spinner.classList.add("hidden");
+            });
+        });
+    </script>
+
+
+    <!-- WhatsApp Button -->
+    <div class="fixed bottom-20 right-0 z-50 flex flex-col items-center">
+        <div id="whatsapp-tooltip"
+            class="mb-2 px-1 mr-1 py-1 text-[#f5a222] font-bold italic text-sm opacity-0 pointer-events-none flex items-center space-x-1 transition-all duration-300">
+            <span>Click Here </span>
+            <i class="fas fa-hand-point-down"></i>
+        </div>
+        <a href="https://wa.me/916300279321" target="_blank" id="whatsapp-btn"
+            class="w-12 h-12 flex items-center justify-center rounded-full bg-green-500 text-white text-2xl shadow-lg hover:scale-110 transition-transform duration-300 relative">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+    <script>
+        const whatsappBtn = document.getElementById('whatsapp-btn');
+        const tooltip = document.getElementById('whatsapp-tooltip');
+        whatsappBtn.addEventListener('mouseenter', () => {
+            tooltip.style.opacity = '1';
+            tooltip.style.transform = 'translateY(0)';
+            tooltip.style.pointerEvents = 'auto';
+        });
+        whatsappBtn.addEventListener('mouseleave', () => {
+            tooltip.style.opacity = '0';
+            tooltip.style.transform = 'translateY(10px)';
+            tooltip.style.pointerEvents = 'none';
+        });
+        whatsappBtn.addEventListener('click', () => {
+            tooltip.style.opacity = '1';
+            tooltip.style.transform = 'translateY(0)';
+            setTimeout(() => {
+                tooltip.style.opacity = '0';
+                tooltip.style.transform = 'translateY(10px)';
+            }, 2000);
+        });
+    </script>
+
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollTopBtn" class="fixed bottom-5 right-5 bg-[#f5a222] hover:bg-[#102e62] hover:text-[#f5a222] text-[#102e62] w-12 h-12 rounded-full flex items-center justify-center shadow-lg opacity-0 
+  invisible transition-all duration-300 z-[9999]">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <script>
+        const scrollBtn = document.getElementById('scrollTopBtn');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 200) {
+                scrollBtn.classList.remove('opacity-0', 'invisible');
+                scrollBtn.classList.add('opacity-100', 'visible');
+            } else {
+                scrollBtn.classList.add('opacity-0', 'invisible');
+                scrollBtn.classList.remove('opacity-100', 'visible');
+            }
+        });
+
+        scrollBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+
+
+</body>
+
+</html>

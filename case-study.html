@@ -1,0 +1,1465 @@
+<!-- #102e62 
+ #f5a222-->
+<!DOCTYPE html>
+<html lang="en" x-data="{ open: false, dropdowns: {company: false, products: false, services: false}, scrolled: false }"
+  x-init="window.addEventListener('scroll', () => { scrolled = window.scrollY > 50 })">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GVR Infosystem</title>
+  <link rel="icon" href="./assests/fav-removebg-preview.png" type="image/x-icon">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- EB Garamond Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/alpinejs" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MotionPathPlugin.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      font-family: 'EB Garamond', serif;
+    }
+
+    [x-cloak] {
+      display: none !important;
+    }
+
+    @keyframes slideDown {
+      from {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .animate-slide-down {
+      animation: slideDown 0.7s ease-out forwards;
+    }
+
+    @keyframes dropdownSlide {
+      from {
+        transform: translateY(-10px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .dropdown-animate {
+      animation: dropdownSlide 0.3s ease-out forwards;
+    }
+
+    @keyframes staggerFade {
+      from {
+        transform: translateY(-5px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .stagger-item {
+      opacity: 0;
+      animation: staggerFade 0.3s ease forwards;
+    }
+
+    .stagger-item:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+
+    .stagger-item:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .stagger-item:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+  </style>
+</head>
+
+<body class="relative min-h-screen bg-gray-100 text-white">
+  <nav x-data="{ 
+        open: false, 
+        dropdowns: { company: false, products: false, services: false }, 
+        activeLink: '', 
+        scrolled: false 
+    }" x-init="window.addEventListener('scroll', () => { scrolled = window.scrollY > 50 })"
+    class="fixed top-0 left-0 w-full z-50 animate-slide-down transition-all duration-500 shadow-md" :style="scrolled
+        ? (window.innerWidth >= 768 
+            ? 'background: linear-gradient(135deg, white 25%, #f5a222 25% 100%); box-shadow: 0 4px 6px rgba(0,0,0,0.1);'
+            : 'background: linear-gradient(135deg, white 45%, #f5a222 45% 100%); box-shadow: 0 4px 6px rgba(0,0,0,0.1);')
+        : (window.innerWidth >= 768
+            ? 'background: linear-gradient(135deg, white 25%, #f5a222 25% 100%);'
+            : 'background: linear-gradient(135deg, white 45%, #f5a222 45% 100%);')">
+
+    <div class="max-w-7xl mx-auto px-4 lg:px-8 flex items-center justify-between h-16"
+      :class="scrolled ? 'text-[#102e62]' : 'text-[#102e62]'">
+      <!-- Logo -->
+      <a href="./" class="text-xl font-bold">
+        <img src="./assests/upscalemedia-transformed.png" alt="MyLogo" class="h-10 w-auto">
+      </a>
+
+      <!-- Desktop Nav -->
+      <div class="hidden lg:flex items-center space-x-8">
+        <!-- Company -->
+        <div class="group h-16 flex items-center relative">
+          <button class="flex items-center gap-1 group-hover:text-black text-xl transition-colors duration-300">
+            Company
+            <svg class="w-4 h-4 transition-transform duration-300 group-hover:rotate-180"
+              xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div
+            class="absolute left-0 top-full hidden group-hover:block bg-gray-900 rounded-lg shadow-lg p-2 text-white z-50 min-w-[28rem] dropdown-animate">
+            <a href="aboutus" class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">About
+              Us</a>
+            <a href="portfolio"
+              class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">Portfolio
+              - <span class="text-white/50">Explore our all overview</span></a>
+            <a href="team" class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">Team -
+              <span class="text-white/50">We are friendly join our team</span></a>
+            <a href="service"
+              class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">Services
+              - <span class="text-white/50">Happy to help you</span></a>
+            <a href="case-study"
+              class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">Case
+              Study - <span class="text-white/50">Know more about our case study</span></a>
+          </div>
+        </div>
+
+        <!-- Services -->
+        <div class="group h-16 flex items-center relative">
+          <button class="flex items-center gap-1 group-hover:text-black text-xl transition-colors duration-300">
+            Services
+            <svg class="w-4 h-4 transition-transform duration-300 group-hover:rotate-180"
+              xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div
+            class="absolute left-0 top-full hidden group-hover:block bg-gray-900 rounded-lg shadow-lg p-2 text-white z-50 min-w-[28rem] dropdown-animate">
+            <a href="cloud-migration-maintenance-deployment"
+              class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">Cloud
+              Migration, Maintenance & Deployment</a>
+            <a href="data-center-operations"
+              class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">Data
+              Center Operations</a>
+            <a href="mobile-applications-development"
+              class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">Mobile
+              Applications Development</a>
+            <a href="security-solutions"
+              class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">Security
+              Solutions</a>
+            <a href="ai-ml-solutions"
+              class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">AI & ML
+              Solutions</a>
+            <a href="web-based-community-solutions"
+              class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">Web
+              Based Community Solutions</a>
+            <a href="enterprise-applications-integration"
+              class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">Enterprise
+              Applications Integration</a>
+          </div>
+        </div>
+
+        <!-- Products -->
+        <div class="group h-16 flex items-center relative">
+          <button class="flex items-center gap-1 group-hover:text-black text-xl transition-colors duration-300">
+            Products
+            <svg class="w-4 h-4 transition-transform duration-300 group-hover:rotate-180"
+              xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div
+            class="absolute left-0 top-full hidden group-hover:block bg-gray-900 rounded-lg shadow-lg p-2 text-white z-50 min-w-[28rem] dropdown-animate">
+            <a href="ayucare(hms)"
+              class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">AYUCARE
+              (HMS)</a>
+            <a href="burserele"
+              class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">BURSERELE</a>
+            <a href="empora(hrm)"
+              class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">EMPORA
+              (HRM)</a>
+          </div>
+        </div>
+
+        <a href="careers" class="hover:text-black text-xl transition-colors duration-300">Careers</a>
+        <a href="blog" class="hover:text-black text-xl transition-colors duration-300">Blog</a>
+      </div>
+
+      <!-- Get Started Button -->
+      <div class="hidden lg:block">
+        <a href="contact"
+          class="relative flex items-center hover:bg-transparent hover:text-[#102e62] gap-2 px-6 py-2 border border-2 border-[#102e62] text-[#fff] bg-[#102e62] rounded-full font-semibold overflow-hidden group">
+          <span class="flex items-center gap-2 group-hover:animate-roll-up-down">
+            Get Started
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <line x1="4" y1="12" x2="20" y2="12" />
+              <polyline points="14 6 20 12 14 18" />
+            </svg>
+          </span>
+        </a>
+      </div>
+
+      <!-- Mobile Toggle -->
+      <button @click="open = !open"
+        class="lg:hidden w-10 h-10 flex items-center justify-center rounded-full border border-[#102e62] text-[#102e62]">
+        <svg x-show="!open" x-cloak xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" stroke="currentColor"
+          viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <svg x-show="open" x-cloak xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" stroke="currentColor"
+          viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+    <!-- Mobile Nav -->
+    <div x-show="open" x-transition.opacity x-cloak class="lg:hidden absolute top-16 left-0 w-full 
+            bg-gray-900
+            border-t border-white/20 text-white dropdown-animate rounded-b-xl shadow-lg">
+      <div class="flex flex-col p-4 space-y-1">
+
+        <!-- Company -->
+        <div class="space-y-1">
+          <button @click="dropdowns.company = !dropdowns.company"
+            class="w-full text-left flex justify-between items-center px-3 py-2 rounded-lg hover:bg-white/10"
+            :class="dropdowns.company ? 'text-yellow-400' : 'text-white'">
+            Company
+            <span x-show="!dropdowns.company">+</span>
+            <span x-show="dropdowns.company">-</span>
+          </button>
+          <div x-show="dropdowns.company" x-transition.opacity x-transition.duration.300ms
+            class="ml-4 mt-2 space-y-2 px-1 py-1 dropdown-animate border border-white/50 rounded-lg">
+            <a href="aboutus"
+              class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">About
+              Us</a>
+            <a href="portfolio"
+              class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">Portfolio
+              - <span class="text-white/50">Explore our all overview</span></a>
+            <a href="team" class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">Team
+              - <span class="text-white/50">We are friendly join our team</span></a>
+            <a href="service"
+              class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">Services
+              - <span class="text-white/50">Happy to help you</span></a>
+            <a href="case-study"
+              class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">Case
+              Study - <span class="text-white/50">Know more about our case study</span></a>
+          </div>
+        </div>
+
+        <!-- Services -->
+        <div class="space-y-3">
+          <button @click="dropdowns.services = !dropdowns.services"
+            class="w-full text-left flex justify-between items-center px-3 py-2 rounded-lg hover:bg-white/10"
+            :class="dropdowns.services ? 'text-yellow-400' : 'text-white'">
+            Services
+            <span x-show="!dropdowns.services">+</span>
+            <span x-show="dropdowns.services">-</span>
+          </button>
+          <div x-show="dropdowns.services" x-transition.opacity x-transition.duration.300ms
+            class="ml-4 mt-2 space-y-2 px-1 py-1 dropdown-animate border border-white/50 rounded-lg">
+            <a href="cloud-migration-maintenance-deployment"
+              class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400stagger-item">Cloud
+              Migration, Maintenance & Deployment</a>
+            <a href="data-center-operations"
+              class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">Data
+              Center Operations</a>
+            <a href="mobile-applications-development"
+              class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">Mobile
+              Applications Development</a>
+            <a href="security-solutions"
+              class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">Security
+              Solutions</a>
+            <a href="ai-ml-solutions"
+              class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">AI &
+              ML Solutions</a>
+            <a href="web-based-community-solutions"
+              class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">Web
+              Based Community Solutions</a>
+            <a href="enterprise-applications-integration"
+              class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">Enterprise
+              Applications Integration</a>
+          </div>
+        </div>
+
+        <!-- Products -->
+        <div class="space-y-3">
+          <button @click="dropdowns.products = !dropdowns.products"
+            class="w-full text-left flex justify-between items-center px-3 py-2 rounded-lg hover:bg-white/10"
+            :class="dropdowns.products ? 'text-yellow-400' : 'text-white'">
+            Products
+            <span x-show="!dropdowns.products">+</span>
+            <span x-show="dropdowns.products">-</span>
+          </button>
+          <div x-show="dropdowns.products" x-transition.opacity x-transition.duration.300ms
+            class="ml-4 mt-2 px-1 py-1 space-y-2 dropdown-animate border border-white/50 rounded-lg">
+            <a href="ayucare(hms)"
+              class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">AYUCARE
+              (HMS)</a>
+            <a href="burserele"
+              class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">BURSERELE</a>
+            <a href="empora(hrm)"
+              class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">EMPORA
+              (HRM)</a>
+          </div>
+        </div>
+
+        <!-- Single links -->
+        <a href="careers" @click="activeLink = 'careers'" class="block px-3 py-2 rounded-lg hover:bg-white/10"
+          :class="activeLink === 'careers' ? 'text-yellow-400' : 'text-white'">
+          Careers
+        </a>
+
+        <a href="blog" @click="activeLink = 'blog'" class="block px-3 py-2 rounded-lg hover:bg-white/10"
+          :class="activeLink === 'blog' ? 'text-yellow-400' : 'text-white'">
+          Blog
+        </a>
+
+        <!-- Get Started (Mobile with click animation) -->
+        <!-- Get Started (Mobile) -->
+        <div class="block lg:hidden">
+          <a href="contact" id="mobile-get-started"
+            class="relative flex items-center justify-center gap-2 px-6 py-2 bg-[#f5a222] text-[#102e62] border border-[#f5a222] rounded-full font-semibold overflow-hidden transition-all duration-300 ease-in-out">
+            Get Started
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <line x1="4" y1="12" x2="20" y2="12" />
+              <polyline points="14 6 20 12 14 18" />
+            </svg>
+          </a>
+        </div>
+
+      </div>
+    </div>
+    </div>
+  </nav>
+  <script>
+    const mobileBtn = document.getElementById('mobile-get-started');
+
+    mobileBtn.addEventListener('click', (e) => {
+      // Optional: prevent immediate redirect for visual feedback
+      e.preventDefault();
+
+      // Change background to transparent and text color to #f5a222
+      mobileBtn.style.backgroundColor = 'transparent';
+      mobileBtn.style.color = '#f5a222';
+
+      // Navigate after a small delay (for user to see effect)
+      setTimeout(() => {
+        window.location.href = mobileBtn.getAttribute('href');
+      }, 200);
+    });
+  </script>
+
+
+<!-- Case Study Banner Section -->
+<section id="case-study-banner"
+  class="relative w-full pt-10 pb-5 md:py-20 mb-5 bg-cover bg-center bg-no-repeat md:h-[600px] 
+  flex flex-col items-center justify-center text-center overflow-hidden">
+
+  <!-- Background Video -->
+  <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover z-0">
+    <source src="./assests/bannervideo.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- Dark Gradient Overlay -->
+  <div class="absolute inset-0 bg-gradient-to-b from-[#102e62]/90 via-[#0b1e43]/85 to-[#000000]/90 z-0"></div>
+
+  <!-- Content -->
+  <div class="relative z-10 max-w-3xl px-6 py-14 md:pt-0 md:pb-0">
+    <h2
+      class="case-study-banner-title text-3xl sm:text-4xl md:text-5xl font-bold text-[#f5a222] drop-shadow-lg mt-8 mb-2 md:mb-4 opacity-0">
+      Real Stories, Real Impact
+    </h2>
+
+    <p
+      class="case-study-banner-subtitle text-md sm:text-lg md:text-xl italic text-gray-100 opacity-0">
+      Explore how our innovative solutions have transformed businesses across industries.
+    </p>
+  </div>
+</section>
+
+<style>
+  /* ---------------- Entrance Animation ---------------- */
+
+  @keyframes caseStudyBannerSlideInTop {
+    0% {
+      opacity: 0;
+      transform: translateY(-50px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .case-study-banner-animate {
+    animation: caseStudyBannerSlideInTop 1s ease-out forwards;
+  }
+
+  /* Optional: Soft video overlay */
+  #case-study-banner::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+  }
+</style>
+
+<script>
+  // Slide-in stagger animation on load
+  window.addEventListener("load", () => {
+    const title = document.querySelector(".case-study-banner-title");
+    const subtitle = document.querySelector(".case-study-banner-subtitle");
+
+    // Animate title first
+    setTimeout(() => {
+      title.classList.add("case-study-banner-animate");
+    }, 300);
+
+    // Animate subtitle after title
+    setTimeout(() => {
+      subtitle.classList.add("case-study-banner-animate");
+    }, 900);
+  });
+</script>
+
+
+  <!-- INNOVATIVE GROWTH SECTION -->
+  <section id="growth-section" class="relative w-full md:pt-5 overflow-hidden">
+    <div class="relative z-10 max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-10 items-center">
+
+      <!-- Left Part (Image) -->
+      <div class="flex justify-center md:justify-start md:py-5">
+        <img src="./assests/casestudybannerimg.png" alt="Growth Image"
+          class="rounded-[25px] shadow-[5px_5px_10px_#102e62,_5px_5px_10px_black] max-w-full">
+      </div>
+
+      <!-- Right Part (Text) -->
+      <div class="space-y-2 md:space-y-4 text-left">
+
+        <h2 id="growth-title" class="text-xl md:text-2xl lg:text-5xl font-bold text-black opacity-0 translate-y-10">
+          Innovative Growth Strategies
+        </h2>
+
+        <p id="growth-paragraph" class="text-gray-800 text-md md:text-xl leading-relaxed opacity-0 translate-x-[-30px]">
+          Navigating the Path to Success: Insightful Consulting for Thriving Businesses
+        </p>
+        <div id="growth-rating" class="flex items-center space-x-2 opacity-0 translate-x-[-30px]">
+          <!-- Stars -->
+          <div class="flex text-[#f5a222] text-lg space-x-1">
+            <span class="star opacity-0">★</span>
+            <span class="star opacity-0">★</span>
+            <span class="star opacity-0">★</span>
+            <span class="star opacity-0">★</span>
+            <span class="star opacity-0">★</span>
+          </div>
+          <!-- Text -->
+          <span class="text-gray-800 text-md font-medium">4.8 Google Reviews</span>
+        </div>
+
+        <a id="growth-btn" href="contact"
+          class="growth-button group relative inline-flex items-center px-3 py-2 md:px-6 md:py-3 rounded-full bg-[#102e62] backdrop-blur-md border border-[#f5a222] text-[#f5a222] font-semibold overflow-hidden opacity-0 transition-all duration-500">
+          <span class="growth-roll-text inline-block">Learn More</span>
+          <span class="growth-roll-arrow inline-block ml-3">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 19V5m0 0l-6 6m6-6l6 6" />
+            </svg>
+          </span>
+        </a>
+
+      </div>
+
+    </div>
+  </section>
+  <style>
+    #growth-section .growth-roll-text,
+    #growth-section .growth-roll-arrow {
+      display: inline-block;
+      transform-origin: center;
+    }
+
+    @keyframes growth-rollUpOut {
+      0% {
+        transform: translateY(0) rotateX(0deg);
+        opacity: 1;
+      }
+
+      50% {
+        transform: translateY(-100%) rotateX(90deg);
+        opacity: 0;
+      }
+
+      100% {
+        transform: translateY(100%) rotateX(0deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes growth-rollIn {
+      0% {
+        transform: translateY(100%) rotateX(0deg);
+        opacity: 0;
+      }
+
+      50% {
+        transform: translateY(-20%) rotateX(-10deg);
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateY(0) rotateX(0deg);
+        opacity: 1;
+      }
+    }
+
+    #growth-section .growth-button.group:hover .growth-roll-text,
+    #growth-section .growth-button.group:hover .growth-roll-arrow {
+      animation: growth-rollUpOut 0.4s ease forwards,
+        growth-rollIn 0.4s ease 0.4s forwards;
+    }
+
+    #growth-section .growth-roll-arrow {
+      transform: rotate(45deg);
+    }
+
+    @keyframes growth-slideUp {
+      0% {
+        transform: translateY(30px);
+        opacity: 0;
+      }
+
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes growth-slideInLeft {
+      0% {
+        transform: translateX(-40px);
+        opacity: 0;
+      }
+
+      100% {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes growth-floatUpDown {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-6px);
+      }
+    }
+
+    @keyframes star-pop {
+      0% {
+        transform: scale(0.5);
+        opacity: 0;
+      }
+
+      80% {
+        transform: scale(1.2);
+        opacity: 1;
+      }
+
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .growth-show {
+      opacity: 1 !important;
+    }
+
+    .growth-animate-slideUp {
+      animation: growth-slideUp 0.8s ease-out forwards;
+    }
+
+    .growth-animate-slideInLeft {
+      animation: growth-slideInLeft 1s ease forwards;
+    }
+
+    .growth-animate-float {
+      animation: growth-floatUpDown 3s ease-in-out infinite;
+    }
+
+    .star-animate {
+      animation: star-pop 0.4s ease forwards;
+    }
+  </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const section = document.getElementById("growth-section");
+      const title = document.getElementById("growth-title");
+      const paragraph = document.getElementById("growth-paragraph");
+      const rating = document.getElementById("growth-rating");
+      const stars = rating.querySelectorAll(".star");
+      const btn = document.getElementById("growth-btn");
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            title.classList.add("growth-animate-slideUp", "growth-show");
+            setTimeout(() => paragraph.classList.add("growth-animate-slideInLeft", "growth-show"), 800);
+            setTimeout(() => {
+              rating.classList.add("growth-animate-slideInLeft", "growth-show");
+              stars.forEach((star, i) => {
+                setTimeout(() => {
+                  star.classList.add("star-animate");
+                }, i * 250);
+              });
+            }, 1300);
+            setTimeout(() => {
+              btn.classList.add("growth-animate-slideInLeft", "growth-show");
+              setTimeout(() => btn.classList.add("growth-animate-float"), 1000);
+            }, 2000);
+
+          } else {
+            title.classList.remove("growth-animate-slideUp", "growth-show");
+            paragraph.classList.remove("growth-animate-slideInLeft", "growth-show");
+            rating.classList.remove("growth-animate-slideInLeft", "growth-show");
+            stars.forEach(star => star.classList.remove("star-animate"));
+            btn.classList.remove("growth-animate-slideInLeft", "growth-animate-float", "growth-show");
+          }
+        });
+      }, { threshold: 0.3 });
+
+      observer.observe(section);
+    });
+  </script>
+
+  <!-- ABOUT SECTION -->
+  <section id="about-modern" class="relative w-full py-5 md:pb-0 md:pt-10 overflow-hidden">
+    <div class="flex flex-col md:flex-row items-center md:items-center px-1 md:px-12 gap-0">
+
+      <!-- LEFT CONTENT -->
+      <div class="md:w-[40%] text-center md:text-left md:space-y-4 about-left">
+        <h4 class="text-sm font-semibold text-[#1a3a70] tracking-wider uppercase about-item">About Our Company</h4>
+        <h2 class="text-2xl md:text-4xl font-bold text-[#0f172a] leading-snug about-item">
+          Empowering <span class="text-[#f5a222]">Innovation & Growth</span>
+        </h2>
+        <p class="text-gray-700 leading-relaxed text-sm md:text-lg about-item">
+          At GVR, we merge creativity and technology to craft digital solutions that simplify business operations,
+          enhance user engagement, and accelerate performance. Our goal is to turn every client vision into
+          measurable success.
+        </p>
+        <button
+          class="about-item mt-4 px-6 py-2 bg-[#102e62] text-white hover:bg-[#f5a222] rounded-full relative overflow-hidden transition-all duration-500 ease-in-out active:scale-95 shadow-md hover:text-[#102e62]">
+          <span class="relative z-10">Learn More</span>
+        </button>
+      </div>
+
+      <!-- RIGHT CONTENT - WAVE DESIGN WITH ICONS -->
+      <div
+        class="about-right relative w-full md:w-[60%] flex items-center justify-center min-h-[150px] md:min-h-[450px] overflow-hidden opacity-0 translate-y-10">
+
+        <svg class="absolute bottom-30 left-0 w-full h-[60%] md:h-[70%]" viewBox="0 0 500 200"
+          preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="waveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#102e62" />
+              <stop offset="100%" stop-color="#f5a222" />
+            </linearGradient>
+          </defs>
+
+          <path d="M0 100 C100 20, 200 180, 300 100 S500 180, 600 100" stroke="url(#waveGrad)" stroke-width="3.5"
+            fill="none" class="wave-path" />
+        </svg>
+
+        <!-- ICONS AT PEAKS -->
+        <div
+          class="absolute bottom-[10%] md:bottom-[40%] left-[0%] md:left-[10%] flex flex-col items-center text-center">
+          <div
+            class="w-12 h-12 rounded-full bg-[#102e62] flex items-center justify-center text-[#f5a222] text-lg shadow-md mb-1">
+            <i class="fas fa-briefcase"></i>
+          </div>
+          <h4 class="text-[#102e62] font-semibold text-lg">6K Projects Done</h4>
+        </div>
+
+        <div
+          class="absolute bottom-[18%] md:bottom-[30%] left-[30%] md:left-[40%] flex flex-col items-center text-center">
+          <div
+            class="w-12 h-12 rounded-full bg-[#f5a222] flex items-center justify-center text-white text-lg shadow-md mb-1">
+            <i class="fas fa-users"></i>
+          </div>
+          <h4 class="text-[#102e62] font-semibold text-lg mt-0">6K Happy Customers</h4>
+        </div>
+
+        <div
+          class="absolute bottom-[8%] md:bottom-[35%] right-[0%] md:right-[5%] flex flex-col items-center text-center">
+          <div
+            class="w-12 h-12 rounded-full bg-gradient-to-br from-[#102e62] to-[#1b3e8b] flex items-center justify-center text-[#f5a222] text-lg shadow-md mb-1">
+            <i class="fas fa-check-circle"></i>
+          </div>
+          <h4 class="text-[#102e62] font-semibold text-lg">100% Results Guaranteed</h4>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 🌊 STYLES -->
+  <style>
+    /* Wave Animation */
+    @keyframes waveMotion {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(-50px);
+      }
+    }
+
+    .wave-path {
+      animation: waveMotion 4s ease-in-out infinite alternate;
+    }
+
+    /* Floating icons */
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-6px);
+      }
+    }
+
+    .absolute>div.w-12 {
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .absolute>div.w-12:hover {
+      transform: scale(1.1);
+      transition: all 0.3s ease;
+    }
+
+    /* LEFT CONTENT animation */
+    .about-item {
+      opacity: 0;
+      transform: translateX(-40px);
+      transition: all 0.7s ease-out;
+    }
+
+    .about-left.active .about-item {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .about-left.active .about-item:nth-child(1) {
+      transition-delay: 0.1s;
+    }
+
+    .about-left.active .about-item:nth-child(2) {
+      transition-delay: 0.3s;
+    }
+
+    .about-left.active .about-item:nth-child(3) {
+      transition-delay: 0.5s;
+    }
+
+    .about-left.active .about-item:nth-child(4) {
+      transition-delay: 0.7s;
+    }
+
+    /* Hover effect for button background */
+    button span:last-child {
+      transform-origin: left;
+    }
+
+    button:hover span:last-child {
+      transform: scaleX(1);
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 768px) {
+      svg {
+        transform: scale(0.9);
+      }
+
+      .w-12.h-12 {
+        width: 40px !important;
+        height: 40px !important;
+      }
+
+      h4 {
+        font-size: 12px !important;
+      }
+    }
+  </style>
+
+  <!-- 🌟 ANIMATIONS -->
+  <script>
+    // LEFT SIDE TEXT ANIMATION (staggered)
+    const aboutLeft = document.querySelector('.about-left');
+    const leftObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          aboutLeft.classList.add('active');
+        } else {
+          aboutLeft.classList.remove('active');
+        }
+      });
+    }, { threshold: 0.3 });
+    leftObserver.observe(aboutLeft);
+
+    // RIGHT SIDE SLIDE IN (from bottom)
+    const aboutRight = document.querySelector('.about-right');
+    const rightObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          aboutRight.style.transition = "all 1s ease-out";
+          aboutRight.style.transform = "translateY(0)";
+          aboutRight.style.opacity = "1";
+        } else {
+          aboutRight.style.transform = "translateY(40px)";
+          aboutRight.style.opacity = "0";
+        }
+      });
+    }, { threshold: 0.3 });
+    rightObserver.observe(aboutRight);
+  </script>
+
+
+
+
+
+
+  <!-- EMPOWERING SUCCESS SECTION (MODERN STYLE MIRRORED) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <section id="consulting-modern" class="relative w-full md:pt-10 pb-5 md:pb-20 overflow-hidden">
+    <div class="flex flex-col md:flex-row items-center md:items-start px-1 md:px-6 gap-0 md:gap-5">
+
+      <!-- LEFT CONTENT (same as before) -->
+      <div class="relative md:w-[60%] flex items-center justify-center min-h-[480px] w-full order-2 md:order-1">
+
+
+        <!-- CENTER LOGO -->
+        <div
+          class="absolute w-24 md:w-28 h-24 md:h-28 bg-white rounded-full flex items-center justify-center shadow-[0_8px_25px_rgba(16,46,98,0.15)] border border-[#f5a222]/30 z-20">
+          <img src="./assests/gvrlogo.png" alt="logo" class="w-12 md:w-14 h-12 md:h-14 object-contain">
+        </div>
+
+        <!-- CONNECTING LINES -->
+        <svg class="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 500 400"
+          xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="gradLine2" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#102e62" stop-opacity="0.7" />
+              <stop offset="100%" stop-color="#f5a222" stop-opacity="0.8" />
+            </linearGradient>
+            <style>
+              @keyframes dashMove {
+                to {
+                  stroke-dashoffset: -30;
+                }
+              }
+            </style>
+          </defs>
+
+          <path d="M250 190 C180 180, 200 50, 210 50" stroke="url(#gradLine2)" stroke-width="2.5" fill="none"
+            stroke-dasharray="6 6" stroke-dashoffset="0" style="animation: dashMove 4s linear infinite;" />
+
+          <path d="M270 220 C330 250, 370 290, 380 330" stroke="url(#gradLine2)" stroke-width="2.5" fill="none"
+            stroke-dasharray="6 6" stroke-dashoffset="0" style="animation: dashMove 4s linear infinite;" />
+
+          <path d="M230 220 C170 250, 130 290, 120 330" stroke="url(#gradLine2)" stroke-width="2.5" fill="none"
+            stroke-dasharray="6 6" stroke-dashoffset="0" style="animation: dashMove 4s linear infinite;" />
+        </svg>
+
+        <!-- CARDS -->
+        <div class="absolute top-6 sm:top-0 md:-top-5 md:left-[45%] -translate-x-1/2 glass-card animate-float z-10">
+          <div
+            class="flex flex-col items-center text-center p-4 rounded-2xl backdrop-blur-md bg-white/70 border border-[#f5a222]/20 shadow-[0_4px_25px_rgba(16,46,98,0.1)] w-40 md:w-44">
+            <div
+              class="w-8 md:w-14 h-8 md:h-14 rounded-xl flex items-center justify-center bg-gradient-to-br from-[#102e62] to-[#1b3e8b] text-[#f5a222] text-xl md:text-2xl mb-2">
+              <i class="fas fa-lightbulb"></i>
+            </div>
+            <h3 class="font-semibold text-[#102e62] text-sm md:text-base">Tailored Solutions</h3>
+            <p class="text-xs md:text-sm text-gray-600 mt-1">Customized strategies to match each client’s goals.</p>
+          </div>
+        </div>
+
+        <div class="absolute -bottom-3 md:-bottom-10 md:right-[13%] right-5 glass-card animate-float-delayed z-10">
+          <div
+            class="flex flex-col items-center text-center p-4 rounded-2xl backdrop-blur-md bg-white/70 border border-[#f5a222]/20 shadow-[0_4px_25px_rgba(16,46,98,0.1)] w-40 md:w-44">
+            <div
+              class="w-8 md:w-14 h-8 md:h-14 rounded-xl flex items-center justify-center bg-gradient-to-br from-[#102e62] to-[#1b3e8b] text-[#f5a222] text-xl md:text-2xl mb-2">
+              <i class="fas fa-handshake"></i>
+            </div>
+            <h3 class="font-semibold text-[#102e62] text-sm md:text-base">Collaborative Approach</h3>
+            <p class="text-xs md:text-sm text-gray-600 mt-1">Working closely with clients to find real opportunities.
+            </p>
+          </div>
+        </div>
+
+        <div class="absolute bottom-3 md:-bottom-10 md:left-[13%] left-5 glass-card animate-float-slow z-10">
+          <div
+            class="flex flex-col items-center text-center p-4 rounded-2xl backdrop-blur-md bg-white/70 border border-[#f5a222]/20 shadow-[0_4px_25px_rgba(16,46,98,0.1)] w-40 md:w-44">
+            <div
+              class="w-8 md:w-14 h-8 md:h-14 rounded-xl flex items-center justify-center bg-gradient-to-br from-[#102e62] to-[#1b3e8b] text-[#f5a222] text-xl md:text-2xl mb-2">
+              <i class="fas fa-users"></i>
+            </div>
+            <h3 class="font-semibold text-[#102e62] text-sm md:text-base">Expert Team</h3>
+            <p class="text-xs md:text-sm text-gray-600 mt-1">A skilled team offering strategic consulting expertise.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ✅ RIGHT CONTENT -->
+      <div
+        class="consulting-modern__right md:w-[40%] text-sm md:text-xl text-center md:text-left space-y-1 md:space-y-4 order-1 md:order-2 mb-5 md:mb-0 opacity-0">
+        <h4 class="stagger text-sm font-semibold text-[#1a3a70] tracking-wider uppercase">Case Studies</h4>
+        <h2 class="stagger text-2xl md:text-4xl font-bold text-[#0f172a] leading-snug">
+          Empowering <span class="text-[#f5a222]">Success & Strategy</span>
+        </h2>
+        <p class="stagger text-gray-700 leading-relaxed text-sm md:text-lg">
+          Our consulting expertise helps clients unlock growth, improve performance, and embrace change with confidence.
+          Every partnership is an opportunity to innovate smarter and move faster.
+        </p>
+        <button
+          class="stagger mt-4 px-6 py-2 bg-[#102e62] text-white rounded-full hover:bg-[#f5a222] hover:text-white transition-all duration-300 shadow-md">
+          Explore More
+        </button>
+      </div>
+    </div>
+  </section>
+  <style>
+    /* Floating animation (unchanged) */
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    .animate-float {
+      animation: float 5s ease-in-out infinite;
+    }
+
+    .animate-float-delayed {
+      animation: float 6s ease-in-out infinite;
+      animation-delay: 1s;
+    }
+
+    .animate-float-slow {
+      animation: float 7s ease-in-out infinite;
+      animation-delay: 2s;
+    }
+
+    /* ✨ Slide-in Animation */
+    @keyframes slideInRight {
+      0% {
+        opacity: 0;
+        transform: translateX(60px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .consulting-modern__right.active {
+      opacity: 1;
+    }
+
+    .consulting-modern__right.active .stagger {
+      animation: slideInRight 0.8s ease-out forwards;
+    }
+
+    .consulting-modern__right.active .stagger:nth-child(1) {
+      animation-delay: 0.2s;
+    }
+
+    .consulting-modern__right.active .stagger:nth-child(2) {
+      animation-delay: 0.4s;
+    }
+
+    .consulting-modern__right.active .stagger:nth-child(3) {
+      animation-delay: 0.6s;
+    }
+
+    .consulting-modern__right.active .stagger:nth-child(4) {
+      animation-delay: 0.8s;
+    }
+  </style>
+  <script>
+    // ✅ Scroll-triggered stagger animation (repeats every time)
+    const consultingSection = document.querySelector("#consulting-modern .consulting-modern__right");
+    const consultingTexts = consultingSection.querySelectorAll(".stagger");
+
+    const consultingObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // Animate IN (staggered)
+          consultingSection.classList.add("active");
+          consultingTexts.forEach((el, i) => {
+            el.style.animationDelay = `${i * 0.2}s`;
+            el.style.animationPlayState = "running";
+          });
+        } else {
+          // Reset animation when leaving view
+          consultingSection.classList.remove("active");
+          consultingTexts.forEach(el => {
+            el.style.animation = "none"; // reset animation
+            void el.offsetWidth; // force reflow to restart next time
+            el.style.animation = ""; // restore animation property
+          });
+        }
+      });
+    }, { threshold: 0.3 });
+
+    consultingObserver.observe(consultingSection);
+  </script>
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    // ✅ Animate LEFT SIDE (slide from bottom once per scroll-in)
+    gsap.from("#consulting-modern .md\\:w-\\[60\\%\\]", {
+      scrollTrigger: {
+        trigger: "#consulting-modern",
+        start: "top 85%",
+        toggleActions: "play none none reverse", // replays when scrolling back up
+      },
+      y: 80,
+      opacity: 0,
+      duration: 1.2,
+      ease: "power3.out",
+      onComplete: () => {
+        // When the slide-in finishes, floating animations keep running
+        document.querySelectorAll(".animate-float, .animate-float-delayed, .animate-float-slow")
+          .forEach(el => el.style.animationPlayState = "running");
+      }
+    });
+
+    // 💤 Pause floating animations initially so they start *after* the intro
+    document.querySelectorAll(".animate-float, .animate-float-delayed, .animate-float-slow")
+      .forEach(el => el.style.animationPlayState = "paused");
+  </script>
+
+
+
+
+
+
+  <!-- TRANSFORMATIVE SOLUTIONS SECTION -->
+  <section id="chat-section"
+    class="relative w-full bg-gradient-to-b from-[#102e62] to-white py-10 md:py-20 overflow-hidden md:rounded-t-[100%]">
+    <div class="relative z-10 mx-auto px-6 max-w-7xl">
+      <!-- Top Content -->
+      <div class="w-full text-center space-y-3">
+        <h2 id="chat-top-title" class="opacity-0 text-2xl md:text-4xl font-bold text-white">
+          Transformative Solutions Tailored to Your Needs
+        </h2>
+        <p id="chat-top-subtitle" class="opacity-0 text-gray-300 text-sm md:text-lg max-w-3xl mx-auto pb-0 md:pb-[8%]">
+          Driving Growth and Innovation Through Customized Strategies
+        </p>
+        <div id="chat-carousel-wrapper" class="flex justify-center opacity-0">
+          <div class="w-[20rem] h-[16rem] md:w-[28rem] md:h-[19rem] chat-perspective-1000">
+            <div class="relative w-full h-full mt-12 md:mt-5 chat-transform-style-3d transition-transform duration-500"
+              id="chat-carousel-inner"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Content -->
+      <div class="w-full text-center space-y-3 md:space-y-6 mt-0 md:mt-12">
+        <h2 id="chat-bottom-title" class="opacity-0 text-2xl md:text-4xl font-bold text-black">
+          Ready to Work, Let's Chat
+        </h2>
+        <p id="chat-bottom-para" class="opacity-0 text-gray-800 text-md md:text-lg max-w-2xl mx-auto">
+          Our team of experts is ready to collaborate with you every step of the way, from initial consultation to
+          implementation.
+        </p>
+
+        <!-- Button -->
+        <a href="contact" id="chat-bottom-btn" class="opacity-0 chat-group inline-flex items-center gap-2  px-4 py-2 md:px-6 md:py-3 border-2 border-[#f5a222] hover:border-2 border-[#f5a222] 
+         hover:text-[#f5a222] text-[#ffff] bg-[#f5a222] hover:bg-transparent rounded-full overflow-hidden relative">
+          <span class="chat-animate-roll relative inline-block">Contact Us</span>
+          <span class="chat-animate-roll relative inline-block -rotate-45">➔</span>
+        </a>
+      </div>
+    </div>
+  </section>
+  <style>
+    .chat-perspective-1000 {
+      perspective: 1000px;
+    }
+
+    .chat-transform-style-3d {
+      transform-style: preserve-3d;
+    }
+
+    @keyframes slideUp {
+      0% {
+        transform: translateY(40px);
+        opacity: 0;
+      }
+
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeRotateIn {
+      0% {
+        opacity: 0;
+        transform: rotateY(90deg) scale(0.9);
+      }
+
+      100% {
+        opacity: 1;
+        transform: rotateY(0deg) scale(1);
+      }
+    }
+
+    @keyframes floatAnim {
+      0% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
+
+      100% {
+        transform: translateY(0);
+      }
+    }
+  </style>
+  <script>
+    const chatSection = document.getElementById("chat-section");
+    const chatCarouselInner = document.getElementById("chat-carousel-inner");
+    const chatSlidesData = [
+      { icon: "fa-lightbulb", title: "Strategic Planning and Execution", desc: "Our consulting services are customized to suit the unique needs and goals of each client, ensuring precise alignment with their business objectives." },
+      { icon: "fa-bolt", title: "Business Process Optimization", desc: "Our consulting services are customized to suit the unique needs and goals of each client, ensuring precise alignment with their business objectives." },
+      { icon: "fa-digital-tachograph", title: "Digital Transformation Consulting", desc: "Our consulting services are customized to suit the unique needs and goals of each client, ensuring precise alignment with their business objectives." },
+      { icon: "fa-chess", title: "Strategic Planning and Execution", desc: "Our consulting services are customized to suit the unique needs and goals of each client, ensuring precise alignment with their business objectives." },
+      { icon: "fa-people-arrows", title: "Change Management Solutions", desc: "Our consulting services are customized to suit the unique needs and goals of each client, ensuring precise alignment with their business objectives." },
+      { icon: "fa-chart-line", title: "Performance Metrics and KPI Development", desc: "Our consulting services are customized to suit the unique needs and goals of each client, ensuring precise alignment with their business objectives." }
+    ];
+
+    const chatNumSlides = chatSlidesData.length;
+    const chatTheta = 360 / chatNumSlides;
+
+    function buildCarousel() {
+      chatCarouselInner.innerHTML = "";
+      const isMobile = window.innerWidth < 768;
+      const chatTranslateZ = isMobile ? 135 : 280;
+
+      chatSlidesData.forEach((item, i) => {
+        const slide = document.createElement("div");
+        slide.className = "absolute w-32 h-auto md:w-48 md:h-52 bg-white text-black flex flex-col items-center justify-center rounded-xl shadow-lg left-1/2 -translate-x-1/2 -translate-y-1/2 text-center";
+        slide.style.transform = `rotateY(${i * chatTheta}deg) translateZ(${chatTranslateZ}px)`;
+        slide.innerHTML = `
+      <i class="fa ${item.icon} text-lg md:text-3xl text-[#f5a222] mb-0"></i>
+      <h3 class="text-[11px] md:text-sm font-semibold">${item.title}</h3>
+      <p class="text-[10px] md:text-xs font-normal text-gray-900 md:mt-1">${item.desc}</p>
+    `;
+        chatCarouselInner.appendChild(slide);
+      });
+    }
+
+    buildCarousel();
+    window.addEventListener("resize", buildCarousel);
+
+    // Animate every time the section comes into view
+    const chatObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // Reset animations
+          const elements = [
+            "chat-top-title",
+            "chat-top-subtitle",
+            "chat-carousel-wrapper",
+            "chat-bottom-title",
+            "chat-bottom-para",
+            "chat-bottom-btn"
+          ];
+          elements.forEach(id => {
+            const el = document.getElementById(id);
+            el.style.animation = "none";
+            el.offsetHeight; // trigger reflow
+          });
+
+          // Trigger animations
+          document.getElementById("chat-top-title").style.animation = "slideUp 0.6s ease forwards";
+          setTimeout(() => {
+            document.getElementById("chat-top-subtitle").style.animation = "slideUp 0.6s ease forwards";
+          }, 400);
+          setTimeout(() => {
+            document.getElementById("chat-carousel-wrapper").style.animation = "fadeRotateIn 0.6s ease forwards";
+          }, 900);
+          setTimeout(() => {
+            let chatRotationY = 0;
+            const rotateInterval = setInterval(() => {
+              chatRotationY -= 60;
+              chatCarouselInner.style.transform = `rotateY(${chatRotationY}deg)`;
+            }, 3000);
+            // Stop rotation if user scrolls away (optional)
+            entry.target.addEventListener("mouseleave", () => clearInterval(rotateInterval));
+          }, 1600);
+          setTimeout(() => {
+            document.getElementById("chat-bottom-title").style.animation = "slideUp 0.6s ease forwards";
+          }, 1700);
+          setTimeout(() => {
+            document.getElementById("chat-bottom-para").style.animation = "slideUp 0.6s ease forwards";
+          }, 2100);
+          setTimeout(() => {
+            const btn = document.getElementById("chat-bottom-btn");
+            btn.style.animation = "slideUp 0.6s ease forwards, floatAnim 3s ease-in-out infinite 0.6s";
+          }, 2500);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    chatObserver.observe(chatSection);
+
+  </script>
+
+
+  <footer class="relative bg-gradient-to-b from-black to-[#102e62] w-full text-gray-300 pt-10 overflow-hidden">
+    <div class="relative z-10">
+      <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10 pb-10 border-b border-gray-700">
+        <!-- Left: Logo + Address -->
+        <div>
+          <img src="./assests/upscalemedia-transformed.png" alt="GVR Logo" class="h-12 mb-4">
+          <p class="text-md mb-4">
+            Plot No. 3, 3rd Floor, Sri Sai Enclave, Old Bowenpally, HYDERABAD, INDIA
+          </p>
+        </div>
+        <!-- Middle (Contact Info) -->
+        <div>
+          <div class="flex items-center mb-3">
+            <i class="fas fa-envelope text-[#f5a222] mr-2"></i>
+            <a href="mailto:info@gvr.com" class="hover:text-white text-md">info@gvrinfosystems.com</a>
+          </div>
+          <div class="flex items-center">
+            <i class="fas fa-phone text-[#f5a222] mr-2"></i>
+            <a href="tel:+911234567890" class="hover:text-white text-md">+916300279339</a>
+          </div>
+        </div>
+        <!-- Right: Newsletter -->
+        <div>
+          <h3 class="text-xl font-semibold text-[#fff] mb-2">Newsletter</h3>
+          <p class="text-md mb-4">
+            Sign up to GVR weekly newsletter to get the latest updates.
+          </p>
+          <form id="newsletter-form" class="flex">
+            <input type="email" id="user_email" placeholder="Enter your email here.."
+              class="w-full px-3 py-2 rounded-l-md focus:outline-none text-black" required>
+
+            <button id="subscribe-btn" type="submit"
+              class="bg-blue-500 text-white px-4 rounded-r-md hover:bg-blue-600 flex items-center justify-center relative">
+              <i id="send-icon" class="fas fa-paper-plane"></i>
+              <span id="loading-spinner"
+                class="hidden animate-spin ml-2 w-4 h-4 border-2 border-white border-t-transparent rounded-full"></span>
+            </button>
+          </form>
+          <!-- Messages -->
+          <p id="form-success" class="text-green-400 mt-2 hidden">✅ Thank you! Your email has been sent.</p>
+          <p id="form-error" class="text-red-400 mt-2 hidden">❌ Failed to send. Please try again later.</p>
+        </div>
+      </div>
+
+      <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10 py-10 border-b border-gray-700">
+        <!-- Information -->
+        <div>
+          <h3 class="text-xl font-semibold text-[#fff] mb-3">Information</h3>
+          <ul class="space-y-2 text-md">
+            <li><a href="aboutus" class="hover:text-white">About GVR</a></li>
+            <li><a href="portfolio" class="hover:text-white">Portfolio</a></li>
+            <li><a href="team" class="hover:text-white">Team</a></li>
+            <li><a href="service" class="hover:text-white">Services</a></li>
+            <li><a href="case-study" class="hover:text-white">Case Study</a></li>
+            <li><a href="careers" class="hover:text-white">Careers</a></li>
+            <li><a href="blog" class="hover:text-white">Blog</a></li>
+            <li><a href="contact" class="hover:text-white">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Services -->
+        <div>
+          <h3 class="text-xl font-semibold text-[#fff] mb-3">Services</h3>
+          <ul class="space-y-2 text-md">
+            <li><a href="cloud-migration-maintenance-deployment" class="hover:text-white">Cloud
+                Migration, Maintenance & Deployment</a></li>
+            <li><a href="data-center-operations" class="hover:text-white">Data Center Operations</a></li>
+            <li><a href="mobile-applications-development" class="hover:text-white">Mobile Application
+                Development</a></li>
+            <li><a href="security-solutions" class="hover:text-white">Security Solutions</a></li>
+            <li><a href="ai-ml-solutions" class="hover:text-white">AI & ML Solutions</a></li>
+            <li><a href="web-based-community-solutions" class="hover:text-white">Web Based Community
+                Solutions</a></li>
+            <li><a href="enterprise-applications-integration" class="hover:text-white">Enterprise
+                Application Integration</a></li>
+          </ul>
+        </div>
+
+        <!-- Products -->
+        <div>
+          <h3 class="text-xl font-semibold text-[#fff] mb-3">Products</h3>
+          <ul class="space-y-2 text-md">
+            <li><a href="ayucare(hms)" class="hover:text-white">AYUCARE(HMS)</a></li>
+            <li><a href="burserele" class="hover:text-white">BURSERELE</a></li>
+            <li><a href="empora(hrm)" class="hover:text-white">EMPORA(HRM)</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Copyright -->
+      <div class="text-center text-sm text-gray-300 py-5 px-1 md:px-0">
+        © 2025 GVR. All rights reserved. | Developed by Prodbiz Solutions Private Limited
+      </div>
+    </div>
+  </footer>
+
+  <!-- EmailJS Script -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script>
+    (function () {
+      emailjs.init("YOUR_USER_ID");
+    })();
+
+    const form = document.getElementById("newsletter-form");
+    const btn = document.getElementById("subscribe-btn");
+    const icon = document.getElementById("send-icon");
+    const spinner = document.getElementById("loading-spinner");
+    const successMsg = document.getElementById("form-success");
+    const errorMsg = document.getElementById("form-error");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      successMsg.classList.add("hidden");
+      errorMsg.classList.add("hidden");
+      btn.disabled = true;
+      icon.classList.add("hidden");
+      spinner.classList.remove("hidden");
+
+      emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+        user_email: document.getElementById("user_email").value
+      }).then(function () {
+        successMsg.classList.remove("hidden");
+        successMsg.classList.add("fade-in");
+        document.getElementById("user_email").value = "";
+        btn.disabled = false;
+        icon.classList.remove("hidden");
+        spinner.classList.add("hidden");
+      }, function (error) {
+        errorMsg.classList.remove("hidden");
+        errorMsg.classList.add("fade-in");
+        btn.disabled = false;
+        icon.classList.remove("hidden");
+        spinner.classList.add("hidden");
+      });
+    });
+  </script>
+
+
+  <!-- WhatsApp Button -->
+  <div class="fixed bottom-20 right-0 z-50 flex flex-col items-center">
+    <div id="whatsapp-tooltip"
+      class="mb-2 px-1 mr-1 py-1 text-[#f5a222] font-bold italic text-sm opacity-0 pointer-events-none flex items-center space-x-1 transition-all duration-300">
+      <span>Click Here </span>
+      <i class="fas fa-hand-point-down"></i>
+    </div>
+    <a href="https://wa.me/916300279321" target="_blank" id="whatsapp-btn"
+      class="w-12 h-12 flex items-center justify-center rounded-full bg-green-500 text-white text-2xl shadow-lg hover:scale-110 transition-transform duration-300 relative">
+      <i class="fab fa-whatsapp"></i>
+    </a>
+  </div>
+  <script>
+    const whatsappBtn = document.getElementById('whatsapp-btn');
+    const tooltip = document.getElementById('whatsapp-tooltip');
+    whatsappBtn.addEventListener('mouseenter', () => {
+      tooltip.style.opacity = '1';
+      tooltip.style.transform = 'translateY(0)';
+      tooltip.style.pointerEvents = 'auto';
+    });
+    whatsappBtn.addEventListener('mouseleave', () => {
+      tooltip.style.opacity = '0';
+      tooltip.style.transform = 'translateY(10px)';
+      tooltip.style.pointerEvents = 'none';
+    });
+    whatsappBtn.addEventListener('click', () => {
+      tooltip.style.opacity = '1';
+      tooltip.style.transform = 'translateY(0)';
+      setTimeout(() => {
+        tooltip.style.opacity = '0';
+        tooltip.style.transform = 'translateY(10px)';
+      }, 2000);
+    });
+  </script>
+
+
+  <!-- Scroll to Top Button -->
+  <button id="scrollTopBtn" class="fixed bottom-5 right-5 bg-[#f5a222] hover:bg-[#102e62] hover:text-[#f5a222] text-[#102e62] w-12 h-12 rounded-full flex items-center justify-center shadow-lg opacity-0 
+  invisible transition-all duration-300 z-[9999]">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+  <script>
+    const scrollBtn = document.getElementById('scrollTopBtn');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 200) {
+        scrollBtn.classList.remove('opacity-0', 'invisible');
+        scrollBtn.classList.add('opacity-100', 'visible');
+      } else {
+        scrollBtn.classList.add('opacity-0', 'invisible');
+        scrollBtn.classList.remove('opacity-100', 'visible');
+      }
+    });
+
+    scrollBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  </script>
+
+
+</body>
+
+</html>

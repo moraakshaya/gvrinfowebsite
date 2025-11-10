@@ -1,0 +1,2489 @@
+<!-- #102e62 
+ #f5a222-->
+<!DOCTYPE html>
+<html lang="en" x-data="{ open: false, dropdowns: {company: false, products: false, services: false}, scrolled: false }"
+    x-init="window.addEventListener('scroll', () => { scrolled = window.scrollY > 50 })">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GVR Infosystem</title>
+    <link rel="icon" href="./assests/fav-removebg-preview.png" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- EB Garamond Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/alpinejs" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MotionPathPlugin.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <style>
+        body {
+            font-family: 'EB Garamond', serif;
+        }
+
+        [x-cloak] {
+            display: none !important;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .animate-slide-down {
+            animation: slideDown 0.7s ease-out forwards;
+        }
+
+        @keyframes dropdownSlide {
+            from {
+                transform: translateY(-10px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .dropdown-animate {
+            animation: dropdownSlide 0.3s ease-out forwards;
+        }
+
+        @keyframes staggerFade {
+            from {
+                transform: translateY(-5px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .stagger-item {
+            opacity: 0;
+            animation: staggerFade 0.3s ease forwards;
+        }
+
+        .stagger-item:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .stagger-item:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .stagger-item:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+    </style>
+</head>
+
+<body class="relative min-h-screen bg-gray-100 text-white">
+    <nav x-data="{ 
+        open: false, 
+        dropdowns: { company: false, products: false, services: false }, 
+        activeLink: '', 
+        scrolled: false 
+    }" x-init="window.addEventListener('scroll', () => { scrolled = window.scrollY > 50 })"
+        class="fixed top-0 left-0 w-full z-50 animate-slide-down transition-all duration-500 shadow-md" :style="scrolled
+        ? (window.innerWidth >= 768 
+            ? 'background: linear-gradient(135deg, white 25%, #f5a222 25% 100%); box-shadow: 0 4px 6px rgba(0,0,0,0.1);'
+            : 'background: linear-gradient(135deg, white 45%, #f5a222 45% 100%); box-shadow: 0 4px 6px rgba(0,0,0,0.1);')
+        : (window.innerWidth >= 768
+            ? 'background: linear-gradient(135deg, white 25%, #f5a222 25% 100%);'
+            : 'background: linear-gradient(135deg, white 45%, #f5a222 45% 100%);')">
+
+        <div class="max-w-7xl mx-auto px-4 lg:px-8 flex items-center justify-between h-16"
+            :class="scrolled ? 'text-[#102e62]' : 'text-[#102e62]'">
+            <!-- Logo -->
+            <a href="./" class="text-xl font-bold">
+                <img src="./assests/upscalemedia-transformed.png" alt="MyLogo" class="h-10 w-auto">
+            </a>
+
+            <!-- Desktop Nav -->
+            <div class="hidden lg:flex items-center space-x-8">
+                <!-- Company -->
+                <div class="group h-16 flex items-center relative">
+                    <button
+                        class="flex items-center gap-1 group-hover:text-black text-xl transition-colors duration-300">
+                        Company
+                        <svg class="w-4 h-4 transition-transform duration-300 group-hover:rotate-180"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div
+                        class="absolute left-0 top-full hidden group-hover:block bg-gray-900 rounded-lg shadow-lg p-2 text-white z-50 min-w-[28rem] dropdown-animate">
+                        <a href="aboutus"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">About
+                            Us</a>
+                        <a href="portfolio"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">Portfolio
+                            - <span class="text-white/50">Explore our all overview</span></a>
+                        <a href="team"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">Team -
+                            <span class="text-white/50">We are friendly join our team</span></a>
+                        <a href="service"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">Services
+                            - <span class="text-white/50">Happy to help you</span></a>
+                        <a href="case-study"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">Case
+                            Study - <span class="text-white/50">Know more about our case study</span></a>
+                    </div>
+                </div>
+
+                <!-- Services -->
+                <div class="group h-16 flex items-center relative">
+                    <button
+                        class="flex items-center gap-1 group-hover:text-black text-xl transition-colors duration-300">
+                        Services
+                        <svg class="w-4 h-4 transition-transform duration-300 group-hover:rotate-180"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div
+                        class="absolute left-0 top-full hidden group-hover:block bg-gray-900 rounded-lg shadow-lg p-2 text-white z-50 min-w-[28rem] dropdown-animate">
+                        <a href="cloud-migration-maintenance-deployment"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">Cloud
+                            Migration, Maintenance & Deployment</a>
+                        <a href="data-center-operations"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">Data
+                            Center Operations</a>
+                        <a href="mobile-applications-development"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">Mobile
+                            Applications Development</a>
+                        <a href="security-solutions"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">Security
+                            Solutions</a>
+                        <a href="ai-ml-solutions"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">AI & ML
+                            Solutions</a>
+                        <a href="web-based-community-solutions"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">Web
+                            Based Community Solutions</a>
+                        <a href="enterprise-applications-integration"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">Enterprise
+                            Applications Integration</a>
+                    </div>
+                </div>
+
+                <!-- Products -->
+                <div class="group h-16 flex items-center relative">
+                    <button
+                        class="flex items-center gap-1 group-hover:text-black text-xl transition-colors duration-300">
+                        Products
+                        <svg class="w-4 h-4 transition-transform duration-300 group-hover:rotate-180"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div
+                        class="absolute left-0 top-full hidden group-hover:block bg-gray-900 rounded-lg shadow-lg p-2 text-white z-50 min-w-[28rem] dropdown-animate">
+                        <a href="ayucare(hms)"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">AYUCARE
+                            (HMS)</a>
+                        <a href="burserele"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">BURSERELE</a>
+                        <a href="empora(hrm)"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">EMPORA
+                            (HRM)</a>
+                    </div>
+                </div>
+
+                <a href="careers" class="hover:text-black text-xl transition-colors duration-300">Careers</a>
+                <a href="blog" class="hover:text-black text-xl transition-colors duration-300">Blog</a>
+            </div>
+
+            <!-- Get Started Button -->
+            <div class="hidden lg:block">
+                <a href="contact"
+                    class="relative flex items-center hover:bg-transparent hover:text-[#102e62] gap-2 px-6 py-2 border border-2 border-[#102e62] text-[#fff] bg-[#102e62] rounded-full font-semibold overflow-hidden group">
+                    <span class="flex items-center gap-2 group-hover:animate-roll-up-down">
+                        Get Started
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                            <line x1="4" y1="12" x2="20" y2="12" />
+                            <polyline points="14 6 20 12 14 18" />
+                        </svg>
+                    </span>
+                </a>
+            </div>
+
+            <!-- Mobile Toggle -->
+            <button @click="open = !open"
+                class="lg:hidden w-10 h-10 flex items-center justify-center rounded-full border border-[#102e62] text-[#102e62]">
+                <svg x-show="!open" x-cloak xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                    stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+                <svg x-show="open" x-cloak xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                    stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+        <!-- Mobile Nav -->
+        <div x-show="open" x-transition.opacity x-cloak class="lg:hidden absolute top-16 left-0 w-full 
+            bg-gray-900
+            border-t border-white/20 text-white dropdown-animate rounded-b-xl shadow-lg">
+            <div class="flex flex-col p-4 space-y-1">
+
+                <!-- Company -->
+                <div class="space-y-1">
+                    <button @click="dropdowns.company = !dropdowns.company"
+                        class="w-full text-left flex justify-between items-center px-3 py-2 rounded-lg hover:bg-white/10"
+                        :class="dropdowns.company ? 'text-yellow-400' : 'text-white'">
+                        Company
+                        <span x-show="!dropdowns.company">+</span>
+                        <span x-show="dropdowns.company">-</span>
+                    </button>
+                    <div x-show="dropdowns.company" x-transition.opacity x-transition.duration.300ms
+                        class="ml-4 mt-2 space-y-2 px-1 py-1 dropdown-animate border border-white/50 rounded-lg">
+                        <a href="aboutus"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">About
+                            Us</a>
+                        <a href="portfolio"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">Portfolio
+                            - <span class="text-white/50">Explore our all overview</span></a>
+                        <a href="team"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">Team
+                            - <span class="text-white/50">We are friendly join our team</span></a>
+                        <a href="service"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">Services
+                            - <span class="text-white/50">Happy to help you</span></a>
+                        <a href="case-study"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">Case
+                            Study - <span class="text-white/50">Know more about our case study</span></a>
+                    </div>
+                </div>
+
+                <!-- Services -->
+                <div class="space-y-3">
+                    <button @click="dropdowns.services = !dropdowns.services"
+                        class="w-full text-left flex justify-between items-center px-3 py-2 rounded-lg hover:bg-white/10"
+                        :class="dropdowns.services ? 'text-yellow-400' : 'text-white'">
+                        Services
+                        <span x-show="!dropdowns.services">+</span>
+                        <span x-show="dropdowns.services">-</span>
+                    </button>
+                    <div x-show="dropdowns.services" x-transition.opacity x-transition.duration.300ms
+                        class="ml-4 mt-2 space-y-2 px-1 py-1 dropdown-animate border border-white/50 rounded-lg">
+                        <a href="cloud-migration-maintenance-deployment"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400stagger-item">Cloud
+                            Migration, Maintenance & Deployment</a>
+                        <a href="data-center-operations"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">Data
+                            Center Operations</a>
+                        <a href="mobile-applications-development"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">Mobile
+                            Applications Development</a>
+                        <a href="security-solutions"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">Security
+                            Solutions</a>
+                        <a href="ai-ml-solutions"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">AI &
+                            ML Solutions</a>
+                        <a href="web-based-community-solutions"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">Web
+                            Based Community Solutions</a>
+                        <a href="enterprise-applications-integration"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">Enterprise
+                            Applications Integration</a>
+                    </div>
+                </div>
+
+                <!-- Products -->
+                <div class="space-y-3">
+                    <button @click="dropdowns.products = !dropdowns.products"
+                        class="w-full text-left flex justify-between items-center px-3 py-2 rounded-lg hover:bg-white/10"
+                        :class="dropdowns.products ? 'text-yellow-400' : 'text-white'">
+                        Products
+                        <span x-show="!dropdowns.products">+</span>
+                        <span x-show="dropdowns.products">-</span>
+                    </button>
+                    <div x-show="dropdowns.products" x-transition.opacity x-transition.duration.300ms
+                        class="ml-4 mt-2 px-1 py-1 space-y-2 dropdown-animate border border-white/50 rounded-lg">
+                        <a href="ayucare(hms)"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">AYUCARE
+                            (HMS)</a>
+                        <a href="burserele"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">BURSERELE</a>
+                        <a href="empora(hrm)"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">EMPORA
+                            (HRM)</a>
+                    </div>
+                </div>
+
+                <!-- Single links -->
+                <a href="careers" @click="activeLink = 'careers'" class="block px-3 py-2 rounded-lg hover:bg-white/10"
+                    :class="activeLink === 'careers' ? 'text-yellow-400' : 'text-white'">
+                    Careers
+                </a>
+
+                <a href="blog" @click="activeLink = 'blog'" class="block px-3 py-2 rounded-lg hover:bg-white/10"
+                    :class="activeLink === 'blog' ? 'text-yellow-400' : 'text-white'">
+                    Blog
+                </a>
+
+                <!-- Get Started (Mobile with click animation) -->
+                <!-- Get Started (Mobile) -->
+                <div class="block lg:hidden">
+                    <a href="contact" id="mobile-get-started"
+                        class="relative flex items-center justify-center gap-2 px-6 py-2 bg-[#f5a222] text-[#102e62] border border-[#f5a222] rounded-full font-semibold overflow-hidden transition-all duration-300 ease-in-out">
+                        Get Started
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                            <line x1="4" y1="12" x2="20" y2="12" />
+                            <polyline points="14 6 20 12 14 18" />
+                        </svg>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+        </div>
+    </nav>
+    <script>
+        const mobileBtn = document.getElementById('mobile-get-started');
+
+        mobileBtn.addEventListener('click', (e) => {
+            // Optional: prevent immediate redirect for visual feedback
+            e.preventDefault();
+
+            // Change background to transparent and text color to #f5a222
+            mobileBtn.style.backgroundColor = 'transparent';
+            mobileBtn.style.color = '#f5a222';
+
+            // Navigate after a small delay (for user to see effect)
+            setTimeout(() => {
+                window.location.href = mobileBtn.getAttribute('href');
+            }, 200);
+        });
+    </script>
+
+
+    <!-- HOME BANNER SECTION -->
+    <style>
+        @keyframes rollDown {
+            0% {
+                transform: translateY(-120%) rotateX(90deg);
+                opacity: 0;
+            }
+
+            25% {
+                transform: translateY(0) rotateX(0deg);
+                opacity: 1;
+            }
+
+            75% {
+                transform: translateY(0) rotateX(0deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(120%) rotateX(90deg);
+                opacity: 0;
+            }
+        }
+
+        .animate-roll-down {
+            display: inline-block;
+            animation: rollDown 3s ease-in-out infinite;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(80px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .animate-slide-in {
+            animation: slideInRight 1s ease forwards;
+        }
+
+        @keyframes imageSlideIn {
+            from {
+                transform: translateX(-150px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .animate-image-slide-in {
+            animation: imageSlideIn 1.2s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 1s ease forwards;
+        }
+
+        @keyframes popUp {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .animate-pop-up {
+            animation: popUp 0.8s ease forwards;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-6px);
+            }
+        }
+
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .banner-btn {
+            border-radius: 9999px;
+            cursor: pointer;
+            overflow: hidden;
+            display: inline-block;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .banner-btn-content,
+        .banner-btn-arrow {
+            display: inline-block;
+            transform-origin: center;
+        }
+
+        @keyframes bannerRollUpOut {
+            0% {
+                transform: translateY(0) rotateX(0deg);
+                opacity: 1;
+            }
+
+            50% {
+                transform: translateY(-100%) rotateX(90deg);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateY(100%) rotateX(0deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes bannerRollIn {
+            0% {
+                transform: translateY(100%) rotateX(0deg);
+                opacity: 0;
+            }
+
+            50% {
+                transform: translateY(-20%) rotateX(-10deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(0) rotateX(0deg);
+                opacity: 1;
+            }
+        }
+
+        .banner-btn.group:hover .banner-btn-content,
+        .banner-btn.group:hover .banner-btn-arrow {
+            animation: bannerRollUpOut 0.4s ease forwards, bannerRollIn 0.4s ease 0.4s forwards;
+        }
+
+        .banner-btn-arrow {
+            display: inline-block;
+            transform: rotate(45deg);
+            margin-left: 0.1rem;
+            font-size: 30px;
+            font-weight: 900;
+        }
+
+        /* Background video styling */
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1;
+        }
+    </style>
+    <section id="hero-section"
+        class="relative w-full md:min-h-screen rounded-b-[0px] flex flex-col justify-center items-center px-6 md:px-16 pt-20 pb-10 md:pt-[8%] md:pb-[5%] mt-10 overflow-hidden">
+
+        <!-- Background Video -->
+        <video class="video-background" autoplay muted loop playsinline>
+            <source src="./assests/homelanding.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+        <!-- Dark Overlay -->
+        <div class="video-overlay"></div>
+
+        <!-- Hero Content -->
+        <div class="relative z-10 w-full max-w-6xl text-left text-white flex flex-col space-y-3 md:space-y-4">
+
+            <h2 class="text-lg md:text-xl font-medium opacity-0 animate-slide-in" style="animation-delay: 0.5s;">
+                Welcome to <span class="text-[#f5a222] text-2xl md:text-2xl font-bold animate-roll-down">GVR Tech</span>
+            </h2>
+
+            <h1 class="text-3xl md:text-5xl font-extrabold opacity-0 animate-slide-in"
+                style="animation-delay: 1.5s; line-height: 1.2;">
+                Driving Digital Success <br>
+                with
+                Smart Technology & Strategy
+            </h1>
+
+            <p class="text-gray-200 text-base md:text-lg max-w-xl opacity-0 animate-fade-in"
+                style="animation-delay: 2.5s;">
+                We empower organizations with tailored IT and digital solutions that streamline operations,
+                boost productivity, and accelerate business growth in the digital era.
+            </p>
+
+            <div class="opacity-0 animate-pop-up" style="animation-delay: 3.5s;">
+                <a href="contact"
+                    class="banner-btn text-[#f5a222] hover:text-[#102e62] font-bold border border-[#f5a222] bg-transparent hover:bg-[#f5a222] group animate-float md:mt-4 px-3 py-2 text-sm md:px-4 md:py-2 md:text-lg">
+                    <span class="banner-btn-content">Let’s Collaborate</span>
+                    <span class="banner-btn-arrow">
+                        <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 19V5m0 0l-6 6m6-6l6 6" />
+                        </svg>
+                    </span>
+                </a>
+            </div>
+
+
+        </div>
+    </section>
+
+
+
+    <!-- BRAND COLLEBRATION SECTION -->
+    <section id="brand-showcase" class="relative flex flex-col md:flex-row items-end md:items-center justify-between md:min-h-[100vh]
+  overflow-hidden 
+  bg-[radial-gradient(circle_at_end,_#ffffff_15%,_rgba(245,162,34,0.6)_25%,_rgba(255,255,255,0.9)_100%)]
+  md:bg-[radial-gradient(circle_at_center,_#ffffff_15%,_rgba(245,162,34,0.6)_25%,_rgba(255,255,255,0.9)_100%)]
+  bg-[radial-gradient(circle_at_42%_78%,_#ffffff_15%,_rgba(245,162,34,0.6)_25%,_rgba(255,255,255,0.9)_100%)]">
+
+        <!-- LEFT SIDE CONTENT -->
+        <div id="brand-showcase-content" class="content-side relative md:absolute top-0 left-0 w-full md:w-[35%] h-auto md:h-full flex flex-col justify-center items-start 
+         md:pl-16 md:space-y-4 z-20 text-center md:text-left opacity-0">
+            <h4 id="brand-showcase-subtitle"
+                class="text-[#000] text-base md:text-lg font-semibold font-['EB Garamond'] tracking-wide opacity-0 translate-x-[-50px]">
+                Trusted Partnerships
+            </h4>
+            <h2 id="brand-showcase-title"
+                class="text-[#102e62] text-3xl md:text-5xl font-bold drop-shadow-lg font-['EB Garamond'] leading-snug opacity-0 translate-x-[-50px]">
+                Brands We Collaborate With
+            </h2>
+            <p id="brand-showcase-text"
+                class="text-gray-700 text-base md:text-xl font-['EB Garamond']  leading-relaxed mx-auto md:mx-0 opacity-0 translate-x-[-50px]">
+                We proudly partner with leading brands worldwide to drive innovation, digital transformation, and
+                impactful technology solutions.
+            </p>
+        </div>
+
+        <!-- RIGHT SIDE SLIDER -->
+        <div class="relative w-full md:w-full h-full flex justify-center items-center overflow-visible ml-auto md:mt-0">
+            <div class="absolute md:relative right-0 top-0 w-full h-full flex justify-center items-center">
+                <img src="./assests/brandlogo1.png" class="logo-slide active" alt="Brand 1">
+                <img src="./assests/brandlogo2.png" class="logo-slide" alt="Brand 2">
+                <img src="./assests/brandlogo3.png" class="logo-slide" alt="Brand 3">
+                <img src="./assests/brandlogo4.png" class="logo-slide" alt="Brand 4">
+                <img src="./assests/brandlogo5.png" class="logo-slide" alt="Brand 5">
+                <img src="./assests/brandlogo6.png" class="logo-slide" alt="Brand 6">
+                <img src="./assests/brandlogo7.png" class="logo-slide" alt="Brand 7">
+                <img src="./assests/brandlogo8.png" class="logo-slide" alt="Brand 8">
+                <img src="./assests/brandlogo9.png" class="logo-slide" alt="Brand 9">
+            </div>
+        </div>
+    </section>
+    <style>
+        /* ---------------- TEXT SLIDE-IN ANIMATION ---------------- */
+        @keyframes brandShowcaseSlideIn {
+            0% {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* ---------------- LOGO SLIDER EFFECT ---------------- */
+        .logo-slide {
+            position: absolute;
+            width: 220px;
+            height: 220px;
+            object-fit: contain;
+            opacity: 0;
+            transform: translateX(250%) scale(0.8);
+            filter: blur(6px);
+            border-radius: 50%;
+            transition: all 1.6s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        .logo-slide.active {
+            opacity: 1;
+            transform: translateX(0%) scale(1.3);
+            filter: blur(0);
+            z-index: 5;
+            background: radial-gradient(circle at center, #ffffff 20%, #f5a222 80%);
+            padding: 20px;
+            animation: glowAppear 0.8s ease forwards;
+        }
+
+        /* @keyframes glowAppear {
+            0% {
+                box-shadow: 0 0 0 rgba(245, 162, 34, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 25px #ffffff, 0 0 10px #f5a222, 0 0 20px rgba(245, 162, 34);
+            }
+        } */
+
+        .logo-slide.fadeout {
+            animation: glowFade 1s ease forwards;
+        }
+
+        /* @keyframes glowFade {
+            from {
+                box-shadow: 0 0 25px #ffffff, 0 0 20px #f5a222, 0 0 40px rgba(245, 162, 34, 0.1);
+            }
+
+            to {
+                box-shadow: 0 0 0 rgba(245, 162, 34, 0);
+            }
+        } */
+
+        .logo-slide.second {
+            opacity: 0.7;
+            transform: translateX(160%) scale(1);
+            filter: blur(5px);
+            z-index: 3;
+        }
+
+        .logo-slide.third {
+            opacity: 0.4;
+            transform: translateX(280%) scale(0.95);
+            filter: blur(8px);
+            z-index: 2;
+        }
+
+        .logo-slide.exit {
+            opacity: 0;
+            transform: translate(-300%, -120%) scale(0.6) rotate(-10deg);
+            filter: blur(10px);
+            z-index: 1;
+            background: radial-gradient(circle at center, #ffffff 20%, #f5a222 80%);
+        }
+
+        /* ---------------- RESPONSIVE ---------------- */
+        @media (max-width: 768px) {
+            #brand-showcase {
+                flex-direction: column;
+                text-align: center;
+                padding: 0;
+                margin: 0;
+            }
+
+            .content-side {
+                position: relative;
+                width: 100%;
+                padding: 0.5rem 1rem;
+                order: 1;
+                border: none;
+                text-align: center;
+                align-items: center;
+            }
+
+            #brand-showcase>div:last-child {
+                order: 2;
+                margin-top: 0.5rem;
+                margin-bottom: 0.5rem;
+                height: auto;
+                min-height: 140px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                overflow: visible;
+                position: relative;
+            }
+
+            .logo-slide {
+                width: 100px;
+                height: 100px;
+            }
+
+            .logo-slide.active {
+                transform: translateX(-30%) scale(1.2);
+            }
+
+            .logo-slide.second {
+                transform: translateX(100%) scale(0.9);
+            }
+
+            .logo-slide.third {
+                transform: translateX(250%) scale(0.85);
+            }
+
+            .logo-slide.exit {
+                transform: translate(-250%, -80%) scale(0.6);
+            }
+
+            @keyframes glowFade {
+                from {
+                    box-shadow: 0 0 25px #ffffff, 0 0 5px #f5a222, 0 0 10px rgba(245, 162, 34, 0.1);
+                }
+
+                to {
+                    box-shadow: 0 0 0 rgba(245, 162, 34, 0);
+                }
+            }
+
+        }
+    </style>
+    <script>
+        // ---------- TEXT ANIMATION WHEN SECTION ENTERS VIEW ----------
+        const brandShowcaseObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                const title = document.getElementById("brand-showcase-title");
+                const subtitle = document.getElementById("brand-showcase-subtitle");
+                const text = document.getElementById("brand-showcase-text");
+                const content = document.getElementById("brand-showcase-content");
+
+                if (entry.isIntersecting) {
+                    // Reset animations so they can replay
+                    subtitle.style.animation = "none";
+                    title.style.animation = "none";
+                    text.style.animation = "none";
+
+                    // Force reflow to restart animations
+                    void subtitle.offsetWidth;
+                    void title.offsetWidth;
+                    void text.offsetWidth;
+
+                    // Show container
+                    content.style.opacity = "1";
+
+                    // Apply animations in staggered sequence
+                    subtitle.style.animation = "brandShowcaseSlideIn 0.8s ease forwards";
+                    title.style.animation = "brandShowcaseSlideIn 0.8s ease 0.3s forwards";
+                    text.style.animation = "brandShowcaseSlideIn 0.8s ease 0.6s forwards";
+                } else {
+                    // Hide content when section leaves view
+                    content.style.opacity = "0";
+                    subtitle.style.opacity = "0";
+                    title.style.opacity = "0";
+                    text.style.opacity = "0";
+                    subtitle.style.transform = "translateX(-50px)";
+                    title.style.transform = "translateX(-50px)";
+                    text.style.transform = "translateX(-50px)";
+                }
+            });
+        }, { threshold: 0.3 });
+
+        brandShowcaseObserver.observe(document.getElementById("brand-showcase"));
+
+        // ---------- LOGO SLIDER ----------
+        document.addEventListener("DOMContentLoaded", () => {
+            const slides = document.querySelectorAll(".logo-slide");
+            let current = 0;
+
+            function updateSlides() {
+                const total = slides.length;
+                slides.forEach(slide => {
+                    slide.classList.remove("active", "second", "third", "exit", "fadeout");
+                });
+
+                const currentSlide = slides[current];
+                const nextSlide = slides[(current + 1) % total];
+                const nextNextSlide = slides[(current + 2) % total];
+                const prevSlide = slides[(current - 1 + total) % total];
+
+                prevSlide.classList.add("fadeout");
+                currentSlide.classList.add("active");
+                nextSlide.classList.add("second");
+                nextNextSlide.classList.add("third");
+                prevSlide.classList.add("exit");
+            }
+
+            updateSlides();
+            setInterval(() => {
+                current = (current + 1) % slides.length;
+                updateSlides();
+            }, 3000);
+        });
+    </script>
+
+
+
+    <!-- ABOUT GVR SECTION -->
+    <section id="about-gvr-floating"
+        class="relative w-full pt-16 pb-5 md:pt-24 md:pb-12 overflow-hidden  bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900">
+        <!-- Background Decorations -->
+        <div class="absolute inset-0">
+            <div class="absolute top-10 left-10 w-48 h-48 bg-[#00c6ff]/10 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-10 right-10 w-56 h-56 bg-[#f5a623]/10 rounded-full blur-3xl"></div>
+        </div>
+
+        <div class="max-w-5xl mx-auto text-center px-4 md:px-6 font-['EB Garamond'] relative z-10">
+
+            <!-- Subtitle -->
+            <h3 class="text-2xl md:text-3xl font-semibold text-white mb-3">
+                We are <span class="text-[#f5a222]">GVR</span>
+            </h3>
+
+            <!-- Title -->
+            <h2 class="text-3xl md:text-5xl font-bold text-white leading-snug mb-5 drop-shadow-lg">
+                Our Commitment to Client Satisfaction
+            </h2>
+
+            <!-- Paragraph -->
+            <p class="text-gray-200 text-base md:text-lg max-w-2xl mx-auto mb-6 leading-relaxed">
+                At GVR, our commitment to client satisfaction is at the core of everything we do.
+                We understand that our clients’ success defines our own.
+            </p>
+
+            <!-- Key Points -->
+            <ul class="text-gray-100 text-base md:text-lg space-y-2 mb-8">
+                <li>✔️ Grow your business the right way.</li>
+                <li>✔️ Let business growth help your business grow.</li>
+                <li>✔️ Helping you to get better every day.</li>
+            </ul>
+
+            <!-- Button -->
+            <a href="contact"
+                class="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-[#f5a222] border border-[#f5a222] text-[#102e62] font-semibold overflow-hidden group transition-all duration-300 hover:bg-[#102e62] hover:text-[#f5a222] shadow-lg">
+                <span class="inline-block transform group-hover:translate-x-1 transition-transform duration-300">Explore
+                    More</span>
+                <svg class="w-5 h-5 transform rotate-45 group-hover:translate-x-1 transition-transform duration-300"
+                    fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 19V5m0 0l-6 6m6-6l6 6" />
+                </svg>
+            </a>
+        </div>
+
+        <!-- Floating Images -->
+        <div class="absolute inset-0 pointer-events-none z-[1]">
+            <img src="./assests/social-media-marketing-concept-marketing-with-applications.jpg" alt="Business Growth"
+                class="floating-img top-10 left-[10%] w-28 md:w-40 rounded-full shadow-[0_0_30px_rgba(255,255,255,0.2)]">
+            <img src="./assests/portrait-successful-female-partners-shaking-hands.jpg" alt="Team Collaboration"
+                class="floating-img top-[50%] left-[5%] w-32 md:w-48 rounded-full shadow-[0_0_40px_rgba(255,255,255,0.2)]">
+            <img src="./assests/representation-user-experience-interface-design.jpg" alt="Client Satisfaction"
+                class="floating-img top-[20%] right-[10%] w-32 md:w-44 rounded-full shadow-[0_0_40px_rgba(255,255,255,0.2)]">
+            <img src="./assests/social-media-marketing-concept-marketing-with-applications.jpg" alt="Strategy"
+                class="floating-img bottom-[10%] right-[5%] w-28 md:w-40 rounded-full shadow-[0_0_30px_rgba(255,255,255,0.2)]">
+        </div>
+    </section>
+    <style>
+        @keyframes floatMotion {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-25px) rotate(3deg);
+            }
+
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+        }
+
+        .floating-img {
+            position: absolute;
+            object-fit: cover;
+            animation: floatMotion 8s ease-in-out infinite;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1.3s ease;
+            filter: brightness(0.8);
+        }
+
+        /* Default hidden text (fade + slide from left) */
+        #about-gvr-floating h3,
+        #about-gvr-floating h2,
+        #about-gvr-floating p,
+        #about-gvr-floating ul,
+        #about-gvr-floating a {
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+
+        /* Visible state (slide in) */
+        #about-gvr-floating.visible h3,
+        #about-gvr-floating.visible h2,
+        #about-gvr-floating.visible p,
+        #about-gvr-floating.visible ul,
+        #about-gvr-floating.visible a {
+            opacity: 1;
+            transform: translateX(0);
+            transition: all 0.9s ease;
+        }
+
+        /* Stagger animation delays */
+        #about-gvr-floating.visible h3 {
+            transition-delay: 0.2s;
+        }
+
+        #about-gvr-floating.visible h2 {
+            transition-delay: 0.4s;
+        }
+
+        #about-gvr-floating.visible p {
+            transition-delay: 0.6s;
+        }
+
+        #about-gvr-floating.visible ul {
+            transition-delay: 0.8s;
+        }
+
+        #about-gvr-floating.visible a {
+            transition-delay: 1s;
+        }
+
+        /* Floating images fade in */
+        #about-gvr-floating.visible .floating-img {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 1.5s ease;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .floating-img {
+                opacity: 0.8;
+                filter: brightness(0.9);
+            }
+
+            .floating-img:nth-child(1) {
+                top: 5%;
+                left: 10%;
+                width: 80px;
+            }
+
+            .floating-img:nth-child(2) {
+                top: 70%;
+                left: 0;
+                width: 90px;
+            }
+
+            .floating-img:nth-child(3) {
+                top: 20%;
+                right: 5%;
+                width: 90px;
+            }
+
+            .floating-img:nth-child(4) {
+                bottom: 5%;
+                right: 10%;
+                width: 80px;
+            }
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const section = document.getElementById("about-gvr-floating");
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        section.classList.add("visible");
+                    } else {
+                        section.classList.remove("visible");
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            observer.observe(section);
+        });
+    </script>
+
+
+
+
+
+    <!-- EXPERIENCE SECTION -->
+    <section id="stats-section"
+        class="relative bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 pt-5 pb-16 md:pt-0 md:pb-10 overflow-hidden">
+        <!-- Background Decorations -->
+        <div class="absolute inset-0">
+            <div class="absolute top-10 left-10 w-48 h-48 bg-[#00c6ff]/10 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-10 right-10 w-56 h-56 bg-[#f5a623]/10 rounded-full blur-3xl"></div>
+        </div>
+
+        <div
+            class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-10 md:gap-20 px-0 md:px-5 relative z-10">
+
+            <div class="relative w-full md:w-1/2 flex flex-col items-center">
+                <div
+                    class="absolute left-1/2 transform -translate-x-1/2 w-1 bg-gray-700 h-full rounded-full overflow-hidden">
+                    <div id="line-fill"
+                        class="absolute top-0 left-0 w-full h-0 bg-gradient-to-b from-[#00c6ff] to-[#f5a623] rounded-full">
+                    </div>
+                </div>
+
+                <!-- Cards -->
+                <div class="timeline-card left-card" data-aos="fade-right">
+                    <div class="stat-card">
+                        <div class="icon-box"><i class="fa-solid fa-briefcase text-lg md:text-4xl text-[#f5a623]"></i>
+                        </div>
+                        <div class="text-box">
+                            <div class="flex items-baseline justify-center gap-1">
+                                <h3 class="counter text-3xl md:text-4xl font-extrabold text-white" data-target="4">0
+                                </h3>
+                                <span class="text-xl md:text-3xl text-[#f5a623] font-bold">+</span>
+                            </div>
+                            <p class="text-gray-300 text-sm md:text-base mt-1">Years of Experience</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-card right-card" data-aos="fade-left">
+                    <div class="stat-card">
+                        <div class="icon-box"><i class="fa-solid fa-trophy text-lg md:text-4xl text-[#00c6ff]"></i>
+                        </div>
+                        <div class="text-box">
+                            <div class="flex items-baseline justify-center gap-1">
+                                <h3 class="counter text-3xl md:text-4xl font-extrabold text-white" data-target="7">0
+                                </h3>
+                                <span class="text-xl md:text-3xl text-[#00c6ff] font-bold">+</span>
+                            </div>
+                            <p class="text-gray-300 text-sm md:text-base mt-1">Success Stories</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-card left-card" data-aos="fade-right">
+                    <div class="stat-card">
+                        <div class="icon-box"><i class="fa-solid fa-building text-lg md:text-4xl text-[#a855f7]"></i>
+                        </div>
+                        <div class="text-box">
+                            <div class="flex items-baseline justify-center gap-1">
+                                <h3 class="counter text-3xl md:text-4xl font-extrabold text-white" data-target="7">0
+                                </h3>
+                                <span class="text-xl md:text-3xl text-[#a855f7] font-bold">+</span>
+                            </div>
+                            <p class="text-gray-300 text-sm md:text-base mt-1">Companies Trust Us</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-card right-card" data-aos="fade-left">
+                    <div class="stat-card">
+                        <div class="icon-box"><i class="fa-solid fa-chart-line text-lg md:text-4xl text-[#22c55e]"></i>
+                        </div>
+                        <div class="text-box">
+                            <div class="flex items-baseline justify-center gap-1">
+                                <h3 class="counter text-3xl md:text-4xl font-extrabold text-white" data-target="100">0
+                                </h3>
+                                <span class="text-xl md:text-3xl text-[#22c55e] font-bold">%</span>
+                            </div>
+                            <p class="text-gray-300 text-sm md:text-base mt-1">Results Guaranteed</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Text Content -->
+            <div class="stats-text text-center md:text-left w-full md:w-1/2">
+                <h2 class="text-3xl md:text-5xl font-extrabold text-white mb-4">Why Choose <span
+                        class="text-[#f5a623]">GVR</span>?</h2>
+                <p class="text-gray-300 text-lg leading-relaxed mb-6">
+                    We bring innovation, precision, and passion to every project.
+                    Our expert team ensures your goals are achieved efficiently with measurable results.
+                </p>
+                <ul class="space-y-3 text-gray-300 text-base md:text-lg">
+                    <li><i class="fa-solid fa-circle-check text-[#00c6ff] mr-2"></i> Dedicated & Skilled Professionals
+                    </li>
+                    <li><i class="fa-solid fa-circle-check text-[#f5a623] mr-2"></i> Transparent & Reliable Process</li>
+                    <li><i class="fa-solid fa-circle-check text-[#22c55e] mr-2"></i> Guaranteed Client Satisfaction</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <style>
+        .timeline-card {
+            position: relative;
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            margin: 1rem 0;
+        }
+
+        .timeline-card.right-card {
+            justify-content: flex-end;
+        }
+
+        .timeline-card::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 1rem;
+            height: 1rem;
+            background-color: #f5a623;
+            border-radius: 50%;
+            border: 3px solid #fff;
+            box-shadow: 0 0 15px rgba(245, 166, 35, 0.5);
+            z-index: 10;
+        }
+
+        .stat-card {
+            background: linear-gradient(145deg, #1f2937, #374151);
+            padding: 1.5rem 2rem;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            width: 45%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+            transform: translateY(50px);
+            opacity: 0;
+        }
+
+        .text-box {
+            text-align: center;
+        }
+
+        .icon-box {
+            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1), transparent);
+            padding: 1rem;
+            border-radius: 0.75rem;
+        }
+
+        @media (max-width: 768px) {
+            .timeline-card {
+                margin: 0.5rem 0;
+            }
+
+            .timeline-card.left-card {
+                justify-content: flex-start;
+                padding-right: 10%;
+            }
+
+            .timeline-card.right-card {
+                justify-content: flex-end;
+                padding-left: 10%;
+            }
+
+            .stat-card {
+                width: 50%;
+                gap: 0rem;
+                padding: 1rem;
+            }
+        }
+    </style>
+    <script>
+        // ===================== STATS SECTION ANIMATIONS =====================
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Animate center timeline line fill
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: '#stats-section',
+                start: 'top 80%',
+                end: 'bottom 50%',
+                scrub: 1,
+            }
+        }).to('#stats-section #line-fill', {
+            height: '100%',
+            duration: 2,
+            ease: 'none'
+        });
+
+        // Animate each stat card (slide-up + inner motion)
+        const statCards = gsap.utils.toArray('#stats-section .stat-card');
+        statCards.forEach((card, i) => {
+            const icon = card.querySelector('.icon-box');
+            const text = card.querySelector('.text-box');
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 85%',
+                    toggleActions: 'restart none none reverse', // replays when re-entered
+                }
+            });
+            tl.to(card, {
+                y: 0,
+                opacity: 1,
+                duration: 0.6,
+                ease: 'power3.out',
+                delay: i * 0.1
+            })
+                .from(icon, {
+                    x: -30,
+                    opacity: 0,
+                    duration: 0.3
+                }, '-=0.3')
+                .from(text, {
+                    x: 30,
+                    opacity: 0,
+                    duration: 0.3
+                }, '-=0.2');
+        });
+
+        // Counter animation
+        function animateCounter(el, target, duration = 2000) {
+            const start = 0;
+            const startTime = performance.now();
+            function update(currentTime) {
+                const progress = Math.min((currentTime - startTime) / duration, 1);
+                el.textContent = Math.floor(progress * target);
+                if (progress < 1) requestAnimationFrame(update);
+            }
+            requestAnimationFrame(update);
+        }
+
+        const counters = document.querySelectorAll('#stats-section .counter');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    counters.forEach(counter => animateCounter(counter, parseInt(counter.dataset.target)));
+                }
+            });
+        }, { threshold: 0.5 });
+        observer.observe(document.getElementById('stats-section'));
+
+        // ===================== RIGHT SIDE: TEXT SLIDE-IN ANIMATION =====================
+        const rightContentTimeline = gsap.timeline({
+            scrollTrigger: {
+                trigger: '#stats-section .stats-text',
+                start: 'top 85%',
+                end: 'bottom 20%',
+                toggleActions: 'restart none none reverse', // repeats on scroll
+                once: false,
+            }
+        });
+
+        rightContentTimeline
+            .from('#stats-section .stats-text h2', {
+                x: -80,
+                opacity: 0,
+                duration: 0.8,
+                ease: 'power3.out'
+            })
+            .from('#stats-section .stats-text p', {
+                x: -80,
+                opacity: 0,
+                duration: 0.8,
+                ease: 'power3.out'
+            }, '-=0.5')
+            .from('#stats-section .stats-text li', {
+                x: -80,
+                opacity: 0,
+                stagger: 0.25,
+                duration: 0.6,
+                ease: 'power3.out'
+            }, '-=0.3');
+    </script>
+
+
+
+
+
+
+
+
+
+    <!-- OUR PRODUCTS SECTION -->
+    <section id="ourproducts-section" class="relative w-full py-5 md:py-20 bg-[#f9fafb] overflow-hidden">
+        <div class="flex flex-col md:flex-row items-start gap-4 md:gap-8 md:px-20 px-1">
+
+            <!-- LEFT CONTENT -->
+            <div class="md:w-[30%] flex flex-col justify-center text-center md:text-left space-y-2 md:space-y-4">
+                <h3 class="text-md md:text-lg font-bold text-black text-animate">
+                    <span class="text-[#f5a222]">Crafting</span> Success with our products
+                </h3>
+                <h2 class="text-4xl md:text-5xl font-bold text-black drop-shadow-lg text-animate">
+                    Our Products
+                </h2>
+                <p class="text-gray-700 text-md md:text-lg text-animate">
+                    GVR Infosystems mainly concentrates on providing innovative products and digital
+                    solutions that simplify your work and enhance operational efficiency across multiple sectors.
+                </p>
+                <a href="portfolio"
+                    class="mt-4 px-6 py-2 border border-yellow-500 rounded-full bg-[#102e62] text-[#f5a222] font-bold text-md inline-block self-center md:self-start text-animate">
+                    View Products
+                </a>
+            </div>
+
+
+            <!-- RIGHT CONTENT -->
+            <div class="md:w-[70%] flex gap-4 group" id="productGrid">
+
+                <!-- CARD TEMPLATE -->
+                <div class="product-card relative w-1/3 h-80 md:h-[420px] rounded-xl overflow-hidden transition-all duration-700 ease-in-out cursor-pointer"
+                    data-card>
+                    <img src="./assests/Hospital-Management-System.jpg"
+                        class="w-full h-full object-cover transition-all duration-700">
+                    <div class="absolute inset-0 bg-black/60 transition-all duration-700"></div>
+                    <div class="card-info absolute bottom-4 left-4 z-10">
+                        <h3 class="text-white text-xl font-bold drop-shadow-lg">Ayucare (HMS)</h3>
+                    </div>
+                    <div class="card-icon absolute bottom-4 right-4 z-10 w-10 h-10 border border-white rounded-full flex items-center justify-center text-white text-xl bg-transparent hover:bg-white hover:text-black transition-all duration-300"
+                        onclick="toggleCard(this)">
+                        +
+                    </div>
+
+                    <!-- Hidden content -->
+                    <div
+                        class="hover-content absolute inset-0 bg-black/80 opacity-0 invisible transition-all duration-500 flex flex-col justify-end p-6 text-left text-white">
+                        <div class="translate-y-10 opacity-0 transition-all duration-300">
+                            <h3 class="text-2xl text-[#f5a222] font-bold mb-2">Ayucare (HMS)</h3>
+                            <p class="text-sm md:text-xl text-gray-200 mb-3">
+                                Hospital Management System designed to improve efficiency and accuracy in hospital
+                                workflows with a
+                                user-friendly digital platform.
+                            </p>
+                            <a href="#"
+                                class="inline-block px-4 py-2 border border-yellow-400 text-yellow-400 rounded-full font-semibold text-sm hover:bg-yellow-400 hover:text-black transition">
+                                Learn More
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 2 -->
+                <div class="product-card relative w-1/3 h-80 md:h-[420px] rounded-xl overflow-hidden transition-all duration-700 ease-in-out cursor-pointer"
+                    data-card>
+                    <img src="./assests/bruserele.jpg" class="w-full h-full object-cover transition-all duration-700">
+                    <div class="absolute inset-0 bg-black/60 transition-all duration-700"></div>
+                    <div class="card-info absolute bottom-4 left-4 z-10">
+                        <h3 class="text-white text-xl font-bold drop-shadow-lg">Burserele</h3>
+                    </div>
+                    <div class="card-icon absolute bottom-4 right-4 z-10 w-10 h-10 border border-white rounded-full flex items-center justify-center text-white text-xl bg-transparent hover:bg-white hover:text-black transition-all duration-300"
+                        onclick="toggleCard(this)">
+                        +
+                    </div>
+                    <div
+                        class="hover-content absolute inset-0 bg-black/80 opacity-0 invisible transition-all duration-500 flex flex-col justify-end p-6 text-left text-white">
+                        <div class="translate-y-10 opacity-0 transition-all duration-300">
+                            <h3 class="text-2xl text-[#f5a222] font-bold mb-2">Burserele</h3>
+                            <p class="text-sm md:text-xl text-gray-200 mb-3">
+                                Financial management and document handling made simple. Designed for efficient tracking
+                                and reporting.
+                            </p>
+                            <a href="#"
+                                class="inline-block px-4 py-2 border border-yellow-400 text-yellow-400 rounded-full font-semibold text-sm hover:bg-yellow-400 hover:text-black transition">
+                                Learn More
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 3 -->
+                <div class="product-card relative w-1/3 h-80 md:h-[420px] rounded-xl overflow-hidden transition-all duration-700 ease-in-out cursor-pointer"
+                    data-card>
+                    <img src="./assests/team2.jpg" class="w-full h-full object-cover transition-all duration-700">
+                    <div class="absolute inset-0 bg-black/60 transition-all duration-700"></div>
+                    <div class="card-info absolute bottom-4 left-4 z-10">
+                        <h3 class="text-white text-xl font-bold drop-shadow-lg">Empora (HRM)</h3>
+                    </div>
+                    <div class="card-icon absolute bottom-4 right-4 z-10 w-10 h-10 border border-white rounded-full flex items-center justify-center text-white text-xl bg-transparent hover:bg-white hover:text-black transition-all duration-300"
+                        onclick="toggleCard(this)">
+                        +
+                    </div>
+                    <div
+                        class="hover-content absolute inset-0 bg-black/80 opacity-0 invisible transition-all duration-500 flex flex-col justify-end p-6 text-left text-white">
+                        <div class="translate-y-10 opacity-0 transition-all duration-300">
+                            <h3 class="text-2xl text-[#f5a222] font-bold mb-2">Empora (HRM)</h3>
+                            <p class="text-sm md:text-xl text-gray-200 mb-3">
+                                Human Resource Management System to streamline workflows, payroll, and performance — all
+                                in one dashboard.
+                            </p>
+                            <a href="#"
+                                class="inline-block px-4 py-2 border border-yellow-400 text-yellow-400 rounded-full font-semibold text-sm hover:bg-yellow-400 hover:text-black transition">
+                                Learn More
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        /* ---------- Desktop Hover Effects ---------- */
+        #productGrid:hover .product-card {
+            transform: scale(0.9);
+            opacity: 0.8;
+        }
+
+        .product-card:hover {
+            transform: scale(1.05);
+            opacity: 1;
+            z-index: 10;
+            width: 60% !important;
+        }
+
+        .product-card:hover img {
+            filter: brightness(60%);
+            transform: scale(1.1);
+        }
+
+        .product-card:hover .card-info {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        .product-card:hover .hover-content {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .product-card:hover .translate-y-10 {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* ---------- Mobile Behavior ---------- */
+        @media (max-width: 768px) {
+            #productGrid {
+                display: flex;
+                flex-direction: row;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                gap: 1rem;
+            }
+
+            .product-card {
+                min-width: 90%;
+                height: 360px;
+                flex-shrink: 0;
+                scroll-snap-align: start;
+                position: relative;
+                transition: all 0.4s ease;
+            }
+
+            /* Disable desktop hover behavior */
+            #productGrid:hover .product-card,
+            .product-card:hover {
+                transform: none !important;
+                opacity: 1 !important;
+                width: 90% !important;
+            }
+
+            /* Overlay (hidden initially) */
+            .product-card .overlay {
+                position: absolute;
+                inset: 0;
+                background: rgba(0, 0, 0, 0.6);
+                opacity: 1;
+                transition: opacity 0.4s ease;
+                z-index: 1;
+            }
+
+            .product-card.expanded .overlay {
+                background: rgba(0, 0, 0, 0.8);
+            }
+
+            /* Hidden content */
+            .hover-content {
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.4s ease;
+                z-index: 2;
+            }
+
+            /* When expanded */
+            .product-card.expanded .hover-content {
+                opacity: 1 !important;
+                visibility: visible !important;
+            }
+
+            .product-card.expanded .translate-y-10 {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            /* Hide title when expanded */
+            .product-card.expanded .card-info {
+                display: none !important;
+            }
+
+            /* Icon style */
+            .card-icon {
+                z-index: 3;
+                transition: all 0.3s ease;
+            }
+
+            /* Change + to – when expanded */
+            .product-card.expanded .card-icon {
+                background: white;
+                color: black;
+            }
+
+
+
+        }
+    </style>
+
+    <script>
+
+        function toggleCard(icon) {
+            if (window.innerWidth > 768) return; // Only mobile behavior
+
+            const card = icon.closest('.product-card');
+            const allCards = document.querySelectorAll('.product-card');
+
+            // If clicked card already open → close it
+            if (card.classList.contains('expanded')) {
+                card.classList.remove('expanded');
+                return;
+            }
+
+            // Otherwise, close all others and open this one
+            allCards.forEach(c => c.classList.remove('expanded'));
+            card.classList.add('expanded');
+        }
+    </script>
+
+    <!-- GSAP & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // SECTION ANIMATION TRIGGER
+        ScrollTrigger.create({
+            trigger: "#ourproducts-section",
+            start: "top 80%", // when 80% of viewport
+            onEnter: animateProductsSection,
+            onEnterBack: animateProductsSection, // replay on scroll back
+            once: false // repeat every time
+        });
+
+        function animateProductsSection() {
+            // Reset animations before replay
+            gsap.set("#ourproducts-section .text-animate", { opacity: 0, y: 30 });
+            gsap.set("#productGrid .product-card", { opacity: 0, x: 60 });
+
+            // LEFT TEXT animation (stagger line by line)
+            gsap.to("#ourproducts-section .text-animate", {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                ease: "power3.out",
+                stagger: 0.25,
+                delay: 0.1
+            });
+
+            // RIGHT CARDS animation (stagger)
+            gsap.to("#productGrid .product-card", {
+                opacity: 1,
+                x: 0,
+                duration: 0.8,
+                ease: "power3.out",
+                stagger: 0.2,
+                delay: 0.6
+            });
+        }
+    </script>
+
+
+
+
+
+
+
+
+    <!-- SERVICES SECTION -->
+    <style>
+        .svc-carousel-container {
+            perspective: 1200px;
+        }
+
+        #svc-section {
+            position: relative;
+            background: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+            color: white;
+            overflow: hidden;
+        }
+
+        #svc-section::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 0;
+        }
+
+        #svc-section>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Layout container */
+        .svc-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: 2rem;
+            padding: 3rem 1rem;
+        }
+
+        @media (max-width: 640px) {
+            #svc-carousel {
+                overflow: visible;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .svc-container {
+                flex-direction: row;
+                text-align: left;
+                justify-content: space-between;
+                align-items: center;
+                gap: 3rem;
+            }
+
+            .svc-left {
+                width: 35%;
+                padding-left: 65px;
+            }
+
+            .svc-right {
+                width: 65%;
+            }
+        }
+
+        /* Card styling */
+        .svc-card {
+            transition: transform 0.8s ease, opacity 0.8s ease, border 0.4s ease;
+        }
+
+        .svc-btn {
+            background: transparent;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .svc-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .svc-btn span,
+        .svc-btn-arrow {
+            display: inline-block;
+            transform-origin: center;
+        }
+
+        @keyframes svc-btn-rollUpOut {
+            0% {
+                transform: translateY(0) rotateX(0deg);
+                opacity: 1;
+            }
+
+            50% {
+                transform: translateY(-100%) rotateX(90deg);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateY(100%) rotateX(0deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes svc-btn-rollIn {
+            0% {
+                transform: translateY(100%) rotateX(0deg);
+                opacity: 0;
+            }
+
+            50% {
+                transform: translateY(-20%) rotateX(-10deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(0) rotateX(0deg);
+                opacity: 1;
+            }
+        }
+
+        .svc-btn:hover span,
+        .svc-btn:hover .svc-btn-arrow {
+            animation: svc-btn-rollUpOut 0.4s ease forwards,
+                svc-btn-rollIn 0.4s ease 0.4s forwards;
+        }
+
+        .svc-subtitle,
+        .svc-title {
+            opacity: 0;
+            transform: translateY(-40px);
+        }
+
+        .svc-animate-subtitle {
+            animation: svcSlideDown 0.5s ease forwards;
+        }
+
+        .svc-animate-title {
+            animation: svcSlideDown 0.5s ease forwards;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes svcSlideDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-40px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .svc-card:focus-within {
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
+        }
+
+        /* ---------------- LEFT CONTENT ANIMATIONS ---------------- */
+        @keyframes slideInLeft {
+            0% {
+                opacity: 0;
+                transform: translateX(-60px);
+                filter: blur(4px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+                filter: blur(0);
+            }
+        }
+
+        .svc-left-animate h3,
+        .svc-left-animate h2,
+        .svc-left-animate p {
+            opacity: 0;
+            transform: translateX(-60px);
+        }
+
+        .svc-left-animate-active h3 {
+            animation: slideInLeft 0.8s ease-in-out forwards;
+        }
+
+        .svc-left-animate-active h2 {
+            animation: slideInLeft 0.8s ease-in-out forwards;
+            animation-delay: 0.3s;
+        }
+
+        .svc-left-animate-active p {
+            animation: slideInLeft 0.8s ease-in-out forwards;
+            animation-delay: 0.6s;
+        }
+
+        /* ---------------- RIGHT CAROUSEL REAPPEAR ANIMATION ---------------- */
+        @keyframes fadeInScale {
+            0% {
+                opacity: 0;
+                transform: scale(0.8) rotateY(-15deg);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1) rotateY(0);
+            }
+        }
+
+        .svc-carousel-reappear {
+            animation: fadeInScale 1s ease forwards;
+        }
+    </style>
+
+    <section id="svc-section" class="relative">
+        <div class="svc-container">
+            <!-- LEFT TEXT CONTENT -->
+            <div class="svc-left svc-left-animate">
+                <h3 id="svc-subtitle" class="svc-subtitle text-lg sm:text-xl md:text-2xl text-white">
+                    Our <span class="text-[#f5a222]">Specialize</span>
+                </h3>
+                <h2 id="svc-title" class="svc-title text-2xl sm:text-3xl md:text-5xl text-white font-bold mb-4">
+                    Featured Services
+                </h2>
+                <p class="text-gray-200 text-sm md:text-xl leading-relaxed">
+                    We provide a range of innovative and technology-driven solutions that help businesses grow,
+                    streamline operations, and stay ahead in the digital age. Explore our specialized services below.
+                </p>
+            </div>
+
+            <!-- RIGHT CAROUSEL -->
+            <div class="svc-right">
+                <div id="svc-carousel"
+                    class="svc-carousel-container relative w-full max-w-6xl h-[380px] sm:h-[480px] flex items-center justify-center overflow-hidden">
+
+                    <!-- Card 1 -->
+                    <div class="absolute w-[220px] md:w-[280px] h-[300px] md:h-[380px] svc-card rounded-2xl p-6 text-white backdrop-blur-md border border-black overflow-hidden"
+                        style="background: linear-gradient(135deg, #0f3d91, #1e6ed1);">
+                        <h2 class="text-md md:text-xl font-bold mb-4">Enterprise Application Integration</h2>
+                        <img src="./assests/enterprise-application-integration.jpg" alt="Integration"
+                            class="mx-auto w-50 h-240 mb-4">
+                        <a href="enterprise-applications-integration"
+                            class="svc-btn inline-flex w-fit text-sm font-semibold items-center justify-center gap-2 px-4 py-2 border-2 border-[#fff] text-[#fff] rounded-full">
+                            <span>Know more</span>
+                            <i class="fa-solid fa-arrow-up svc-btn-arrow rotate-45"></i>
+                        </a>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="absolute w-[220px] md:w-[280px] h-[300px] md:h-[380px] svc-card rounded-2xl p-6 text-white backdrop-blur-md border border-black overflow-hidden"
+                        style="background: linear-gradient(135deg, #1b4965, #62b6cb);">
+                        <h2 class="text-md md:text-xl font-bold mb-4">Web Based Community Solutions</h2>
+                        <img src="./assests/web-based-community-solutions.jpg" alt="Community"
+                            class="mx-auto w-50 h-240 mb-4">
+                        <a href="web-based-community-solutions"
+                            class="svc-btn inline-flex w-fit text-sm items-center justify-center gap-2 px-4 py-2 font-semibold border-2 border-[#fff] text-[#fff]  rounded-full">
+                            <span>Know more</span>
+                            <i class="fa-solid fa-arrow-up svc-btn-arrow rotate-45"></i>
+                        </a>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="absolute w-[220px] md:w-[280px] h-[300px] md:h-[380px] svc-card rounded-2xl p-6 text-white border border-black overflow-hidden"
+                        style="background: linear-gradient(135deg, #2a2a72, #009ffd);">
+                        <h2 class="text-md md:text-xl font-bold mb-4">AI & ML Solutions</h2>
+                        <img src="./assests/ai-ml-solutions.jpg" alt="AI ML" class="mx-auto w-50 h-240 mb-4">
+                        <a href="ai-ml-solutions"
+                            class="svc-btn inline-flex w-fit text-sm items-center justify-center gap-2 px-4 py-2 font-semibold border-2 border-[#fff] text-[#fff] rounded-full">
+                            <span>Know more</span>
+                            <i class="fa-solid fa-arrow-up svc-btn-arrow rotate-45"></i>
+                        </a>
+                    </div>
+
+                    <!-- More cards... -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const svcCards = document.querySelectorAll(".svc-card");
+        const svcSubtitle = document.getElementById("svc-subtitle");
+        const svcTitle = document.getElementById("svc-title");
+        const svcCarousel = document.getElementById("svc-carousel");
+        const svcLeft = document.querySelector(".svc-left");
+        let svcIndex = 0;
+        let svcAutoScrollStarted = false;
+        let svcScrollInterval;
+
+        function svcUpdateCarousel() {
+            let sideDistance = window.innerWidth < 640 ? 35 : (window.innerWidth < 1024 ? 20 : 18);
+            svcCards.forEach((card, i) => {
+                const offset = (i - svcIndex + svcCards.length) % svcCards.length;
+                card.style.zIndex = svcCards.length - offset;
+                if (offset === 0) {
+                    card.style.transform = "translateX(0) scale(1.1) rotateY(0deg) translateZ(100px)";
+                    card.style.opacity = "1";
+                    card.classList.add("border-white");
+                } else if (offset === 1) {
+                    card.style.transform = `translateX(${sideDistance}vw) scale(0.9) rotateY(-20deg) translateZ(-50px)`;
+                    card.style.opacity = "0.7";
+                    card.classList.remove("border-white");
+                } else if (offset === svcCards.length - 1) {
+                    card.style.transform = `translateX(-${sideDistance}vw) scale(0.9) rotateY(20deg) translateZ(-50px)`;
+                    card.style.opacity = "0.7";
+                    card.classList.remove("border-white");
+                } else {
+                    card.style.transform = "scale(0.7) translateZ(-300px)";
+                    card.style.opacity = "0";
+                    card.classList.remove("border-white");
+                }
+            });
+        }
+
+        function svcNextSlide() {
+            svcIndex = (svcIndex + 1) % svcCards.length;
+            svcUpdateCarousel();
+        }
+
+        const svcObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Animate left text
+                    svcLeft.classList.remove("svc-left-animate-active");
+                    void svcLeft.offsetWidth;
+                    svcLeft.classList.add("svc-left-animate-active");
+
+                    // Animate subtitle/title
+                    svcSubtitle.classList.remove("svc-animate-subtitle");
+                    svcTitle.classList.remove("svc-animate-title");
+                    void svcSubtitle.offsetWidth;
+                    void svcTitle.offsetWidth;
+                    svcSubtitle.classList.add("svc-animate-subtitle");
+                    svcTitle.classList.add("svc-animate-title");
+
+                    // Restart carousel appearance animation
+                    svcCarousel.classList.remove("svc-carousel-reappear");
+                    void svcCarousel.offsetWidth;
+                    svcCarousel.classList.add("svc-carousel-reappear");
+
+                    // Restart auto scroll
+                    if (svcScrollInterval) clearInterval(svcScrollInterval);
+                    svcAutoScrollStarted = false;
+                    setTimeout(() => {
+                        if (!svcAutoScrollStarted) {
+                            svcUpdateCarousel();
+                            svcScrollInterval = setInterval(svcNextSlide, 2500);
+                            svcAutoScrollStarted = true;
+                        }
+                    }, 1000);
+                } else {
+                    if (svcScrollInterval) clearInterval(svcScrollInterval);
+                    svcAutoScrollStarted = false;
+                    svcLeft.classList.remove("svc-left-animate-active");
+                    svcCarousel.classList.remove("svc-carousel-reappear");
+                }
+            });
+        }, { threshold: 0.3 });
+
+        svcObserver.observe(document.getElementById("svc-section"));
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- CLIENT STORIES -->
+    <style>
+        #client-cards {
+            display: flex;
+            width: max-content;
+            animation: client-carousel 35s linear infinite;
+        }
+
+        @keyframes client-carousel {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        #client-cards:hover {
+            animation-play-state: paused;
+        }
+
+        .client-card:hover {
+            box-shadow: 4px 4px 10px #102e62;
+            border-color: #102e62;
+        }
+
+        @keyframes slideDown {
+            0% {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .animate-title {
+            animation: slideDown 1.2s ease forwards;
+        }
+
+        .animate-cards {
+            transition: opacity 1s ease;
+            opacity: 1 !important;
+        }
+
+        @media (max-width: 768px) {
+            #client-cards {
+                animation: client-carousel 25s linear infinite;
+            }
+        }
+    </style>
+    <section id="client-stories" class="relative w-full py-5 overflow-hidden">
+        <div class="relative max-w-7xl mx-auto px-6">
+            <h2 id="client-title"
+                class="text-2xl md:text-4xl font-bold text-black text-center translate-y-[-50px] opacity-0 drop-shadow-lg">
+                Few Stories from our Client
+            </h2>
+            <!-- Cards Wrapper -->
+            <div id="client-cards" class="mt-8 md:mt-12 flex gap-6 opacity-0 flex-wrap justify-center">
+                <!-- Card 1 -->
+                <div
+                    class="client-card w-80 flex-shrink-0 border border-blue-500 shadow-sm rounded-xl p-6 bg-gray-900/95">
+                    <div class="client-stars flex text-yellow-400 mb-4"><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i></div>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-4">"The team at GVR Infosystems was exceptional
+                        in delivering a tailored product on time!"</p>
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white text-lg">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-white">Karthik</h4>
+                            <p class="text-sm text-gray-400">Marketing Manager</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div
+                    class="client-card w-80 flex-shrink-0 border border-blue-500 shadow-sm rounded-xl p-6 bg-gray-900/95">
+                    <div class="client-stars flex text-yellow-400 mb-4"><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i></div>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-4">"Impressed with their expertise in IT
+                        Solutions. Great customer service as well."</p>
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white text-lg">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-white">Prakash</h4>
+                            <p class="text-sm text-gray-400">Delivery Manager</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div
+                    class="client-card w-80 flex-shrink-0 border border-blue-500 shadow-sm rounded-xl p-6 bg-gray-900/95">
+                    <div class="client-stars flex text-yellow-400 mb-4"><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i></div>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-4">"They took the time to understand our unique
+                        business needs and tailored their solutions."</p>
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white text-lg">
+                            <i class="fas fa-user-cog"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-white">Durgaprashad</h4>
+                            <p class="text-sm text-gray-400">Operations Manager</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div
+                    class="client-card w-80 flex-shrink-0 border border-blue-500 shadow-sm rounded-xl p-6 bg-gray-900/95">
+                    <div class="client-stars flex text-yellow-400 mb-4"><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i></div>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-4">"We are thrilled to share that GVR Infosystems
+                        provided the perfect solution!"</p>
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white text-lg">
+                            <i class="fas fa-user-shield"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-white">Satya</h4>
+                            <p class="text-sm text-gray-400">Director</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div
+                    class="client-card w-80 flex-shrink-0 border border-blue-500 shadow-sm rounded-xl p-6 bg-gray-900/95">
+                    <div class="client-stars flex text-yellow-400 mb-4"><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i></div>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-4">"Working with GVR Infosystems transformed how
+                        we manage operations."</p>
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white text-lg">
+                            <i class="fas fa-user-edit"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-white">Praveen</h4>
+                            <p class="text-sm text-gray-400">Delivery Head</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div
+                    class="client-card w-80 flex-shrink-0 border border-blue-500 shadow-sm rounded-xl p-6 bg-gray-900/95">
+                    <div class="client-stars flex text-yellow-400 mb-4"><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i></div>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-4">"The team delivered on time with dedication
+                        and professionalism."</p>
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white text-lg">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-white">Vamshi</h4>
+                            <p class="text-sm text-gray-400">HR Manager</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 7 -->
+                <div
+                    class="client-card w-80 flex-shrink-0 border border-blue-500 shadow-sm rounded-xl p-6 bg-gray-900/95">
+                    <div class="client-stars flex text-yellow-400 mb-4"><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i></div>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-4">"They provided innovative solutions that
+                        improved our business."</p>
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white text-lg">
+                            <i class="fas fa-user-cog"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-white">Zain</h4>
+                            <p class="text-sm text-gray-400">Tech Manager</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const section = document.querySelector("#client-stories");
+            const title = document.querySelector("#client-title");
+            const cards = document.querySelector("#client-cards");
+            cards.innerHTML += cards.innerHTML;
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        title.classList.add("animate-title");
+                        cards.classList.add("animate-cards");
+                    } else {
+                        title.classList.remove("animate-title");
+                        cards.classList.remove("animate-cards");
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            observer.observe(section);
+        });
+    </script>
+    <style>
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+
+
+
+
+
+
+
+
+    <footer class="relative bg-gradient-to-b from-black to-[#102e62] w-full text-gray-300 pt-10 overflow-hidden">
+        <div class="relative z-10">
+            <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10 pb-10 border-b border-gray-700">
+                <!-- Left: Logo + Address -->
+                <div>
+                    <img src="./assests/upscalemedia-transformed.png" alt="GVR Logo" class="h-12 mb-4">
+                    <p class="text-md mb-4">
+                        Plot No. 3, 3rd Floor, Sri Sai Enclave, Old Bowenpally, HYDERABAD, INDIA
+                    </p>
+                </div>
+                <!-- Middle (Contact Info) -->
+                <div>
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-envelope text-[#f5a222] mr-2"></i>
+                        <a href="mailto:info@gvr.com" class="hover:text-white text-md">info@gvrinfosystems.com</a>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-phone text-[#f5a222] mr-2"></i>
+                        <a href="tel:+911234567890" class="hover:text-white text-md">+916300279339</a>
+                    </div>
+                </div>
+                <!-- Right: Newsletter -->
+                <div>
+                    <h3 class="text-xl font-semibold text-[#fff] mb-2">Newsletter</h3>
+                    <p class="text-md mb-4">
+                        Sign up to GVR weekly newsletter to get the latest updates.
+                    </p>
+                    <form id="newsletter-form" class="flex">
+                        <input type="email" id="user_email" placeholder="Enter your email here.."
+                            class="w-full px-3 py-2 rounded-l-md focus:outline-none text-black" required>
+
+                        <button id="subscribe-btn" type="submit"
+                            class="bg-blue-500 text-white px-4 rounded-r-md hover:bg-blue-600 flex items-center justify-center relative">
+                            <i id="send-icon" class="fas fa-paper-plane"></i>
+                            <span id="loading-spinner"
+                                class="hidden animate-spin ml-2 w-4 h-4 border-2 border-white border-t-transparent rounded-full"></span>
+                        </button>
+                    </form>
+                    <!-- Messages -->
+                    <p id="form-success" class="text-green-400 mt-2 hidden">✅ Thank you! Your email has been sent.</p>
+                    <p id="form-error" class="text-red-400 mt-2 hidden">❌ Failed to send. Please try again later.</p>
+                </div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10 py-10 border-b border-gray-700">
+                <!-- Information -->
+                <div>
+                    <h3 class="text-xl font-semibold text-[#fff] mb-3">Information</h3>
+                    <ul class="space-y-2 text-md">
+                        <li><a href="aboutus" class="hover:text-white">About GVR</a></li>
+                        <li><a href="portfolio" class="hover:text-white">Portfolio</a></li>
+                        <li><a href="team" class="hover:text-white">Team</a></li>
+                        <li><a href="service" class="hover:text-white">Services</a></li>
+                        <li><a href="case-study" class="hover:text-white">Case Study</a></li>
+                        <li><a href="careers" class="hover:text-white">Careers</a></li>
+                        <li><a href="blog" class="hover:text-white">Blog</a></li>
+                        <li><a href="contact" class="hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div>
+                    <h3 class="text-xl font-semibold text-[#fff] mb-3">Services</h3>
+                    <ul class="space-y-2 text-md">
+                        <li><a href="cloud-migration-maintenance-deployment" class="hover:text-white">Cloud
+                                Migration, Maintenance & Deployment</a></li>
+                        <li><a href="data-center-operations" class="hover:text-white">Data Center Operations</a></li>
+                        <li><a href="mobile-applications-development" class="hover:text-white">Mobile Application
+                                Development</a></li>
+                        <li><a href="security-solutions" class="hover:text-white">Security Solutions</a></li>
+                        <li><a href="ai-ml-solutions" class="hover:text-white">AI & ML Solutions</a></li>
+                        <li><a href="web-based-community-solutions" class="hover:text-white">Web Based Community
+                                Solutions</a></li>
+                        <li><a href="enterprise-applications-integration" class="hover:text-white">Enterprise
+                                Application Integration</a></li>
+                    </ul>
+                </div>
+
+                <!-- Products -->
+                <div>
+                    <h3 class="text-xl font-semibold text-[#fff] mb-3">Products</h3>
+                    <ul class="space-y-2 text-md">
+                        <li><a href="ayucare(hms)" class="hover:text-white">AYUCARE(HMS)</a></li>
+                        <li><a href="burserele" class="hover:text-white">BURSERELE</a></li>
+                        <li><a href="empora(hrm)" class="hover:text-white">EMPORA(HRM)</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="text-center text-sm text-gray-300 py-5 px-1 md:px-0">
+                © 2025 GVR. All rights reserved. | Developed by Prodbiz Solutions Private Limited
+            </div>
+        </div>
+    </footer>
+
+    <!-- EmailJS Script -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script>
+        (function () {
+            emailjs.init("YOUR_USER_ID");
+        })();
+
+        const form = document.getElementById("newsletter-form");
+        const btn = document.getElementById("subscribe-btn");
+        const icon = document.getElementById("send-icon");
+        const spinner = document.getElementById("loading-spinner");
+        const successMsg = document.getElementById("form-success");
+        const errorMsg = document.getElementById("form-error");
+
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            successMsg.classList.add("hidden");
+            errorMsg.classList.add("hidden");
+            btn.disabled = true;
+            icon.classList.add("hidden");
+            spinner.classList.remove("hidden");
+
+            emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+                user_email: document.getElementById("user_email").value
+            }).then(function () {
+                successMsg.classList.remove("hidden");
+                successMsg.classList.add("fade-in");
+                document.getElementById("user_email").value = "";
+                btn.disabled = false;
+                icon.classList.remove("hidden");
+                spinner.classList.add("hidden");
+            }, function (error) {
+                errorMsg.classList.remove("hidden");
+                errorMsg.classList.add("fade-in");
+                btn.disabled = false;
+                icon.classList.remove("hidden");
+                spinner.classList.add("hidden");
+            });
+        });
+    </script>
+
+
+    <!-- WhatsApp Button -->
+    <div class="fixed bottom-20 right-0 z-50 flex flex-col items-center">
+        <div id="whatsapp-tooltip"
+            class="mb-2 px-1 mr-1 py-1 text-[#f5a222] font-bold italic text-sm opacity-0 pointer-events-none flex items-center space-x-1 transition-all duration-300">
+            <span>Click Here </span>
+            <i class="fas fa-hand-point-down"></i>
+        </div>
+        <a href="https://wa.me/916300279321" target="_blank" id="whatsapp-btn"
+            class="w-12 h-12 flex items-center justify-center rounded-full bg-green-500 text-white text-2xl shadow-lg hover:scale-110 transition-transform duration-300 relative">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+    <script>
+        const whatsappBtn = document.getElementById('whatsapp-btn');
+        const tooltip = document.getElementById('whatsapp-tooltip');
+        whatsappBtn.addEventListener('mouseenter', () => {
+            tooltip.style.opacity = '1';
+            tooltip.style.transform = 'translateY(0)';
+            tooltip.style.pointerEvents = 'auto';
+        });
+        whatsappBtn.addEventListener('mouseleave', () => {
+            tooltip.style.opacity = '0';
+            tooltip.style.transform = 'translateY(10px)';
+            tooltip.style.pointerEvents = 'none';
+        });
+        whatsappBtn.addEventListener('click', () => {
+            tooltip.style.opacity = '1';
+            tooltip.style.transform = 'translateY(0)';
+            setTimeout(() => {
+                tooltip.style.opacity = '0';
+                tooltip.style.transform = 'translateY(10px)';
+            }, 2000);
+        });
+    </script>
+
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollTopBtn" class="fixed bottom-5 right-5 bg-[#f5a222] hover:bg-[#102e62] hover:text-[#f5a222] text-[#102e62] w-12 h-12 rounded-full flex items-center justify-center shadow-lg opacity-0 
+  invisible transition-all duration-300 z-[9999]">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+    <script>
+        const scrollBtn = document.getElementById('scrollTopBtn');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 200) {
+                scrollBtn.classList.remove('opacity-0', 'invisible');
+                scrollBtn.classList.add('opacity-100', 'visible');
+            } else {
+                scrollBtn.classList.add('opacity-0', 'invisible');
+                scrollBtn.classList.remove('opacity-100', 'visible');
+            }
+        });
+
+        scrollBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+
+</body>
+
+</html>

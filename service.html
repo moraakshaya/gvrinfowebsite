@@ -1,0 +1,1484 @@
+<!-- #102e62 
+ #f5a222-->
+<!DOCTYPE html>
+<html lang="en" x-data="{ open: false, dropdowns: {company: false, products: false, services: false}, scrolled: false }"
+    x-init="window.addEventListener('scroll', () => { scrolled = window.scrollY > 50 })">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GVR Infosystem</title>
+    <link rel="icon" href="./assests/fav-removebg-preview.png" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- EB Garamond Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/alpinejs" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MotionPathPlugin.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'EB Garamond', serif;
+        }
+
+        [x-cloak] {
+            display: none !important;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .animate-slide-down {
+            animation: slideDown 0.7s ease-out forwards;
+        }
+
+        @keyframes dropdownSlide {
+            from {
+                transform: translateY(-10px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .dropdown-animate {
+            animation: dropdownSlide 0.3s ease-out forwards;
+        }
+
+        @keyframes staggerFade {
+            from {
+                transform: translateY(-5px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .stagger-item {
+            opacity: 0;
+            animation: staggerFade 0.3s ease forwards;
+        }
+
+        .stagger-item:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .stagger-item:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .stagger-item:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+    </style>
+</head>
+
+<body class="relative min-h-screen bg-gray-100 text-white">
+        <nav x-data="{ 
+        open: false, 
+        dropdowns: { company: false, products: false, services: false }, 
+        activeLink: '', 
+        scrolled: false 
+    }" x-init="window.addEventListener('scroll', () => { scrolled = window.scrollY > 50 })"
+        class="fixed top-0 left-0 w-full z-50 animate-slide-down transition-all duration-500 shadow-md" :style="scrolled
+        ? (window.innerWidth >= 768 
+            ? 'background: linear-gradient(135deg, white 25%, #f5a222 25% 100%); box-shadow: 0 4px 6px rgba(0,0,0,0.1);'
+            : 'background: linear-gradient(135deg, white 45%, #f5a222 45% 100%); box-shadow: 0 4px 6px rgba(0,0,0,0.1);')
+        : (window.innerWidth >= 768
+            ? 'background: linear-gradient(135deg, white 25%, #f5a222 25% 100%);'
+            : 'background: linear-gradient(135deg, white 45%, #f5a222 45% 100%);')">
+
+        <div class="max-w-7xl mx-auto px-4 lg:px-8 flex items-center justify-between h-16"
+            :class="scrolled ? 'text-[#102e62]' : 'text-[#102e62]'">
+            <!-- Logo -->
+            <a href="./" class="text-xl font-bold">
+                <img src="./assests/upscalemedia-transformed.png" alt="MyLogo" class="h-10 w-auto">
+            </a>
+
+            <!-- Desktop Nav -->
+            <div class="hidden lg:flex items-center space-x-8">
+                <!-- Company -->
+                <div class="group h-16 flex items-center relative">
+                    <button
+                        class="flex items-center gap-1 group-hover:text-black text-xl transition-colors duration-300">
+                        Company
+                        <svg class="w-4 h-4 transition-transform duration-300 group-hover:rotate-180"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div
+                        class="absolute left-0 top-full hidden group-hover:block bg-gray-900 rounded-lg shadow-lg p-2 text-white z-50 min-w-[28rem] dropdown-animate">
+                        <a href="aboutus"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">About
+                            Us</a>
+                        <a href="portfolio"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">Portfolio
+                            - <span class="text-white/50">Explore our all overview</span></a>
+                        <a href="team"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">Team -
+                            <span class="text-white/50">We are friendly join our team</span></a>
+                        <a href="service"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">Services
+                            - <span class="text-white/50">Happy to help you</span></a>
+                        <a href="case-study"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">Case
+                            Study - <span class="text-white/50">Know more about our case study</span></a>
+                    </div>
+                </div>
+
+                <!-- Services -->
+                <div class="group h-16 flex items-center relative">
+                    <button
+                        class="flex items-center gap-1 group-hover:text-black text-xl transition-colors duration-300">
+                        Services
+                        <svg class="w-4 h-4 transition-transform duration-300 group-hover:rotate-180"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div
+                        class="absolute left-0 top-full hidden group-hover:block bg-gray-900 rounded-lg shadow-lg p-2 text-white z-50 min-w-[28rem] dropdown-animate">
+                        <a href="cloud-migration-maintenance-deployment"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">Cloud
+                            Migration, Maintenance & Deployment</a>
+                        <a href="data-center-operations"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">Data
+                            Center Operations</a>
+                        <a href="mobile-applications-development"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">Mobile
+                            Applications Development</a>
+                        <a href="security-solutions"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">Security
+                            Solutions</a>
+                        <a href="ai-ml-solutions"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">AI & ML
+                            Solutions</a>
+                        <a href="web-based-community-solutions"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">Web
+                            Based Community Solutions</a>
+                        <a href="enterprise-applications-integration"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">Enterprise
+                            Applications Integration</a>
+                    </div>
+                </div>
+
+                <!-- Products -->
+                <div class="group h-16 flex items-center relative">
+                    <button
+                        class="flex items-center gap-1 group-hover:text-black text-xl transition-colors duration-300">
+                        Products
+                        <svg class="w-4 h-4 transition-transform duration-300 group-hover:rotate-180"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div
+                        class="absolute left-0 top-full hidden group-hover:block bg-gray-900 rounded-lg shadow-lg p-2 text-white z-50 min-w-[28rem] dropdown-animate">
+                        <a href="ayucare(hms)"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">AYUCARE
+                            (HMS)</a>
+                        <a href="burserele"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">BURSERELE</a>
+                        <a href="empora(hrm)"
+                            class="block px-4 py-2 hover:bg-white/20 hover:text-yellow-400 rounded stagger-item">EMPORA
+                            (HRM)</a>
+                    </div>
+                </div>
+
+                <a href="careers" class="hover:text-black text-xl transition-colors duration-300">Careers</a>
+                <a href="blog" class="hover:text-black text-xl transition-colors duration-300">Blog</a>
+            </div>
+
+            <!-- Get Started Button -->
+            <div class="hidden lg:block">
+                <a href="contact"
+                    class="relative flex items-center hover:bg-transparent hover:text-[#102e62] gap-2 px-6 py-2 border border-2 border-[#102e62] text-[#fff] bg-[#102e62] rounded-full font-semibold overflow-hidden group">
+                    <span class="flex items-center gap-2 group-hover:animate-roll-up-down">
+                        Get Started
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                            <line x1="4" y1="12" x2="20" y2="12" />
+                            <polyline points="14 6 20 12 14 18" />
+                        </svg>
+                    </span>
+                </a>
+            </div>
+
+            <!-- Mobile Toggle -->
+            <button @click="open = !open"
+                class="lg:hidden w-10 h-10 flex items-center justify-center rounded-full border border-[#102e62] text-[#102e62]">
+                <svg x-show="!open" x-cloak xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                    stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+                <svg x-show="open" x-cloak xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                    stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+        <!-- Mobile Nav -->
+        <div x-show="open" x-transition.opacity x-cloak class="lg:hidden absolute top-16 left-0 w-full 
+            bg-gray-900
+            border-t border-white/20 text-white dropdown-animate rounded-b-xl shadow-lg">
+            <div class="flex flex-col p-4 space-y-1">
+
+                <!-- Company -->
+                <div class="space-y-1">
+                    <button @click="dropdowns.company = !dropdowns.company"
+                        class="w-full text-left flex justify-between items-center px-3 py-2 rounded-lg hover:bg-white/10"
+                        :class="dropdowns.company ? 'text-yellow-400' : 'text-white'">
+                        Company
+                        <span x-show="!dropdowns.company">+</span>
+                        <span x-show="dropdowns.company">-</span>
+                    </button>
+                    <div x-show="dropdowns.company" x-transition.opacity x-transition.duration.300ms
+                        class="ml-4 mt-2 space-y-2 px-1 py-1 dropdown-animate border border-white/50 rounded-lg">
+                        <a href="aboutus"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">About
+                            Us</a>
+                        <a href="portfolio"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">Portfolio
+                            - <span class="text-white/50">Explore our all overview</span></a>
+                        <a href="team"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">Team
+                            - <span class="text-white/50">We are friendly join our team</span></a>
+                        <a href="service"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">Services
+                            - <span class="text-white/50">Happy to help you</span></a>
+                        <a href="case-study"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">Case
+                            Study - <span class="text-white/50">Know more about our case study</span></a>
+                    </div>
+                </div>
+
+                <!-- Services -->
+                <div class="space-y-3">
+                    <button @click="dropdowns.services = !dropdowns.services"
+                        class="w-full text-left flex justify-between items-center px-3 py-2 rounded-lg hover:bg-white/10"
+                        :class="dropdowns.services ? 'text-yellow-400' : 'text-white'">
+                        Services
+                        <span x-show="!dropdowns.services">+</span>
+                        <span x-show="dropdowns.services">-</span>
+                    </button>
+                    <div x-show="dropdowns.services" x-transition.opacity x-transition.duration.300ms
+                        class="ml-4 mt-2 space-y-2 px-1 py-1 dropdown-animate border border-white/50 rounded-lg">
+                        <a href="cloud-migration-maintenance-deployment"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400stagger-item">Cloud
+                            Migration, Maintenance & Deployment</a>
+                        <a href="data-center-operations"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">Data
+                            Center Operations</a>
+                        <a href="mobile-applications-development"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">Mobile
+                            Applications Development</a>
+                        <a href="security-solutions"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">Security
+                            Solutions</a>
+                        <a href="ai-ml-solutions"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">AI &
+                            ML Solutions</a>
+                        <a href="web-based-community-solutions"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">Web
+                            Based Community Solutions</a>
+                        <a href="enterprise-applications-integration"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">Enterprise
+                            Applications Integration</a>
+                    </div>
+                </div>
+
+                <!-- Products -->
+                <div class="space-y-3">
+                    <button @click="dropdowns.products = !dropdowns.products"
+                        class="w-full text-left flex justify-between items-center px-3 py-2 rounded-lg hover:bg-white/10"
+                        :class="dropdowns.products ? 'text-yellow-400' : 'text-white'">
+                        Products
+                        <span x-show="!dropdowns.products">+</span>
+                        <span x-show="dropdowns.products">-</span>
+                    </button>
+                    <div x-show="dropdowns.products" x-transition.opacity x-transition.duration.300ms
+                        class="ml-4 mt-2 px-1 py-1 space-y-2 dropdown-animate border border-white/50 rounded-lg">
+                        <a href="ayucare(hms)"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">AYUCARE
+                            (HMS)</a>
+                        <a href="burserele"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">BURSERELE</a>
+                        <a href="empora(hrm)"
+                            class="block px-3 py-2 rounded-md hover:bg-white/10 hover:text-yellow-400 stagger-item">EMPORA
+                            (HRM)</a>
+                    </div>
+                </div>
+
+                <!-- Single links -->
+                <a href="careers" @click="activeLink = 'careers'" class="block px-3 py-2 rounded-lg hover:bg-white/10"
+                    :class="activeLink === 'careers' ? 'text-yellow-400' : 'text-white'">
+                    Careers
+                </a>
+
+                <a href="blog" @click="activeLink = 'blog'" class="block px-3 py-2 rounded-lg hover:bg-white/10"
+                    :class="activeLink === 'blog' ? 'text-yellow-400' : 'text-white'">
+                    Blog
+                </a>
+
+                <!-- Get Started (Mobile with click animation) -->
+                <!-- Get Started (Mobile) -->
+                <div class="block lg:hidden">
+                    <a href="contact" id="mobile-get-started"
+                        class="relative flex items-center justify-center gap-2 px-6 py-2 bg-[#f5a222] text-[#102e62] border border-[#f5a222] rounded-full font-semibold overflow-hidden transition-all duration-300 ease-in-out">
+                        Get Started
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                            <line x1="4" y1="12" x2="20" y2="12" />
+                            <polyline points="14 6 20 12 14 18" />
+                        </svg>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+        </div>
+    </nav>
+    <script>
+        const mobileBtn = document.getElementById('mobile-get-started');
+
+        mobileBtn.addEventListener('click', (e) => {
+            // Optional: prevent immediate redirect for visual feedback
+            e.preventDefault();
+
+            // Change background to transparent and text color to #f5a222
+            mobileBtn.style.backgroundColor = 'transparent';
+            mobileBtn.style.color = '#f5a222';
+
+            // Navigate after a small delay (for user to see effect)
+            setTimeout(() => {
+                window.location.href = mobileBtn.getAttribute('href');
+            }, 200);
+        });
+    </script>
+
+
+    <!-- SERVICES BANNER SECTION -->
+<section id="portfolio-banner"
+  class="relative w-full pt-10 pb-5 md:py-20 mb-5 bg-cover bg-center bg-no-repeat md:h-[600px] 
+  flex flex-col items-center justify-center text-center overflow-hidden">
+
+  <!-- Background Video -->
+  <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover z-0">
+    <source src="./assests/bannervideo.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- Dark Gradient Overlay -->
+  <div class="absolute inset-0 bg-gradient-to-b from-[#102e62]/90 via-[#0b1e43]/85 to-[#000000]/90 z-0"></div>
+
+  <!-- Content -->
+  <div class="relative z-10 max-w-3xl px-6 py-14 md:pt-0 md:pb-0">
+    <h2
+      class="portfolio-banner-title text-3xl sm:text-4xl md:text-5xl font-bold text-[#f5a222] drop-shadow-lg mt-8 mb-2 md:mb-4 opacity-0">
+      Solutions That Drive Success
+    </h2>
+
+    <p
+      class="portfolio-banner-subtitle text-md sm:text-lg md:text-xl italic text-gray-100 opacity-0">
+      Explore our range of innovative services designed to empower your business growth.
+    </p>
+  </div>
+</section>
+
+<style>
+  /* ---------------- Entrance Animation ---------------- */
+  @keyframes portfolioBannerSlideInTop {
+    0% {
+      opacity: 0;
+      transform: translateY(-50px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .portfolio-banner-animate {
+    animation: portfolioBannerSlideInTop 1s ease-out forwards;
+  }
+
+  /* ---------------- Optional Overlay (for video blend) ---------------- */
+  #portfolio-banner::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+  }
+</style>
+
+<script>
+  // Animate text on scroll (slide in from top with stagger)
+  const portfolioBannerObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const title = entry.target.querySelector('.portfolio-banner-title');
+        const subtitle = entry.target.querySelector('.portfolio-banner-subtitle');
+
+        // Animate title first
+        setTimeout(() => title.classList.add('portfolio-banner-animate'), 200);
+
+        // Animate subtitle after title
+        setTimeout(() => subtitle.classList.add('portfolio-banner-animate'), 800);
+
+        // Unobserve after animation runs once
+        portfolioBannerObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  portfolioBannerObserver.observe(document.querySelector('#portfolio-banner'));
+</script>
+
+
+
+    <!-- SERVICE HOME SECTION -->
+    <section id="service-home-section" class="relative w-full pt-10 pb-5 md:pt-20 overflow-hidden">
+        <div class="relative z-10 max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-10 items-center">
+            <div class="flex justify-center md:justify-start">
+                <img src="./assests/servicebannerimg.jpg" alt="Service Image"
+                    class="rounded-[25px] md:rounded-[50px] shadow-[5px_5px_10px_#102e62,_5px_5px_10px_black] max-w-full">
+            </div>
+            <div class="space-y-3 md:space-y-6 text-left">
+                <p id="service-home-subtitle"
+                    class="text-lg md:text-xl text-black font-medium opacity-0 translate-y-10">
+                    We Are <span id="service-home-word" class="text-[#f5a222] inline-block">IT Guidance</span>
+                </p>
+
+                <h2 id="service-home-title"
+                    class="text-xl md:text-2xl lg:text-5xl font-bold text-black opacity-0 translate-y-10">
+                    Tailored IT Solutions for Your Success
+                </h2>
+
+                <p id="service-home-paragraph" class="text-gray-800 text-md md:text-lg leading-relaxed opacity-0">
+                    we understand that every business is unique, with its own set of challenges, goals, and aspirations.
+                    That's why we offer tailored IT solutions designed.
+                </p>
+
+                <a id="service-home-btn" href="contact"
+                    class="service-home-button group relative inline-flex items-center px-3 py-2 md:px-6 md:py-3 rounded-full bg-[#102e62] 
+                    backdrop-blur-md border border-[#f5a222] text-[#f5a222] font-semibold overflow-hidden opacity-0 transition-all duration-500">
+                    <span class="service-home-roll-text inline-block">Talk To An Expert</span>
+                    <span class="service-home-roll-arrow inline-block ml-3">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 19V5m0 0l-6 6m6-6l6 6" />
+                        </svg>
+                    </span>
+                </a>
+
+            </div>
+
+        </div>
+    </section>
+    <style>
+        #service-home-section .service-home-roll-text,
+        #service-home-section .service-home-roll-arrow {
+            display: inline-block;
+            transform-origin: center;
+        }
+
+        @keyframes service-home-rollUpOut {
+            0% {
+                transform: translateY(0) rotateX(0deg);
+                opacity: 1;
+            }
+
+            50% {
+                transform: translateY(-100%) rotateX(90deg);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateY(100%) rotateX(0deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes service-home-rollIn {
+            0% {
+                transform: translateY(100%) rotateX(0deg);
+                opacity: 0;
+            }
+
+            50% {
+                transform: translateY(-20%) rotateX(-10deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(0) rotateX(0deg);
+                opacity: 1;
+            }
+        }
+
+        #service-home-section .service-home-button.group:hover .service-home-roll-text,
+        #service-home-section .service-home-button.group:hover .service-home-roll-arrow {
+            animation: service-home-rollUpOut 0.4s ease forwards,
+                service-home-rollIn 0.4s ease 0.4s forwards;
+        }
+
+        #service-home-section .service-home-roll-arrow {
+            transform: rotate(45deg);
+        }
+
+        @keyframes service-home-slideUp {
+            0% {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes service-home-fadeIn {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes service-home-rollDown {
+            0% {
+                transform: rotateX(-90deg);
+                opacity: 0;
+            }
+
+            50% {
+                transform: rotateX(0deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: rotateX(0deg);
+                opacity: 1;
+            }
+        }
+
+        @keyframes service-home-floatUpDown {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-6px);
+            }
+        }
+
+        .service-home-show {
+            opacity: 1 !important;
+        }
+
+        .service-home-animate-slideUp {
+            animation: service-home-slideUp 0.8s ease-out forwards;
+        }
+
+        .service-home-animate-fadeIn {
+            animation: service-home-fadeIn 1s ease forwards;
+        }
+
+        .service-home-animate-roll-down {
+            display: inline-block;
+            animation: service-home-rollDown 3s ease-in-out infinite;
+        }
+
+        .service-home-animate-float {
+            animation: service-home-floatUpDown 3s ease-in-out infinite;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const section = document.getElementById("service-home-section");
+            const subtitle = document.getElementById("service-home-subtitle");
+            const serviceWord = document.getElementById("service-home-word");
+            const title = document.getElementById("service-home-title");
+            const paragraph = document.getElementById("service-home-paragraph");
+            const btn = document.getElementById("service-home-btn");
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        subtitle.classList.add("service-home-animate-slideUp", "service-home-show");
+                        setTimeout(() => serviceWord.classList.add("service-home-animate-roll-down", "service-home-show"), 800);
+                        setTimeout(() => title.classList.add("service-home-animate-slideUp", "service-home-show"), 1000);
+                        setTimeout(() => paragraph.classList.add("service-home-animate-fadeIn", "service-home-show"), 1500);
+                        setTimeout(() => {
+                            btn.classList.add("service-home-animate-fadeIn", "service-home-show");
+                            setTimeout(() => btn.classList.add("service-home-animate-float"), 1000);
+                        }, 2000);
+
+                    } else {
+                        subtitle.classList.remove("service-home-animate-slideUp", "service-home-show");
+                        serviceWord.classList.remove("service-home-animate-roll-down", "service-home-show");
+                        title.classList.remove("service-home-animate-slideUp", "service-home-show");
+                        paragraph.classList.remove("service-home-animate-fadeIn", "service-home-show");
+                        btn.classList.remove("service-home-animate-fadeIn", "service-home-animate-float", "service-home-show");
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            observer.observe(section);
+        });
+    </script>
+
+    <!-- FEATURE SERVICE SECTION -->
+    <style>
+        .svc-carousel-container {
+            perspective: 1200px;
+        }
+
+        #svc-section {
+            position: relative;
+            background: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+            color: white;
+            overflow: hidden;
+        }
+
+        #svc-section::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 0;
+        }
+
+        #svc-section>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Layout container */
+        .svc-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: 2rem;
+            padding: 3rem 1rem;
+        }
+
+        @media (max-width: 640px) {
+            #svc-carousel {
+                overflow: visible;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .svc-container {
+                flex-direction: row;
+                text-align: left;
+                justify-content: space-between;
+                align-items: center;
+                gap: 3rem;
+            }
+
+            .svc-left {
+                width: 35%;
+                padding-left: 65px;
+            }
+
+            .svc-right {
+                width: 65%;
+            }
+        }
+
+        /* Card styling */
+        .svc-card {
+            transition: transform 0.8s ease, opacity 0.8s ease, border 0.4s ease;
+        }
+
+        .svc-btn {
+            background: transparent;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .svc-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .svc-btn span,
+        .svc-btn-arrow {
+            display: inline-block;
+            transform-origin: center;
+        }
+
+        @keyframes svc-btn-rollUpOut {
+            0% {
+                transform: translateY(0) rotateX(0deg);
+                opacity: 1;
+            }
+
+            50% {
+                transform: translateY(-100%) rotateX(90deg);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateY(100%) rotateX(0deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes svc-btn-rollIn {
+            0% {
+                transform: translateY(100%) rotateX(0deg);
+                opacity: 0;
+            }
+
+            50% {
+                transform: translateY(-20%) rotateX(-10deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(0) rotateX(0deg);
+                opacity: 1;
+            }
+        }
+
+        .svc-btn:hover span,
+        .svc-btn:hover .svc-btn-arrow {
+            animation: svc-btn-rollUpOut 0.4s ease forwards,
+                svc-btn-rollIn 0.4s ease 0.4s forwards;
+        }
+
+        .svc-subtitle,
+        .svc-title {
+            opacity: 0;
+            transform: translateY(-40px);
+        }
+
+        .svc-animate-subtitle {
+            animation: svcSlideDown 0.5s ease forwards;
+        }
+
+        .svc-animate-title {
+            animation: svcSlideDown 0.5s ease forwards;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes svcSlideDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-40px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .svc-card:focus-within {
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
+        }
+
+        /* ---------------- LEFT CONTENT ANIMATIONS ---------------- */
+        @keyframes slideInLeft {
+            0% {
+                opacity: 0;
+                transform: translateX(-60px);
+                filter: blur(4px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+                filter: blur(0);
+            }
+        }
+
+        .svc-left-animate h3,
+        .svc-left-animate h2,
+        .svc-left-animate p {
+            opacity: 0;
+            transform: translateX(-60px);
+        }
+
+        .svc-left-animate-active h3 {
+            animation: slideInLeft 0.8s ease-in-out forwards;
+        }
+
+        .svc-left-animate-active h2 {
+            animation: slideInLeft 0.8s ease-in-out forwards;
+            animation-delay: 0.3s;
+        }
+
+        .svc-left-animate-active p {
+            animation: slideInLeft 0.8s ease-in-out forwards;
+            animation-delay: 0.6s;
+        }
+
+        /* ---------------- RIGHT CAROUSEL REAPPEAR ANIMATION ---------------- */
+        @keyframes fadeInScale {
+            0% {
+                opacity: 0;
+                transform: scale(0.8) rotateY(-15deg);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1) rotateY(0);
+            }
+        }
+
+        .svc-carousel-reappear {
+            animation: fadeInScale 1s ease forwards;
+        }
+    </style>
+
+    <style>
+        /* force SVG flush and remove stroke/glow that creates the thin line */
+        #svc-section .wave-animation,
+        #svc-section .wave-animation svg {
+            display: block;
+            width: 100%;
+            height: auto;
+            margin-bottom: -2px;
+            /* small nudge if needed */
+            line-height: 0;
+        }
+
+        #svc-section .wave-animation path {
+            stroke: none !important;
+            /* ensure no stroke */
+            filter: none !important;
+            /* remove any drop-shadow/glow */
+            shape-rendering: geometricPrecision;
+        }
+
+        /* 🌊 WAVE ANIMATION */
+        @keyframes waveFlow {
+            0% {
+                transform: translateX(0);
+            }
+
+            50% {
+                transform: translateX(0px);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        .wave-animation path {
+            animation: waveFlow 6s ease-in-out infinite;
+            transform-origin: center;
+            filter: drop-shadow(0 0 8px #0d6efd);
+            /* optional glow effect */
+        }
+
+
+        .wave-bottom {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+        }
+
+        .wave-bottom svg {
+            display: block;
+            width: 100%;
+            height: 90px;
+        }
+
+        .wave-bottom path {
+            animation: waveFlow 6s ease-in-out infinite;
+            transform-origin: center;
+            filter: drop-shadow(0 0 8px #f5f5f5);
+        }
+
+        .wave-bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            z-index: 10;
+        }
+
+        .wave-bottom svg {
+            display: block;
+            width: 100%;
+            height: 70px;
+        }
+
+        .wave-bottom path {
+            animation: waveFlow 6s ease-in-out infinite;
+            transform-origin: center;
+            filter: drop-shadow(0 0 6px rgba(13, 110, 253, 0.3));
+        }
+    </style>
+
+    <section id="svc-section" class="relative bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900">
+        <!-- 🌊 ANIMATED TOP WAVE -->
+        <div class="absolute top-0 left-0 w-full overflow-hidden leading-none z-10">
+            <svg class="relative block w-full h-20 md:h-32 wave-animation" xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 1440 120" preserveAspectRatio="none">
+                <path fill="#f5f5f5" fill-opacity="1"
+                    d="M0,64L48,69.3C96,75,192,85,288,85.3C384,85,480,75,576,58.7C672,43,768,21,864,21.3C960,21,1056,43,1152,58.7C1248,75,1344,85,1392,90.7L1440,96L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z">
+                </path>
+            </svg>
+        </div>
+        <div class="svc-container">
+            <!-- LEFT TEXT CONTENT -->
+            <div class="svc-left svc-left-animate">
+                <h3 id="svc-subtitle" class="svc-subtitle text-lg sm:text-xl md:text-2xl text-white">
+                    Our <span class="text-[#f5a222]">Specialize</span>
+                </h3>
+                <h2 id="svc-title" class="svc-title text-2xl sm:text-3xl md:text-5xl text-white font-bold mb-4">
+                    Featured Services
+                </h2>
+                <p class="text-gray-200 text-sm md:text-xl leading-relaxed">
+                    We provide a range of innovative and technology-driven solutions that help businesses grow,
+                    streamline operations, and stay ahead in the digital age. Explore our specialized services below.
+                </p>
+            </div>
+
+            <!-- RIGHT CAROUSEL -->
+            <div class="svc-right">
+                <div id="svc-carousel"
+                    class="svc-carousel-container relative w-full max-w-6xl h-[380px] sm:h-[480px] flex items-center justify-center overflow-hidden">
+
+                    <!-- Card 1 -->
+                    <div class="absolute w-[220px] md:w-[280px] h-[300px] md:h-[380px] svc-card rounded-2xl p-6 text-white backdrop-blur-md border border-black overflow-hidden"
+                        style="background: linear-gradient(135deg, #0f3d91, #1e6ed1);">
+                        <h2 class="text-md md:text-xl font-bold mb-4">Enterprise Application Integration</h2>
+                        <img src="./assests/enterprise-application-integration.jpg" alt="Integration"
+                            class="mx-auto w-50 h-240 mb-4">
+                        <a href="enterprise-applications-integration"
+                            class="svc-btn inline-flex w-fit text-sm font-semibold items-center justify-center gap-2 px-4 py-2 border-2 border-[#fff] text-[#fff] rounded-full">
+                            <span>Know more</span>
+                            <i class="fa-solid fa-arrow-up svc-btn-arrow rotate-45"></i>
+                        </a>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="absolute w-[220px] md:w-[280px] h-[300px] md:h-[380px] svc-card rounded-2xl p-6 text-white backdrop-blur-md border border-black overflow-hidden"
+                        style="background: linear-gradient(135deg, #1b4965, #62b6cb);">
+                        <h2 class="text-md md:text-xl font-bold mb-4">Web Based Community Solutions</h2>
+                        <img src="./assests/web-based-community-solutions.jpg" alt="Community"
+                            class="mx-auto w-50 h-240 mb-4">
+                        <a href="web-based-community-solutions"
+                            class="svc-btn inline-flex w-fit text-sm items-center justify-center gap-2 px-4 py-2 font-semibold border-2 border-[#fff] text-[#fff]  rounded-full">
+                            <span>Know more</span>
+                            <i class="fa-solid fa-arrow-up svc-btn-arrow rotate-45"></i>
+                        </a>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="absolute w-[220px] md:w-[280px] h-[300px] md:h-[380px] svc-card rounded-2xl p-6 text-white border border-black overflow-hidden"
+                        style="background: linear-gradient(135deg, #2a2a72, #009ffd);">
+                        <h2 class="text-md md:text-xl font-bold mb-4">AI & ML Solutions</h2>
+                        <img src="./assests/ai-ml-solutions.jpg" alt="AI ML" class="mx-auto w-50 h-240 mb-4">
+                        <a href="ai-ml-solutions"
+                            class="svc-btn inline-flex w-fit text-sm items-center justify-center gap-2 px-4 py-2 font-semibold border-2 border-[#fff] text-[#fff] rounded-full">
+                            <span>Know more</span>
+                            <i class="fa-solid fa-arrow-up svc-btn-arrow rotate-45"></i>
+                        </a>
+                    </div>
+
+                    <!-- More cards... -->
+                </div>
+            </div>
+        </div>
+        <!-- 🌊 BOTTOM SMALL WAVE -->
+        <div class="wave-bottom absolute bottom-0 left-0 w-full overflow-hidden leading-none z-10">
+            <svg class="relative block w-full h-16 md:h-24 wave-animation" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100"
+                preserveAspectRatio="none">
+                <path fill="#f5f5f5" fill-opacity="1"
+                    d="M0,40 C80,60 160,80 240,70 C320,60 400,20 480,20 C560,20 640,60 720,70 C800,80 880,60 960,50 C1040,40 1120,50 1200,60 C1280,70 1360,70 1440,60 L1440,100 L0,100 Z">
+                </path>
+            </svg>
+        </div>
+
+
+    </section>
+
+    <script>
+        const svcCards = document.querySelectorAll(".svc-card");
+        const svcSubtitle = document.getElementById("svc-subtitle");
+        const svcTitle = document.getElementById("svc-title");
+        const svcCarousel = document.getElementById("svc-carousel");
+        const svcLeft = document.querySelector(".svc-left");
+        let svcIndex = 0;
+        let svcAutoScrollStarted = false;
+        let svcScrollInterval;
+
+        function svcUpdateCarousel() {
+            let sideDistance = window.innerWidth < 640 ? 35 : (window.innerWidth < 1024 ? 20 : 18);
+            svcCards.forEach((card, i) => {
+                const offset = (i - svcIndex + svcCards.length) % svcCards.length;
+                card.style.zIndex = svcCards.length - offset;
+                if (offset === 0) {
+                    card.style.transform = "translateX(0) scale(1.1) rotateY(0deg) translateZ(100px)";
+                    card.style.opacity = "1";
+                    card.classList.add("border-white");
+                } else if (offset === 1) {
+                    card.style.transform = `translateX(${sideDistance}vw) scale(0.9) rotateY(-20deg) translateZ(-50px)`;
+                    card.style.opacity = "0.7";
+                    card.classList.remove("border-white");
+                } else if (offset === svcCards.length - 1) {
+                    card.style.transform = `translateX(-${sideDistance}vw) scale(0.9) rotateY(20deg) translateZ(-50px)`;
+                    card.style.opacity = "0.7";
+                    card.classList.remove("border-white");
+                } else {
+                    card.style.transform = "scale(0.7) translateZ(-300px)";
+                    card.style.opacity = "0";
+                    card.classList.remove("border-white");
+                }
+            });
+        }
+
+        function svcNextSlide() {
+            svcIndex = (svcIndex + 1) % svcCards.length;
+            svcUpdateCarousel();
+        }
+
+        const svcObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Animate left text
+                    svcLeft.classList.remove("svc-left-animate-active");
+                    void svcLeft.offsetWidth;
+                    svcLeft.classList.add("svc-left-animate-active");
+
+                    // Animate subtitle/title
+                    svcSubtitle.classList.remove("svc-animate-subtitle");
+                    svcTitle.classList.remove("svc-animate-title");
+                    void svcSubtitle.offsetWidth;
+                    void svcTitle.offsetWidth;
+                    svcSubtitle.classList.add("svc-animate-subtitle");
+                    svcTitle.classList.add("svc-animate-title");
+
+                    // Restart carousel appearance animation
+                    svcCarousel.classList.remove("svc-carousel-reappear");
+                    void svcCarousel.offsetWidth;
+                    svcCarousel.classList.add("svc-carousel-reappear");
+
+                    // Restart auto scroll
+                    if (svcScrollInterval) clearInterval(svcScrollInterval);
+                    svcAutoScrollStarted = false;
+                    setTimeout(() => {
+                        if (!svcAutoScrollStarted) {
+                            svcUpdateCarousel();
+                            svcScrollInterval = setInterval(svcNextSlide, 2500);
+                            svcAutoScrollStarted = true;
+                        }
+                    }, 1000);
+                } else {
+                    if (svcScrollInterval) clearInterval(svcScrollInterval);
+                    svcAutoScrollStarted = false;
+                    svcLeft.classList.remove("svc-left-animate-active");
+                    svcCarousel.classList.remove("svc-carousel-reappear");
+                }
+            });
+        }, { threshold: 0.3 });
+
+        svcObserver.observe(document.getElementById("svc-section"));
+    </script>
+
+
+
+    <!-- WHY US SECTION -->
+    <section id="why-us-section" class="relative w-full py-16 overflow-hidden">
+        <div class="relative z-10 max-w-7xl mx-auto px-6 text-center">
+
+            <!-- Subtitle -->
+            <h4 class="whyus-subtitle text-xl font-semibold text-[#f5a222] mb-3 opacity-0 translate-y-6">
+                Why Us Better
+            </h4>
+
+            <!-- Title -->
+            <h2 class="whyus-title text-2xl md:text-4xl font-bold text-black mb-8 opacity-0 translate-y-6">
+                Why Our Services are Better Than Others?
+            </h2>
+
+            <!-- Cards Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-10 pt-5">
+
+                <!-- Card 1 -->
+                <div
+                    class="whyus-card relative bg-gradient-to-b from-[#102e62] to-black p-8 rounded-2xl text-center text-white overflow-hidden transition-all duration-500 transform opacity-0 translate-y-10">
+                    <div class="relative z-10 flex flex-col items-center space-y-4">
+                        <i class="fas fa-award text-[#f5a222] text-4xl"></i>
+                        <p class="text-lg font-semibold">Quality Comes First</p>
+                        <p class="text-sm md:text-base text-gray-300">
+                            We deliver the highest quality work by maintaining strict quality standards and attention to
+                            detail.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div
+                    class="whyus-card relative bg-gradient-to-b from-[#102e62] to-black p-8 rounded-2xl text-center text-white overflow-hidden transition-all duration-500 transform opacity-0 translate-y-10">
+                    <div class="relative z-10 flex flex-col items-center space-y-4">
+                        <i class="fas fa-handshake text-[#f5a222] text-4xl"></i>
+                        <p class="text-lg font-semibold">Flexible Cooperation</p>
+                        <p class="text-sm md:text-base text-gray-300">
+                            We adapt to your needs with flexible engagement models and transparent communication.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div
+                    class="whyus-card relative bg-gradient-to-b from-[#102e62] to-black p-8 rounded-2xl text-center text-white overflow-hidden transition-all duration-500 transform opacity-0 translate-y-10">
+                    <div class="relative z-10 flex flex-col items-center space-y-4">
+                        <i class="fas fa-clock text-[#f5a222] text-4xl"></i>
+                        <p class="text-lg font-semibold">On-Time Delivery</p>
+                        <p class="text-sm md:text-base text-gray-300">
+                            We value your time and ensure timely project completion without compromising quality.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div
+                    class="whyus-card relative bg-gradient-to-b from-[#102e62] to-black p-8 rounded-2xl text-center text-white overflow-hidden transition-all duration-500 transform opacity-0 translate-y-10">
+                    <div class="relative z-10 flex flex-col items-center space-y-4">
+                        <i class="fas fa-balance-scale text-[#f5a222] text-4xl"></i>
+                        <p class="text-lg font-semibold">Transparent Costs</p>
+                        <p class="text-sm md:text-base text-gray-300">
+                            No hidden fees — we maintain full transparency in pricing and deliverables.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div
+                    class="whyus-card relative bg-gradient-to-b from-[#102e62] to-black p-8 rounded-2xl text-center text-white overflow-hidden transition-all duration-500 transform opacity-0 translate-y-10">
+                    <div class="relative z-10 flex flex-col items-center space-y-4">
+                        <i class="fas fa-user-tie text-[#f5a222] text-4xl"></i>
+                        <p class="text-lg font-semibold">Qualified Developers</p>
+                        <p class="text-sm md:text-base text-gray-300">
+                            Our team consists of certified professionals skilled in modern technologies and frameworks.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div
+                    class="whyus-card relative bg-gradient-to-b from-[#102e62] to-black p-8 rounded-2xl text-center text-white overflow-hidden transition-all duration-500 transform opacity-0 translate-y-10">
+                    <div class="relative z-10 flex flex-col items-center space-y-4">
+                        <i class="fas fa-bolt text-[#f5a222] text-4xl"></i>
+                        <p class="text-lg font-semibold">Quick Scale-Up</p>
+                        <p class="text-sm md:text-base text-gray-300">
+                            Easily expand your project with our scalable solutions and rapid resource allocation.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <style>
+        @keyframes whyus-slideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .whyus-card:hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 8px 20px rgba(16, 46, 98, 0.6), 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .whyus-slide-up {
+            animation: whyus-slideUp 0.8s ease forwards;
+        }
+
+        .whyus-title-slide {
+            animation: whyus-slideUp 0.8s ease forwards;
+        }
+
+        .whyus-subtitle-slide {
+            animation: whyus-slideUp 0.8s ease forwards;
+        }
+    </style>
+    <script>
+        const whyusSection = document.querySelector('#why-us-section');
+        const whyusCards = whyusSection.querySelectorAll('.whyus-card');
+        const whyusTitle = whyusSection.querySelector('.whyus-title');
+        const whyusSubtitle = whyusSection.querySelector('.whyus-subtitle');
+
+        const whyusObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        whyusSubtitle.classList.add('whyus-subtitle-slide');
+                    }, 100);
+                    setTimeout(() => {
+                        whyusTitle.classList.add('whyus-title-slide');
+                    }, 300);
+
+                    whyusCards.forEach((card, i) => {
+                        setTimeout(() => {
+                            card.classList.add('whyus-slide-up');
+                        }, 500 + i * 200);
+                    });
+                } else {
+                    whyusSubtitle.classList.remove('whyus-subtitle-slide');
+                    whyusTitle.classList.remove('whyus-title-slide');
+                    whyusCards.forEach(card => {
+                        card.classList.remove('whyus-slide-up');
+                        card.style.opacity = 0;
+                        card.style.transform = 'translateY(30px)';
+                    });
+                }
+            });
+        }, { threshold: 0.3 });
+
+        whyusObserver.observe(whyusSection);
+    </script>
+
+
+
+
+
+
+
+    <footer class="relative bg-gradient-to-b from-black to-[#102e62] w-full text-gray-300 pt-10 overflow-hidden">
+        <div class="relative z-10">
+            <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10 pb-10 border-b border-gray-700">
+                <!-- Left: Logo + Address -->
+                <div>
+                    <img src="./assests/upscalemedia-transformed.png" alt="GVR Logo" class="h-12 mb-4">
+                    <p class="text-md mb-4">
+                        Plot No. 3, 3rd Floor, Sri Sai Enclave, Old Bowenpally, HYDERABAD, INDIA
+                    </p>
+                </div>
+                <!-- Middle (Contact Info) -->
+                <div>
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-envelope text-[#f5a222] mr-2"></i>
+                        <a href="mailto:info@gvr.com" class="hover:text-white text-md">info@gvrinfosystems.com</a>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-phone text-[#f5a222] mr-2"></i>
+                        <a href="tel:+911234567890" class="hover:text-white text-md">+916300279339</a>
+                    </div>
+                </div>
+                <!-- Right: Newsletter -->
+                <div>
+                    <h3 class="text-xl font-semibold text-[#fff] mb-2">Newsletter</h3>
+                    <p class="text-md mb-4">
+                        Sign up to GVR weekly newsletter to get the latest updates.
+                    </p>
+                    <form id="newsletter-form" class="flex">
+                        <input type="email" id="user_email" placeholder="Enter your email here.."
+                            class="w-full px-3 py-2 rounded-l-md focus:outline-none text-black" required>
+
+                        <button id="subscribe-btn" type="submit"
+                            class="bg-blue-500 text-white px-4 rounded-r-md hover:bg-blue-600 flex items-center justify-center relative">
+                            <i id="send-icon" class="fas fa-paper-plane"></i>
+                            <span id="loading-spinner"
+                                class="hidden animate-spin ml-2 w-4 h-4 border-2 border-white border-t-transparent rounded-full"></span>
+                        </button>
+                    </form>
+                    <!-- Messages -->
+                    <p id="form-success" class="text-green-400 mt-2 hidden">✅ Thank you! Your email has been sent.</p>
+                    <p id="form-error" class="text-red-400 mt-2 hidden">❌ Failed to send. Please try again later.</p>
+                </div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10 py-10 border-b border-gray-700">
+                <!-- Information -->
+                <div>
+                    <h3 class="text-xl font-semibold text-[#fff] mb-3">Information</h3>
+                    <ul class="space-y-2 text-md">
+                        <li><a href="aboutus" class="hover:text-white">About GVR</a></li>
+                        <li><a href="portfolio" class="hover:text-white">Portfolio</a></li>
+                        <li><a href="team" class="hover:text-white">Team</a></li>
+                        <li><a href="service" class="hover:text-white">Services</a></li>
+                        <li><a href="case-study" class="hover:text-white">Case Study</a></li>
+                        <li><a href="careers" class="hover:text-white">Careers</a></li>
+                        <li><a href="blog" class="hover:text-white">Blog</a></li>
+                        <li><a href="contact" class="hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div>
+                    <h3 class="text-xl font-semibold text-[#fff] mb-3">Services</h3>
+                    <ul class="space-y-2 text-md">
+                        <li><a href="cloud-migration-maintenance-deployment" class="hover:text-white">Cloud
+                                Migration, Maintenance & Deployment</a></li>
+                        <li><a href="data-center-operations" class="hover:text-white">Data Center Operations</a></li>
+                        <li><a href="mobile-applications-development" class="hover:text-white">Mobile Application
+                                Development</a></li>
+                        <li><a href="security-solutions" class="hover:text-white">Security Solutions</a></li>
+                        <li><a href="ai-ml-solutions" class="hover:text-white">AI & ML Solutions</a></li>
+                        <li><a href="web-based-community-solutions" class="hover:text-white">Web Based Community
+                                Solutions</a></li>
+                        <li><a href="enterprise-applications-integration" class="hover:text-white">Enterprise
+                                Application Integration</a></li>
+                    </ul>
+                </div>
+
+                <!-- Products -->
+                <div>
+                    <h3 class="text-xl font-semibold text-[#fff] mb-3">Products</h3>
+                    <ul class="space-y-2 text-md">
+                        <li><a href="ayucare(hms)" class="hover:text-white">AYUCARE(HMS)</a></li>
+                        <li><a href="burserele" class="hover:text-white">BURSERELE</a></li>
+                        <li><a href="empora(hrm)" class="hover:text-white">EMPORA(HRM)</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="text-center text-sm text-gray-300 py-5 px-1 md:px-0">
+                © 2025 GVR. All rights reserved. | Developed by Prodbiz Solutions Private Limited
+            </div>
+        </div>
+    </footer>
+    <!-- EmailJS Script -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script>
+        (function () {
+            emailjs.init("YOUR_USER_ID");
+        })();
+
+        const form = document.getElementById("newsletter-form");
+        const btn = document.getElementById("subscribe-btn");
+        const icon = document.getElementById("send-icon");
+        const spinner = document.getElementById("loading-spinner");
+        const successMsg = document.getElementById("form-success");
+        const errorMsg = document.getElementById("form-error");
+
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            successMsg.classList.add("hidden");
+            errorMsg.classList.add("hidden");
+            btn.disabled = true;
+            icon.classList.add("hidden");
+            spinner.classList.remove("hidden");
+
+            emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+                user_email: document.getElementById("user_email").value
+            }).then(function () {
+                successMsg.classList.remove("hidden");
+                successMsg.classList.add("fade-in");
+                document.getElementById("user_email").value = "";
+                btn.disabled = false;
+                icon.classList.remove("hidden");
+                spinner.classList.add("hidden");
+            }, function (error) {
+                errorMsg.classList.remove("hidden");
+                errorMsg.classList.add("fade-in");
+                btn.disabled = false;
+                icon.classList.remove("hidden");
+                spinner.classList.add("hidden");
+            });
+        });
+    </script>
+
+
+    <!-- WhatsApp Button -->
+    <div class="fixed bottom-20 right-0 z-50 flex flex-col items-center">
+        <div id="whatsapp-tooltip"
+            class="mb-2 px-1 mr-1 py-1 text-[#f5a222] font-bold italic text-sm opacity-0 pointer-events-none flex items-center space-x-1 transition-all duration-300">
+            <span>Click Here </span>
+            <i class="fas fa-hand-point-down"></i>
+        </div>
+        <a href="https://wa.me/916300279321" target="_blank" id="whatsapp-btn"
+            class="w-12 h-12 flex items-center justify-center rounded-full bg-green-500 text-white text-2xl shadow-lg hover:scale-110 transition-transform duration-300 relative">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+    <script>
+        const whatsappBtn = document.getElementById('whatsapp-btn');
+        const tooltip = document.getElementById('whatsapp-tooltip');
+        whatsappBtn.addEventListener('mouseenter', () => {
+            tooltip.style.opacity = '1';
+            tooltip.style.transform = 'translateY(0)';
+            tooltip.style.pointerEvents = 'auto';
+        });
+        whatsappBtn.addEventListener('mouseleave', () => {
+            tooltip.style.opacity = '0';
+            tooltip.style.transform = 'translateY(10px)';
+            tooltip.style.pointerEvents = 'none';
+        });
+        whatsappBtn.addEventListener('click', () => {
+            tooltip.style.opacity = '1';
+            tooltip.style.transform = 'translateY(0)';
+            setTimeout(() => {
+                tooltip.style.opacity = '0';
+                tooltip.style.transform = 'translateY(10px)';
+            }, 2000);
+        });
+    </script>
+
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollTopBtn" class="fixed bottom-5 right-5 bg-[#f5a222] hover:bg-[#102e62] hover:text-[#f5a222] text-[#102e62] w-12 h-12 rounded-full flex items-center justify-center shadow-lg opacity-0 
+  invisible transition-all duration-300 z-[9999]">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <script>
+        const scrollBtn = document.getElementById('scrollTopBtn');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 200) {
+                scrollBtn.classList.remove('opacity-0', 'invisible');
+                scrollBtn.classList.add('opacity-100', 'visible');
+            } else {
+                scrollBtn.classList.add('opacity-0', 'invisible');
+                scrollBtn.classList.remove('opacity-100', 'visible');
+            }
+        });
+
+        scrollBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+
+</body>
