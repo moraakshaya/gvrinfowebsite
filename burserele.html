@@ -370,48 +370,88 @@
 
 
   <!-- HOME BANNER SECTION -->
-  <section id="hero-buserele"
-    class="relative w-full md:min-h-screen flex items-center justify-center text-center overflow-hidden">
+<section id="hero-buserele"
+  class="relative w-full md:min-h-screen flex items-center justify-center text-center overflow-hidden">
 
-    <!-- Background Video -->
-    <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover">
-      <source src="./assets/buserele-bg.mp4" type="video/mp4" />
-      Your browser does not support the video tag.
-    </video>
+  <!-- Background Video -->
+  <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover">
+    <source src="./assets/buserele-bg.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
 
-    <!-- Overlay -->
-    <div class="absolute inset-0 bg-[#102e62]/70 z-0"></div>
+  <!-- Overlay -->
+  <div class="absolute inset-0 bg-[#102e62]/70 z-0"></div>
 
-    <!-- Content -->
-    <div class="relative z-10 max-w-5xl mx-auto px-10 pt-[30%] pb-16 md:py-0 text-white">
-      <h1 class="text-2xl sm:text-4xl md:text-5xl font-bold mb-4 leading-snug sm:leading-tight">
-        Buserele — Smart Property Management Simplified
-      </h1>
+  <!-- Content -->
+  <div class="relative z-10 max-w-5xl mx-auto px-10 pt-[30%] pb-16 md:py-0 text-white">
+    <h1
+      class="hero-slide-down text-2xl sm:text-4xl md:text-5xl font-bold mb-4 leading-snug sm:leading-tight">
+      Buserele — Smart Property Management Simplified
+    </h1>
 
-      <p class="text-sm sm:text-base md:text-lg mb-8 text-gray-200 max-w-3xl mx-auto">
-        A powerful solution by GVR to automate property operations, tenant
-        management, and billing — all in one platform.
-      </p>
+    <p
+      class="hero-slide-down text-sm sm:text-base md:text-lg mb-8 text-gray-200 max-w-3xl mx-auto delay-200">
+      A powerful solution by GVR to automate property operations, tenant
+      management, and billing — all in one platform.
+    </p>
 
-      <!-- CTA Buttons -->
-      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-        <!-- Primary Button -->
-        <a href="#request-demo"
-          class="bg-[#102e62] text-white hover:bg-white hover:text-[#102e62] transition-all duration-300 font-semibold px-8 py-3 rounded-full shadow-lg text-sm sm:text-base">
-          Request a Demo
-        </a>
-
-        <!-- Secondary Button -->
-        <!-- <a href="#features"
-          class="border-2 border-white text-white hover:bg-white hover:text-[#102e62] transition-all duration-300 font-semibold px-8 py-3 rounded-full text-sm sm:text-base">
-          Contact GVR Team
-        </a> -->
-      </div>
+    <!-- CTA Buttons -->
+    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+      <a href="#request-demo"
+        class="hero-slide-down delay-400 bg-[#102e62] text-white hover:bg-white hover:text-[#102e62] transition-all duration-300 font-semibold px-8 py-3 rounded-full shadow-lg text-sm sm:text-base">
+        Request a Demo
+      </a>
     </div>
+  </div>
 
-    <!-- Optional subtle gradient bottom fade -->
-    <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#102e62]/70 to-transparent z-0"></div>
-  </section>
+  <!-- Optional bottom gradient -->
+  <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#102e62]/70 to-transparent z-0"></div>
+</section>
+
+<!-- Animation Styles -->
+<style>
+  .hero-slide-down {
+    opacity: 0;
+    transform: translateY(-50px);
+    transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1), opacity 1s ease;
+  }
+
+  .hero-visible {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+
+  .delay-200 {
+    transition-delay: 0.2s;
+  }
+
+  .delay-400 {
+    transition-delay: 0.4s;
+  }
+</style>
+
+<!-- Animation Script -->
+<script>
+  const heroObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      const elements = entry.target.querySelectorAll('.hero-slide-down');
+      if (entry.isIntersecting) {
+        elements.forEach((el, i) => {
+          setTimeout(() => {
+            el.classList.add('hero-visible');
+          }, i * 200);
+        });
+      } else {
+        elements.forEach(el => {
+          el.classList.remove('hero-visible');
+        });
+      }
+    });
+  }, { threshold: 0.4 });
+
+  heroObserver.observe(document.querySelector('#hero-buserele'));
+</script>
+
 
 
 

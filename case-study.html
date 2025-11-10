@@ -368,103 +368,109 @@
   </script>
 
 
-<!-- Case Study Banner Section -->
-<section id="case-study-banner"
-  class="relative w-full pt-10 pb-5 md:py-20 mb-5 bg-cover bg-center bg-no-repeat md:h-[600px] 
+  <!-- Case Study Banner Section -->
+  <section id="case-study-banner" class="relative w-full pt-10 pb-5 md:py-20 mb-5 bg-cover bg-center bg-no-repeat md:h-[600px] 
   flex flex-col items-center justify-center text-center overflow-hidden">
 
-  <!-- Background Video -->
-  <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover z-0">
-    <source src="./assests/bannervideo.mp4" type="video/mp4" />
-    Your browser does not support the video tag.
-  </video>
+    <!-- Background Video -->
+    <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover z-0">
+      <source src="./assests/bannervideo.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
 
-  <!-- Dark Gradient Overlay -->
-  <div class="absolute inset-0 bg-gradient-to-b from-[#102e62]/90 via-[#0b1e43]/85 to-[#000000]/90 z-0"></div>
+    <!-- Dark Gradient Overlay -->
+    <div class="absolute inset-0 bg-gradient-to-b from-[#102e62]/90 via-[#0b1e43]/85 to-[#000000]/90 z-0"></div>
 
-  <!-- Content -->
-  <div class="relative z-10 max-w-3xl px-6 py-14 md:pt-0 md:pb-0">
-    <h2
-      class="case-study-banner-title text-3xl sm:text-4xl md:text-5xl font-bold text-[#f5a222] drop-shadow-lg mt-8 mb-2 md:mb-4 opacity-0">
-      Real Stories, Real Impact
-    </h2>
+    <!-- Content -->
+    <div class="relative z-10 max-w-3xl px-6 py-14 md:pt-0 md:pb-0">
+      <h2
+        class="case-study-banner-title text-3xl sm:text-4xl md:text-5xl font-bold text-[#f5a222] drop-shadow-lg mt-8 mb-2 md:mb-4 opacity-0">
+        Real Stories, Real Impact
+      </h2>
 
-    <p
-      class="case-study-banner-subtitle text-md sm:text-lg md:text-xl italic text-gray-100 opacity-0">
-      Explore how our innovative solutions have transformed businesses across industries.
-    </p>
-  </div>
-</section>
+      <p class="case-study-banner-subtitle text-md sm:text-lg md:text-xl italic text-gray-100 opacity-0">
+        Explore how our innovative solutions have transformed businesses across industries.
+      </p>
+    </div>
+  </section>
 
-<style>
-  /* ---------------- Entrance Animation ---------------- */
+  <style>
+    /* ---------------- Entrance Animation ---------------- */
 
-  @keyframes caseStudyBannerSlideInTop {
-    0% {
-      opacity: 0;
-      transform: translateY(-50px);
+    @keyframes caseStudyBannerSlideInTop {
+      0% {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    100% {
-      opacity: 1;
-      transform: translateY(0);
+    .case-study-banner-animate {
+      animation: caseStudyBannerSlideInTop 1s ease-out forwards;
     }
-  }
 
-  .case-study-banner-animate {
-    animation: caseStudyBannerSlideInTop 1s ease-out forwards;
-  }
+    /* Optional: Soft video overlay */
+    #case-study-banner::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+  </style>
 
-  /* Optional: Soft video overlay */
-  #case-study-banner::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
-  }
-</style>
+  <script>
+    // Slide-in stagger animation on load
+    window.addEventListener("load", () => {
+      const title = document.querySelector(".case-study-banner-title");
+      const subtitle = document.querySelector(".case-study-banner-subtitle");
 
-<script>
-  // Slide-in stagger animation on load
-  window.addEventListener("load", () => {
-    const title = document.querySelector(".case-study-banner-title");
-    const subtitle = document.querySelector(".case-study-banner-subtitle");
+      // Animate title first
+      setTimeout(() => {
+        title.classList.add("case-study-banner-animate");
+      }, 300);
 
-    // Animate title first
-    setTimeout(() => {
-      title.classList.add("case-study-banner-animate");
-    }, 300);
-
-    // Animate subtitle after title
-    setTimeout(() => {
-      subtitle.classList.add("case-study-banner-animate");
-    }, 900);
-  });
-</script>
+      // Animate subtitle after title
+      setTimeout(() => {
+        subtitle.classList.add("case-study-banner-animate");
+      }, 900);
+    });
+  </script>
 
 
   <!-- INNOVATIVE GROWTH SECTION -->
   <section id="growth-section" class="relative w-full md:pt-5 overflow-hidden">
-    <div class="relative z-10 max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-10 items-center">
+    <div class="relative z-10 px-6 grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-10 items-center">
 
       <!-- Left Part (Image) -->
       <div class="flex justify-center md:justify-start md:py-5">
-        <img src="./assests/casestudybannerimg.png" alt="Growth Image"
+        <img src="./assests/casestudybannerimg.png" alt="Digital Transformation"
           class="rounded-[25px] shadow-[5px_5px_10px_#102e62,_5px_5px_10px_black] max-w-full">
       </div>
 
       <!-- Right Part (Text) -->
-      <div class="space-y-2 md:space-y-4 text-left">
+      <div class="space-y-3 md:space-y-5 text-left">
 
-        <h2 id="growth-title" class="text-xl md:text-2xl lg:text-5xl font-bold text-black opacity-0 translate-y-10">
-          Innovative Growth Strategies
+        <h2 id="growth-title"
+          class="text-xl md:text-2xl lg:text-4xl font-bold text-[#102e62] opacity-0 translate-x-[-50px]">
+          Empowering Businesses with Digital Innovation
         </h2>
 
-        <p id="growth-paragraph" class="text-gray-800 text-md md:text-xl leading-relaxed opacity-0 translate-x-[-30px]">
-          Navigating the Path to Success: Insightful Consulting for Thriving Businesses
+        <p id="growth-paragraph" class="text-gray-700 text-md md:text-lg leading-relaxed opacity-0 translate-x-[-50px]">
+          At GVR, we drive transformation by helping companies harness the power of technology to streamline operations,
+          improve customer engagement, and scale efficiently. From intelligent automation to data-driven
+          decision-making,
+          our solutions are designed to help your business evolve with confidence and stay ahead in a rapidly changing
+          digital world. Our approach combines strategy, innovation, and collaboration — ensuring every solution we
+          build
+          delivers measurable impact and long-term growth.
         </p>
-        <div id="growth-rating" class="flex items-center space-x-2 opacity-0 translate-x-[-30px]">
+
+        <div id="growth-rating" class="flex items-center space-x-2 opacity-0 translate-x-[-50px]">
           <!-- Stars -->
           <div class="flex text-[#f5a222] text-lg space-x-1">
             <span class="star opacity-0">★</span>
@@ -474,107 +480,25 @@
             <span class="star opacity-0">★</span>
           </div>
           <!-- Text -->
-          <span class="text-gray-800 text-md font-medium">4.8 Google Reviews</span>
+          <span class="text-gray-800 text-md font-medium">4.8 / 5.0 Based on Client Reviews</span>
         </div>
-
-        <!-- <a id="growth-btn" href="contact"
-          class="growth-button group relative inline-flex items-center px-3 py-2 md:px-6 md:py-3 rounded-full bg-[#102e62] backdrop-blur-md border border-[#f5a222] text-[#f5a222] font-semibold overflow-hidden opacity-0 transition-all duration-500">
-          <span class="growth-roll-text inline-block">Learn More</span>
-          <span class="growth-roll-arrow inline-block ml-3">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 19V5m0 0l-6 6m6-6l6 6" />
-            </svg>
-          </span>
-        </a> -->
 
       </div>
 
     </div>
   </section>
+
   <style>
-    #growth-section .growth-roll-text,
-    #growth-section .growth-roll-arrow {
-      display: inline-block;
-      transform-origin: center;
-    }
-
-    @keyframes growth-rollUpOut {
+    /* Slide in from Left Animation */
+    @keyframes slideInFromLeft {
       0% {
-        transform: translateY(0) rotateX(0deg);
-        opacity: 1;
-      }
-
-      50% {
-        transform: translateY(-100%) rotateX(90deg);
-        opacity: 0;
-      }
-
-      100% {
-        transform: translateY(100%) rotateX(0deg);
-        opacity: 0;
-      }
-    }
-
-    @keyframes growth-rollIn {
-      0% {
-        transform: translateY(100%) rotateX(0deg);
-        opacity: 0;
-      }
-
-      50% {
-        transform: translateY(-20%) rotateX(-10deg);
-        opacity: 1;
-      }
-
-      100% {
-        transform: translateY(0) rotateX(0deg);
-        opacity: 1;
-      }
-    }
-
-    #growth-section .growth-button.group:hover .growth-roll-text,
-    #growth-section .growth-button.group:hover .growth-roll-arrow {
-      animation: growth-rollUpOut 0.4s ease forwards,
-        growth-rollIn 0.4s ease 0.4s forwards;
-    }
-
-    #growth-section .growth-roll-arrow {
-      transform: rotate(45deg);
-    }
-
-    @keyframes growth-slideUp {
-      0% {
-        transform: translateY(30px);
-        opacity: 0;
-      }
-
-      100% {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
-
-    @keyframes growth-slideInLeft {
-      0% {
-        transform: translateX(-40px);
+        transform: translateX(-60px);
         opacity: 0;
       }
 
       100% {
         transform: translateX(0);
         opacity: 1;
-      }
-    }
-
-    @keyframes growth-floatUpDown {
-
-      0%,
-      100% {
-        transform: translateY(0);
-      }
-
-      50% {
-        transform: translateY(-6px);
       }
     }
 
@@ -599,22 +523,15 @@
       opacity: 1 !important;
     }
 
-    .growth-animate-slideUp {
-      animation: growth-slideUp 0.8s ease-out forwards;
-    }
-
-    .growth-animate-slideInLeft {
-      animation: growth-slideInLeft 1s ease forwards;
-    }
-
-    .growth-animate-float {
-      animation: growth-floatUpDown 3s ease-in-out infinite;
+    .slide-in {
+      animation: slideInFromLeft 0.8s ease-out forwards;
     }
 
     .star-animate {
       animation: star-pop 0.4s ease forwards;
     }
   </style>
+
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const section = document.getElementById("growth-section");
@@ -622,42 +539,43 @@
       const paragraph = document.getElementById("growth-paragraph");
       const rating = document.getElementById("growth-rating");
       const stars = rating.querySelectorAll(".star");
-      const btn = document.getElementById("growth-btn");
 
       const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            title.classList.add("growth-animate-slideUp", "growth-show");
-            setTimeout(() => paragraph.classList.add("growth-animate-slideInLeft", "growth-show"), 800);
+            // Animate Title
             setTimeout(() => {
-              rating.classList.add("growth-animate-slideInLeft", "growth-show");
-              stars.forEach((star, i) => {
-                setTimeout(() => {
-                  star.classList.add("star-animate");
-                }, i * 250);
-              });
-            }, 1300);
-            setTimeout(() => {
-              btn.classList.add("growth-animate-slideInLeft", "growth-show");
-              setTimeout(() => btn.classList.add("growth-animate-float"), 1000);
-            }, 2000);
+              title.classList.add("slide-in", "growth-show");
+            }, 200);
 
+            // Animate Paragraph
+            setTimeout(() => {
+              paragraph.classList.add("slide-in", "growth-show");
+            }, 700);
+
+            // Animate Rating + Stars
+            setTimeout(() => {
+              rating.classList.add("slide-in", "growth-show");
+              stars.forEach((star, i) => {
+                setTimeout(() => star.classList.add("star-animate"), i * 200);
+              });
+            }, 1200);
           } else {
-            title.classList.remove("growth-animate-slideUp", "growth-show");
-            paragraph.classList.remove("growth-animate-slideInLeft", "growth-show");
-            rating.classList.remove("growth-animate-slideInLeft", "growth-show");
+            title.classList.remove("slide-in", "growth-show");
+            paragraph.classList.remove("slide-in", "growth-show");
+            rating.classList.remove("slide-in", "growth-show");
             stars.forEach(star => star.classList.remove("star-animate"));
-            btn.classList.remove("growth-animate-slideInLeft", "growth-animate-float", "growth-show");
           }
         });
-      }, { threshold: 0.3 });
+      }, { threshold: 0.4 });
 
       observer.observe(section);
     });
   </script>
 
+
   <!-- ABOUT SECTION -->
-  <section id="about-modern" class="relative w-full py-5 md:pb-0 md:pt-10 overflow-hidden">
+  <section id="about-modern" class="relative w-full py-10 md:pb-0 md:pt-10 overflow-hidden">
     <div class="flex flex-col md:flex-row items-center md:items-center px-1 md:px-12 gap-0">
 
       <!-- LEFT CONTENT -->
@@ -671,10 +589,11 @@
           enhance user engagement, and accelerate performance. Our goal is to turn every client vision into
           measurable success.
         </p>
-        <button
-          class="about-item mt-4 px-6 py-2 bg-[#102e62] text-white hover:bg-[#f5a222] rounded-full relative overflow-hidden transition-all duration-500 ease-in-out active:scale-95 shadow-md hover:text-[#102e62]">
+        <a href="aboutus"
+          class="about-item mt-4 inline-block px-6 py-2 bg-[#102e62] text-white hover:bg-[#f5a222] hover:text-[#102e62] rounded-full relative overflow-hidden transition-all duration-500 ease-in-out active:scale-95 shadow-md">
           <span class="relative z-10">Learn More</span>
-        </button>
+        </a>
+
       </div>
 
       <!-- RIGHT CONTENT - WAVE DESIGN WITH ICONS -->
@@ -950,10 +869,10 @@
           Our consulting expertise helps clients unlock growth, improve performance, and embrace change with confidence.
           Every partnership is an opportunity to innovate smarter and move faster.
         </p>
-        <button
-          class="stagger mt-4 px-6 py-2 bg-[#102e62] text-white rounded-full hover:bg-[#f5a222] hover:text-white transition-all duration-300 shadow-md">
+        <a href="portfolio"
+          class="stagger mt-4 px-6 py-2 bg-[#102e62] inline-block  text-white rounded-full hover:bg-[#f5a222] hover:text-white transition-all duration-300 shadow-md">
           Explore More
-        </button>
+      </a>
       </div>
     </div>
   </section>

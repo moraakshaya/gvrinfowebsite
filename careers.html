@@ -91,7 +91,7 @@
 </head>
 
 <body class="relative min-h-screen bg-gray-100 text-white">
-        <nav x-data="{ 
+    <nav x-data="{ 
         open: false, 
         dropdowns: { company: false, products: false, services: false }, 
         activeLink: '', 
@@ -377,29 +377,163 @@
         });
     </script>
 
+    <!-- Careers Hero Section -->
+    <section id="careers-hero"
+        class="relative w-full max-h-screen md:h-[580px] mt-10 py-20 flex flex-col items-center justify-center text-center overflow-hidden">
 
-    <!-- Careers Section -->
-    <section id="careers"
-        class="relative w-full pt-10 pb-5 md:py-20 mb-5 flex flex-col items-center justify-center text-center overflow-hidden bg-cover bg-center bg-no-repeat"
-        style="background-image: url('./assests/gvrbackground.jpg');">
+        <!-- Background Video -->
+        <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover">
+            <source src="./assests/bannervideo.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
 
-        <!-- Dim Gradient Overlay -->
-        <div class="absolute inset-0 bg-[#102e62]/90 z-0"></div>
+        <!-- Dark Overlay -->
+        <div class="absolute inset-0 bg-black/60"></div>
 
-        <div class="relative z-10 max-w-3xl px-6 py-14 md:pt-10 md:pb-0">
+        <!-- Content -->
+        <div class="relative z-10 max-w-4xl px-6">
             <!-- Title -->
-            <h2 class="text-3xl md:text-5xl font-bold text-[#f5a222] drop-shadow-lg mt-8 mb-2 md:mb-4 careers-slide-down">
-                Careers@GVR
-            </h2>
+            <h1 class="careers-hero-slide-down text-2xl md:text-4xl font-bold text-[#f5a222] drop-shadow-lg mb-4">
+                Build Your Future with GVR
+            </h1>
+
             <!-- Subtitle -->
-            <p class="text-md sm:text-lg md:text-xl italic text-gray-100 careers-slide-down delay-200">
-                Unlock your potential with us. Join a team that values innovation, collaboration, and growth. We’re
-                shaping the future, one step at a time.
+            <p class="careers-hero-slide-down text-md md:text-xl text-gray-200 italic mb-8 delay-200">
+                At GVR, we innovate, collaborate, and grow together. Join our mission to create powerful digital
+                solutions that make a difference.
             </p>
+
+            <!-- CTA Buttons -->
+            <div class="flex flex-row gap-2 md:gap-4 justify-center  careers-hero-slide-down delay-400">
+                <a href="#open-positions"
+                    class="bg-[#102e62] text-white hover:bg-white hover:text-[#102e62] transition-all duration-300 px-4 md:px-8 py-3.5 md:py-3 rounded-full shadow-lg text-sm sm:text-base scroll-smooth">
+                    View Open Positions
+                </a>
+
+
+                <a href="#apply-gvr"
+                    class="bg-transparent border border-[#f5a222] text-[#f5a222] hover:bg-[#f5a222] hover:text-[#102e62] transition-all duration-300 px-8 md:px-8 py-3.5 md:py-3 rounded-full shadow-lg text-sm sm:text-base">
+                    Apply Now
+                </a>
+
+            </div>
         </div>
     </section>
+
+    <!-- Animation Styles -->
     <style>
-        .careers-slide-down {
+        .careers-hero-slide-down {
+            opacity: 0;
+            transform: translateY(-50px);
+            transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.9s ease;
+        }
+
+        .delay-200 {
+            transition-delay: 0.2s;
+        }
+
+        .delay-400 {
+            transition-delay: 0.4s;
+        }
+
+        .careers-hero-visible {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+    </style>
+
+    <!-- Animation Script -->
+    <script>
+        const careersHeroObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                const elements = entry.target.querySelectorAll('.careers-hero-slide-down');
+                if (entry.isIntersecting) {
+                    elements.forEach((el, i) => {
+                        setTimeout(() => {
+                            el.classList.add('careers-hero-visible');
+                        }, i * 200);
+                    });
+                } else {
+                    elements.forEach(el => {
+                        el.classList.remove('careers-hero-visible');
+                    });
+                }
+            });
+        }, { threshold: 0.5 });
+
+        careersHeroObserver.observe(document.querySelector('#careers-hero'));
+    </script>
+
+
+
+
+    <!-- About Working at GVR Section -->
+    <section id="about-working-gvr" class="relative w-full py-16 md:py-20 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <!-- Section Title -->
+            <h2 class="about-gvr-slide-down text-3xl md:text-4xl font-bold text-[#102e62] mb-4">
+                About Working at GVR
+            </h2>
+
+            <!-- Subtitle -->
+            <p class="about-gvr-slide-down text-md md:text-lg text-gray-600 max-w-3xl mx-auto mb-10 delay-200">
+                At GVR, we believe in empowering our team to think creatively and deliver cutting-edge software
+                solutions.
+                Whether you’re an experienced professional or a passionate fresher, you’ll find an environment that
+                values
+                your ideas, growth, and talent.
+            </p>
+
+            <!-- Highlights Grid -->
+            <div
+                class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-left about-gvr-cards opacity-0 translate-y-10 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.3,1)]">
+
+                <!-- Card 1 -->
+                <div
+                    class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition-all duration-500">
+                    <h3 class="text-xl text-[#f5a222] font-bold mb-2">🚀 Innovative Projects</h3>
+                    <p class="text-gray-600 text-sm md:text-base">
+                        Work on exciting solutions like <b>Buserele</b>, <b>Ayucare</b>, and <b>Empora</b> that make a
+                        real impact across industries.
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div
+                    class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition-all duration-500">
+                    <h3 class="text-xl text-[#f5a222] font-bold mb-2">💡 Learning & Growth</h3>
+                    <p class="text-gray-600 text-sm md:text-base">
+                        Access training programs, mentorship, and opportunities to upgrade your skills in the latest
+                        technologies.
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div
+                    class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition-all duration-500">
+                    <h3 class="text-xl text-[#f5a222] font-bold mb-2">🤝 Supportive Culture</h3>
+                    <p class="text-gray-600 text-sm md:text-base">
+                        Collaborate with passionate teammates in a friendly and motivating environment that values every
+                        voice.
+                    </p>
+                </div>
+
+                <!-- Card 4 -->
+                <div
+                    class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition-all duration-500">
+                    <h3 class="text-xl text-[#f5a222] font-bold mb-2">🌍 Diversity & Inclusion</h3>
+                    <p class="text-gray-600 text-sm md:text-base">
+                        We welcome talent from all backgrounds, fostering a workplace where creativity and inclusion
+                        thrive.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Animation Styles -->
+    <style>
+        .about-gvr-slide-down {
             opacity: 0;
             transform: translateY(-40px);
             transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.9s ease;
@@ -409,133 +543,250 @@
             transition-delay: 0.2s;
         }
 
-        .careers-visible {
+        .about-gvr-visible {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+
+        .about-gvr-cards-visible {
             opacity: 1 !important;
             transform: translateY(0) !important;
         }
     </style>
+
+    <!-- Animation Script -->
     <script>
-        const careersObserver = new IntersectionObserver((entries, observer) => {
+        const aboutGvrSection = document.querySelector("#about-working-gvr");
+        const aboutGvrText = aboutGvrSection.querySelectorAll(".about-gvr-slide-down");
+        const aboutGvrCards = aboutGvrSection.querySelector(".about-gvr-cards");
+
+        const aboutObserver = new IntersectionObserver(entries => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    const children = entry.target.querySelectorAll('.careers-slide-down');
-                    children.forEach((el, i) => {
-                        setTimeout(() => el.classList.add('careers-visible'), i * 200);
+                    aboutGvrText.forEach((el, i) => {
+                        setTimeout(() => el.classList.add("about-gvr-visible"), i * 200);
                     });
-
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.3 });
-        careersObserver.observe(document.querySelector('#careers'));
-    </script>
-
-    <!-- Features Section Full Width -->
-    <section id="features"
-        class="relative w-full overflow-hidden pb-5 md:pb-0 md:px-20 flex items-center justify-center">
-        <div class="relative w-full max-w-6xl flex flex-col md:flex-row items-center gap-5 md:gap-10">
-
-            <!-- Text Content (7/12) -->
-            <div class="w-full md:w-7/12 space-y-3 md:space-y-6 px-6 md:pl-[8%] order-2 md:order-1">
-                <h2 class="text-2xl md:text-4xl font-bold text-black features-fade-up">
-                    Why Work With Us?
-                </h2>
-                <ul class="list-disc text-md md:text-xl list-inside space-y-3 text-gray-800">
-                    <li class="features-fade-up">Work on cutting-edge projects with top brands</li>
-                    <li class="features-slide-left">Collaborate with industry leaders</li>
-                    <li class="features-slide-right">Accelerate your career growth</li>
-                    <li class="features-fade-up">Culture that fosters innovation & teamwork</li>
-                </ul>
-            </div>
-
-            <!-- Image (5/12) -->
-            <div class="w-full md:w-6/12 px-6 md:px-0 order-1 md:order-2 py-5 rounded-[25px]">
-                <img src="./assests/whyjoinusimg.jpg" alt="Teamwork"
-                    class="rounded-[25px] shadow-[5px_5px_10px_#102e62,_5px_5px_10px_black] features-slide-right w-full h-auto object-cover">
-            </div>
-
-        </div>
-    </section>
-    <style>
-        .features-fade-up {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.9s ease;
-        }
-
-        .features-slide-left {
-            opacity: 0;
-            transform: translateX(-40px);
-            transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.9s ease;
-        }
-
-        .features-slide-right {
-            opacity: 0;
-            transform: translateX(40px);
-            transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.9s ease;
-        }
-
-        .features-visible {
-            opacity: 1 !important;
-            transform: translateX(0) translateY(0) !important;
-        }
-    </style>
-    <script>
-        const featuresObserver = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                const children = entry.target.querySelectorAll(
-                    '.features-fade-up, .features-slide-left, .features-slide-right'
-                );
-                if (entry.isIntersecting) {
-                    children.forEach((el, i) => {
-                        setTimeout(() => {
-                            el.classList.add('features-visible');
-                        }, i * 200);
-                    });
+                    setTimeout(() => {
+                        aboutGvrCards.classList.add("about-gvr-cards-visible");
+                    }, 600);
                 } else {
-                    children.forEach(el => {
-                        el.classList.remove('features-visible');
-                    });
+                    aboutGvrText.forEach(el => el.classList.remove("about-gvr-visible"));
+                    aboutGvrCards.classList.remove("about-gvr-cards-visible");
                 }
             });
         }, { threshold: 0.3 });
 
-        featuresObserver.observe(document.querySelector('#features'));
+        aboutObserver.observe(aboutGvrSection);
     </script>
 
 
-    <!-- Our Technologies Section -->
-    <section id="technologies"
-        class="relative w-full overflow-hidden py-0 md:py-5 flex flex-col items-center justify-center">
-        <img src="https://images.unsplash.com/photo-1612831455543-cd4d2a1b8e0e?w=1600&q=80"
-            class="absolute inset-0 w-full h-full object-cover opacity-10 pointer-events-none" alt="Technologies">
-        <!-- Content -->
-        <div class="relative z-10 max-w-7xl w-full px-6 text-center space-y-3 md:space-y-6">
-            <h2 class="text-3xl md:text-4xl font-bold text-black tech-fade-up">Our Technologies</h2>
-            <p class="text-gray-800 text-md md:text-xl tech-fade-up delay-200">
-                We work with modern tools and frameworks to deliver the best solutions.
+
+
+    <!-- Open Positions Section -->
+    <section id="open-positions" class="relative w-full py-16 md:py-16 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+
+            <!-- Section Title -->
+            <h2 class="positions-slide-down text-3xl md:text-4xl font-bold text-[#102e62] mb-4">
+                Open Positions
+            </h2>
+            <p class="positions-slide-down text-gray-600 text-md md:text-lg mb-10 max-w-3xl mx-auto delay-200">
+                Explore exciting opportunities to be part of our growing team at GVR.
+                Join us in shaping digital solutions that make an impact.
             </p>
 
-            <div class="grid grid-cols-2 text-white text-md md:text-lg md:grid-cols-4 gap-6 mt-6">
-                <div class="tech-fade-up bg-[#102e62] p-6 rounded-lg shadow hover:scale-105 transition-transform">Web
-                    Platform</div>
-                <div class="tech-slide-left bg-[#102e62] p-6 rounded-lg shadow hover:scale-105 transition-transform">
-                    Databases</div>
-                <div class="tech-slide-right bg-[#102e62] p-6 rounded-lg shadow hover:scale-105 transition-transform">
-                    Cloud & DevOps</div>
-                <div class="tech-fade-up bg-[#102e62] p-6 rounded-lg shadow hover:scale-105 transition-transform">Mobile
-                    Apps</div>
-                <div class="tech-slide-left bg-[#102e62] p-6 rounded-lg shadow hover:scale-105 transition-transform">
-                    .NET Core</div>
-                <div class="tech-slide-right bg-[#102e62] p-6 rounded-lg shadow hover:scale-105 transition-transform">
-                    C-Sharp</div>
-                <div class="tech-fade-up bg-[#102e62] p-6 rounded-lg shadow hover:scale-105 transition-transform">
-                    JavaScript</div>
-                <div class="tech-slide-left bg-[#102e62] p-6 rounded-lg shadow hover:scale-105 transition-transform">
-                    Python</div>
+            <!-- Filter Buttons -->
+            <div class="flex flex-wrap justify-center gap-4 mb-10 positions-filters">
+                <button
+                    class="filter-btn active-filter bg-[#102e62] text-white px-4 py-2 rounded-full text-sm font-medium">All</button>
+                <button
+                    class="filter-btn bg-white border border-[#102e62] text-[#102e62] px-4 py-2 rounded-full text-sm font-medium hover:bg-[#102e62] hover:text-white transition-all">Engineering</button>
+                <button
+                    class="filter-btn bg-white border border-[#102e62] text-[#102e62] px-4 py-2 rounded-full text-sm font-medium hover:bg-[#102e62] hover:text-white transition-all">Design</button>
+                <button
+                    class="filter-btn bg-white border border-[#102e62] text-[#102e62] px-4 py-2 rounded-full text-sm font-medium hover:bg-[#102e62] hover:text-white transition-all">HR</button>
+            </div>
+
+            <!-- Job Cards -->
+            <div
+                class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 positions-cards opacity-0 translate-y-10 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.3,1)]">
+
+                <!-- Card 1 -->
+                <div class="job-card bg-white rounded-2xl shadow-lg p-6 text-left hover:shadow-2xl hover:-translate-y-2 transition-all duration-500"
+                    data-category="Engineering">
+                    <h3 class="text-xl font-bold text-[#102e62] mb-2">Frontend Developer (ReactJS)</h3>
+                    <p class="text-gray-600 text-sm mb-1"><b>Location:</b> Hyderabad / Remote</p>
+                    <p class="text-gray-600 text-sm mb-1"><b>Type:</b> Full-time</p>
+                    <p class="text-gray-600 text-sm mb-1"><b>Experience:</b> 0–2 years</p>
+                    <p class="text-gray-600 text-sm mb-3"><b>Skills:</b> React, Tailwind, JavaScript, Git</p>
+                    <a href="#apply"
+                        class="inline-block bg-[#f5a222] hover:bg-[#102e62] text-white font-medium px-5 py-2 rounded-full text-sm transition-all">Apply
+                        Now</a>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="job-card bg-white rounded-2xl shadow-lg p-6 text-left hover:shadow-2xl hover:-translate-y-2 transition-all duration-500"
+                    data-category="Design">
+                    <h3 class="text-xl font-bold text-[#102e62] mb-2">UI/UX Designer</h3>
+                    <p class="text-gray-600 text-sm mb-1"><b>Location:</b> Hyderabad</p>
+                    <p class="text-gray-600 text-sm mb-1"><b>Type:</b> Full-time</p>
+                    <p class="text-gray-600 text-sm mb-1"><b>Experience:</b> 1–3 years</p>
+                    <p class="text-gray-600 text-sm mb-3"><b>Skills:</b> Figma, Wireframing, Prototyping, Design Systems
+                    </p>
+                    <a href="#apply"
+                        class="inline-block bg-[#f5a222] hover:bg-[#102e62] text-white font-medium px-5 py-2 rounded-full text-sm transition-all">Apply
+                        Now</a>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="job-card bg-white rounded-2xl shadow-lg p-6 text-left hover:shadow-2xl hover:-translate-y-2 transition-all duration-500"
+                    data-category="HR">
+                    <h3 class="text-xl font-bold text-[#102e62] mb-2">HR Executive</h3>
+                    <p class="text-gray-600 text-sm mb-1"><b>Location:</b> Hyderabad</p>
+                    <p class="text-gray-600 text-sm mb-1"><b>Type:</b> Full-time</p>
+                    <p class="text-gray-600 text-sm mb-1"><b>Experience:</b> 0–2 years</p>
+                    <p class="text-gray-600 text-sm mb-3"><b>Skills:</b> Recruitment, Employee Engagement, Payroll</p>
+                    <a href="#apply"
+                        class="inline-block bg-[#f5a222] hover:bg-[#102e62] text-white font-medium px-5 py-2 rounded-full text-sm transition-all">Apply
+                        Now</a>
+                </div>
+
             </div>
         </div>
     </section>
+
+    <!-- Styles -->
+    <style>
+        .positions-slide-down {
+            opacity: 0;
+            transform: translateY(-40px);
+            transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.8s ease;
+        }
+
+        .positions-visible {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+
+        .positions-cards-visible {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+
+        .filter-btn.active-filter {
+            background-color: #102e62 !important;
+            color: white !important;
+        }
+    </style>
+
+    <!-- Script -->
+    <script>
+        const positionsSection = document.querySelector("#open-positions");
+        const positionsText = positionsSection.querySelectorAll(".positions-slide-down");
+        const positionsCards = positionsSection.querySelector(".positions-cards");
+
+        // Intersection Observer for animation
+        const positionObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    positionsText.forEach((el, i) => {
+                        setTimeout(() => el.classList.add("positions-visible"), i * 200);
+                    });
+                    setTimeout(() => {
+                        positionsCards.classList.add("positions-cards-visible");
+                    }, 600);
+                } else {
+                    positionsText.forEach(el => el.classList.remove("positions-visible"));
+                    positionsCards.classList.remove("positions-cards-visible");
+                }
+            });
+        }, { threshold: 0.3 });
+
+        positionObserver.observe(positionsSection);
+
+        // Filter functionality
+        const filterButtons = document.querySelectorAll(".filter-btn");
+        const jobCards = document.querySelectorAll(".job-card");
+
+        filterButtons.forEach(btn => {
+            btn.addEventListener("click", () => {
+                document.querySelector(".active-filter").classList.remove("active-filter");
+                btn.classList.add("active-filter");
+                const category = btn.textContent.trim();
+
+                jobCards.forEach(card => {
+                    if (category === "All" || card.dataset.category === category) {
+                        card.style.display = "block";
+                    } else {
+                        card.style.display = "none";
+                    }
+                });
+            });
+        });
+    </script>
+
+
+    <!-- 🌐 Our Technologies Section -->
+    <section id="technologies"
+        class="relative w-full overflow-hidden py-16 md:py-20 flex flex-col items-center justify-center bg-white">
+
+        <!-- Background Image -->
+        <img src="./assests/gvrbackground.jpg" class="absolute inset-0 w-full h-full object-cover pointer-events-none"
+            alt="Technologies Background">
+
+        <!-- Dark Overlay -->
+        <div class="absolute inset-0 bg-black/80"></div>
+
+        <!-- Content -->
+        <div class="relative z-10 max-w-7xl w-full px-6 text-center space-y-4 md:space-y-8 text-white">
+
+            <!-- Title -->
+            <h2 class="text-3xl md:text-4xl font-bold tech-fade-up">Our Technologies</h2>
+
+            <!-- Subtitle -->
+            <p class="text-gray-200 text-md md:text-xl tech-fade-up delay-200 max-w-2xl mx-auto">
+                Powering innovation with the latest tools, frameworks, and cloud platforms.
+            </p>
+
+            <!-- Logos Grid -->
+            <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-8 mt-10 place-items-center">
+
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="ReactJS"
+                    class="w-16 h-16 tech-fade-up hover:scale-110 transition-transform" />
+
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
+                    alt="JavaScript" class="w-16 h-16 tech-slide-left hover:scale-110 transition-transform" />
+
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"
+                    class="w-16 h-16 tech-slide-right hover:scale-110 transition-transform" />
+
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dot-net/dot-net-original.svg"
+                    alt=".NET Core" class="w-16 h-16 tech-fade-up hover:scale-110 transition-transform" />
+
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" alt="C#"
+                    class="w-16 h-16 tech-slide-left hover:scale-110 transition-transform" />
+
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original-wordmark.svg"
+                    alt="MySQL" class="w-16 h-16 tech-slide-right hover:scale-110 transition-transform" />
+
+                <img src="./assests/aws.webp" alt="AWS"
+                    class="w-16 h-16 tech-fade-up hover:scale-110 transition-transform" />
+
+
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git"
+                    class="w-16 h-16 tech-slide-left hover:scale-110 transition-transform" />
+
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker"
+                    class="w-16 h-16 tech-slide-right hover:scale-110 transition-transform" />
+
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma"
+                    class="w-16 h-16 tech-fade-up hover:scale-110 transition-transform" />
+            </div>
+        </div>
+    </section>
+
+
+    <!-- 🎨 Animations -->
     <style>
         .tech-fade-up {
             opacity: 0;
@@ -560,266 +811,244 @@
             transform: translateX(0) translateY(0) !important;
         }
     </style>
+
+    <!-- ⚡ JS Animation Trigger -->
     <script>
-        const techObserver = new IntersectionObserver(entries => {
+        const technologiesObserver = new IntersectionObserver(entries => {
             entries.forEach(entry => {
                 const children = entry.target.querySelectorAll(
                     '.tech-fade-up, .tech-slide-left, .tech-slide-right'
                 );
                 if (entry.isIntersecting) {
                     children.forEach((el, i) => {
-                        setTimeout(() => {
-                            el.classList.add('tech-visible');
-                        }, i * 150);
+                        setTimeout(() => el.classList.add('tech-visible'), i * 150);
                     });
                 } else {
-                    children.forEach(el => {
-                        el.classList.remove('tech-visible');
-                    });
+                    children.forEach(el => el.classList.remove('tech-visible'));
                 }
             });
         }, { threshold: 0.3 });
 
-        techObserver.observe(document.querySelector('#technologies'));
+        technologiesObserver.observe(document.querySelector('#technologies'));
     </script>
 
-    <!-- Open Positions Section -->
-    <section id="open-positions"
-        class="relative w-full overflow-hidden py-8 md:py-16 flex flex-col items-center justify-center">
-        <div class="relative z-10 max-w-7xl w-full px-6 text-center space-y-2 md:space-y-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-black positions-fade-up">Open Positions</h2>
-            <p class="text-gray-800 text-md md:text-xl positions-fade-up delay-200 mb-">
-                Currently no open positions. Check back soon!
+
+
+    <!-- 🌟 Life at GVR Section -->
+    <section id="life-at-gvr" class="relative w-full py-16 md:py-24 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+
+            <!-- Section Header -->
+            <h2 class="life-slide-down text-3xl md:text-4xl font-bold text-[#102e62] mb-4">
+                Life at GVR
+            </h2>
+            <p class="life-slide-down text-gray-600 text-md md:text-lg mb-10 max-w-3xl mx-auto delay-200">
+                Our people are at the heart of everything we do. From brainstorming new ideas to launching impactful
+                products,
+                we collaborate, celebrate, and create together — making every day at GVR inspiring and rewarding.
             </p>
 
-            <div class="grid md:grid-cols-3 gap-6">
-                <div class="positions-fade-up bg-gray-800 rounded-xl p-6 shadow hover:scale-105 transition-transform">
-                    <img src="./assests/softwareengineerimg.jpg" alt="Developer" class="rounded-lg mb-4">
-                    <h3 class="text-xl text-[#f5a222] font-bold">Software Engineer</h3>
-                    <p class="text-gray-300 mt-2">Work with modern technologies and innovate solutions for our clients.
-                    </p>
+            <!-- Team Quotes / Highlights -->
+            <div class="life-slide-up grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                <div
+                    class="bg-[#f5f8fc] p-6 rounded-2xl shadow hover:shadow-xl hover:-translate-y-2 transition-all duration-500">
+                    <img src="./assests/vamshikrishna (1).jpg" alt="Team Collaboration"
+                        class="w-full h-50 object-cover rounded-xl mb-4">
+                    <p class="text-gray-700 italic">“At GVR, teamwork isn’t just a word — it’s our way of building
+                        better every day.”</p>
+                    <h4 class="mt-3 font-semibold text-[#102e62]">— Rajesh, Frontend Developer</h4>
                 </div>
+
                 <div
-                    class="positions-slide-left bg-gray-800 rounded-xl p-6 shadow hover:scale-105 transition-transform">
-                    <img src="./assests/productmanagerimg.jpg" alt="Project Manager" class="rounded-lg mb-4">
-                    <h3 class="text-xl text-[#f5a222] font-bold">Project Manager</h3>
-                    <p class="text-gray-300 mt-2">Lead projects with top brands and coordinate cross-functional teams.
-                    </p>
+                    class="bg-[#f5f8fc] p-6 rounded-2xl shadow hover:shadow-xl hover:-translate-y-2 transition-all duration-500">
+                    <img src="./assests/vamshikrishna (1).jpg" alt="Office Environment"
+                        class="w-full h-50 object-cover rounded-xl mb-4">
+                    <p class="text-gray-700 italic">“Innovation and learning go hand-in-hand here. Every project is a
+                        chance to grow.”</p>
+                    <h4 class="mt-3 font-semibold text-[#102e62]">— Akhila, UI/UX Designer</h4>
                 </div>
+
                 <div
-                    class="positions-slide-right bg-gray-800 rounded-xl p-6 shadow hover:scale-105 transition-transform">
-                    <img src="./assests/uiuximage.jpg" alt="UI/UX Designer" class="rounded-lg mb-4">
-                    <h3 class="text-xl text-[#f5a222] font-bold">UI/UX Designer</h3>
-                    <p class="text-gray-300 mt-2">Design engaging user experiences for web and mobile applications.</p>
+                    class="bg-[#f5f8fc] p-6 rounded-2xl shadow hover:shadow-xl hover:-translate-y-2 transition-all duration-500">
+                    <img src="./assests/vamshikrishna (1).jpg" alt="Team Discussion"
+                        class="w-full h-50 object-cover rounded-xl mb-4">
+                    <p class="text-gray-700 italic">“GVR’s culture is built on creativity and mutual respect — it truly
+                        feels like family.”</p>
+                    <h4 class="mt-3 font-semibold text-[#102e62]">— Karthik, Backend Engineer</h4>
                 </div>
             </div>
-        </div>
-    </section>
-    <style>
-        .positions-fade-up {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.9s ease;
-        }
 
-        .positions-slide-left {
-            opacity: 0;
-            transform: translateX(-40px);
-            transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.9s ease;
-        }
-
-        .positions-slide-right {
-            opacity: 0;
-            transform: translateX(40px);
-            transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.9s ease;
-        }
-
-        .positions-visible {
-            opacity: 1 !important;
-            transform: translateX(0) translateY(0) !important;
-        }
-    </style>
-    <script>
-        const positionsObserver = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                const children = entry.target.querySelectorAll(
-                    '.positions-fade-up, .positions-slide-left, .positions-slide-right'
-                );
-                if (entry.isIntersecting) {
-                    children.forEach((el, i) => {
-                        setTimeout(() => {
-                            el.classList.add('positions-visible');
-                        }, i * 150);
-                    });
-                } else {
-                    children.forEach(el => {
-                        el.classList.remove('positions-visible');
-                    });
-                }
-            });
-        }, { threshold: 0.3 });
-
-        positionsObserver.observe(document.querySelector('#open-positions'));
-    </script>
-
-    <section class="max-w-4xl mx-auto px-4 py-5 text-center space-y-2 md:space-y-4 section-journey">
-
-        <!-- Heading -->
-        <h2 class="text-2xl md:text-4xl font-bold text-gray-900 section-journey-heading">You Are Here</h2>
-
-        <!-- Subheading -->
-        <h3 class="text-xl md:text-2xl font-semibold text-[#f5a222] section-journey-subheading">Let's Start</h3>
-
-        <!-- Description -->
-        <p class="text-gray-600 text-md md:text-xl section-journey-description">Initiating Your Journey to Success and
-            Growth.</p>
-
-        <!-- Steps -->
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-3 md:gap-6 md:mt-12 section-journey-steps">
-
-            <!-- Step 1 -->
-            <div class="flex flex-col items-center p-6 bg-[#f5a222] rounded-lg shadow section-journey-step">
-                <div
-                    class="w-12 h-12 flex items-center justify-center rounded-full bg-[#102e62] text-white font-bold text-lg">
-                    01</div>
-                <h4 class="mt-4 font-semibold text-gray-900">Share your requirements</h4>
-            </div>
-
-            <!-- Step 2 -->
-            <div class="flex flex-col items-center p-6 bg-[#f5a222] rounded-lg shadow section-journey-step">
-                <div
-                    class="w-12 h-12 flex items-center justify-center rounded-full bg-[#102e62] text-white font-bold text-lg">
-                    02</div>
-                <h4 class="mt-4 font-semibold text-gray-900">Discuss them with our experts</h4>
-            </div>
-
-            <!-- Step 3 -->
-            <div class="flex flex-col items-center p-6 bg-[#f5a222] rounded-lg shadow section-journey-step">
-                <div
-                    class="w-12 h-12 flex items-center justify-center rounded-full bg-[#102e62] text-white font-bold text-lg">
-                    03</div>
-                <h4 class="mt-4 font-semibold text-gray-900">Get a free quote</h4>
-            </div>
-
-            <!-- Step 4 -->
-            <div class="flex flex-col items-center p-6 bg-[#f5a222] rounded-lg shadow section-journey-step">
-                <div
-                    class="w-12 h-12 flex items-center justify-center rounded-full bg-[#102e62] text-white font-bold text-lg">
-                    04</div>
-                <h4 class="mt-4 font-semibold text-gray-900">Start the project</h4>
+            <!-- Optional Video Section -->
+            <div class="life-slide-up max-w-4xl mx-auto relative rounded-2xl overflow-hidden shadow-lg">
+                <video autoplay muted loop playsinline class="w-full h-[300px] md:h-[450px] object-cover rounded-2xl">
+                    <source src="./assests/life-at-gvr.mp4" type="video/mp4">
+                </video>
+                <!-- Dark Overlay -->
+                <div class="absolute inset-0 bg-black/40 flex flex-col items-center justify-center">
+                    <h3 class="text-2xl md:text-3xl font-bold text-white mb-2">Experience the GVR Spirit</h3>
+                    <p class="text-[#f5a222] font-medium">Innovation • Collaboration • Growth</p>
+                </div>
             </div>
 
         </div>
-
     </section>
 
-    <!-- JS for Section-Specific Staggered Animation -->
-    <script>
-        const journeyElements = document.querySelectorAll('.section-journey-heading, .section-journey-subheading, .section-journey-description, .section-journey-step');
-
-        const journeyObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    // Get all elements in order
-                    journeyElements.forEach((el, index) => {
-                        setTimeout(() => {
-                            el.classList.add('section-journey-visible');
-                        }, index * 150); // stagger delay: 150ms
-                    });
-                } else {
-                    // Remove visible class when section leaves viewport to repeat animation
-                    journeyElements.forEach(el => el.classList.remove('section-journey-visible'));
-                }
-            });
-        }, { threshold: 0.2 });
-
-        journeyElements.forEach(el => {
-            el.classList.add('section-journey-init'); // initial hidden state
-            journeyObserver.observe(el);
-        });
-    </script>
-
-    <!-- Tailwind Custom CSS -->
+    <!-- ✨ Styles -->
     <style>
-        .section-journey-init {
+        .life-slide-down {
+            opacity: 0;
+            transform: translateY(-40px);
+            transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.8s ease;
+        }
+
+        .life-slide-up {
             opacity: 0;
             transform: translateY(40px);
-            transition: all 0.7s ease-out;
+            transition: transform 0.9s cubic-bezier(0.25, 1, 0.3, 1), opacity 0.9s ease;
         }
 
-        .section-journey-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    </style>
-
-    <!-- Join Our Team Section -->
-    <section id="join-team"
-        class="relative w-full bg-[#102e62] md:rounded-t-[50%] overflow-hidden pb-4 md:pt-[5%] px-4 pt-5 flex items-center justify-center">
-
-        <!-- Centered Form -->
-        <form class="space-y-4 join-fade-up bg-transparent p-8 rounded-2xl shadow-[0_0_5px_#333] max-w-lg w-full">
-            <h2 class="text-3xl md:text-4xl font-bold text-white text-center">Let's Connect!</h2>
-            <p class="text-gray-300 text-md md:text-lg text-center">Send us a message, and we'll promptly discuss your
-                project with you.</p>
-            <input type="text" placeholder="Your Name"
-                class="input-field join-scroll-letter w-full p-3 rounded-md bg-gray-700 text-gray-200 focus:outline-none">
-            <input type="email" placeholder="Your Email"
-                class="input-field join-scroll-letter w-full p-3 rounded-md bg-gray-700 text-gray-200 focus:outline-none">
-            <input type="text" placeholder="Phone Number"
-                class="input-field join-scroll-letter w-full p-3 rounded-md bg-gray-700 text-gray-200 focus:outline-none">
-            <input type="text" placeholder="Company Name"
-                class="input-field join-scroll-letter w-full p-3 rounded-md bg-gray-700 text-gray-200 focus:outline-none">
-            <textarea placeholder="How can we help you?"
-                class="input-field join-scroll-letter w-full p-3 rounded-md bg-gray-700 text-gray-200 focus:outline-none"></textarea>
-            <button type="submit"
-                class="submit-btn join-scroll-letter w-full py-3 font-bold rounded-md text-black hover:border border-[#f5a222] hover:text-white hover:bg-transparent bg-[#f5a222] transition-colors">
-                Ready to Work, Let's Chat
-            </button>
-        </form>
-    </section>
-
-    <style>
-        .join-fade-up {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.9s ease;
-        }
-
-        .join-scroll-letter {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: transform 0.7s ease, opacity 0.7s ease;
-        }
-
-        .join-fade-up.show,
-        .join-scroll-letter.show-letter {
+        .life-visible {
             opacity: 1 !important;
             transform: translateY(0) !important;
         }
     </style>
 
+    <!-- 💡 Script -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const scrollItems = document.querySelectorAll('.join-fade-up, .join-scroll-letter');
+        const lifeSection = document.querySelector("#life-at-gvr");
+        const lifeText = lifeSection.querySelectorAll(".life-slide-down, .life-slide-up");
 
-            const observer = new IntersectionObserver(entries => {
-                entries.forEach((entry, index) => {
-                    if (entry.isIntersecting) {
-                        setTimeout(() => {
-                            entry.target.classList.add('show');
-                            entry.target.classList.add('show-letter');
-                        }, index * 100);
-                    } else {
-                        entry.target.classList.remove('show');
-                        entry.target.classList.remove('show-letter');
-                    }
-                });
-            }, { threshold: 0.2 });
+        const lifeObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    lifeText.forEach((el, i) => {
+                        setTimeout(() => el.classList.add("life-visible"), i * 200);
+                    });
+                } else {
+                    lifeText.forEach(el => el.classList.remove("life-visible"));
+                }
+            });
+        }, { threshold: 0.3 });
 
-            scrollItems.forEach(item => observer.observe(item));
-        });
+        lifeObserver.observe(lifeSection);
     </script>
+
+
+
+
+
+
+    <!-- 🌟 How to Apply Section -->
+    <section id="apply-gvr" class="relative w-full py-10 md:py-20 bg-[#102e62] text-white overflow-hidden">
+        <!-- Background Video -->
+        <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover">
+            <source src="./assets/apply-bg.mp4" type="video/mp4">
+        </video>
+
+        <!-- Dark Overlay -->
+        <div class="absolute inset-0 bg-black/50"></div>
+
+        <!-- Content -->
+        <div class="relative max-w-5xl mx-auto px-6 text-center z-10">
+            <!-- Heading -->
+            <h2 class="apply-slide-down text-2xl md:text-4xl font-bold mb-3 text-[#f5a222]">
+                Ready to Join GVR?
+            </h2>
+            <p class="apply-slide-down text-gray-200 mb-10 max-w-2xl mx-auto delay-200">
+                Submit your resume and portfolio through the form below, or email us directly at
+                <a href="mailto:careers@gvr.com"
+                    class="text-[#f5a222] font-semibold hover:underline">careers@gvr.com</a>.
+            </p>
+
+            <!-- Application Form -->
+            <form
+                class="apply-slide-up grid grid-cols-1 md:grid-cols-2 gap-6 bg-white/10 backdrop-blur-lg p-8 rounded-2xl shadow-lg">
+                <!-- Name -->
+                <div class="flex flex-col text-left">
+                    <label class="text-sm font-medium mb-1 text-gray-200">Your Name</label>
+                    <input type="text" placeholder="Enter your name"
+                        class="w-full p-3 rounded-lg bg-transparent text-white border border-[#f5a222] placeholder-gray-400 focus:outline-none focus:border-white">
+                </div>
+
+                <!-- Email -->
+                <div class="flex flex-col text-left">
+                    <label class="text-sm font-medium mb-1 text-gray-200">Email</label>
+                    <input type="email" placeholder="Enter your email"
+                        class="w-full p-3 rounded-lg bg-transparent text-white border border-[#f5a222] placeholder-gray-400 focus:outline-none focus:border-white">
+                </div>
+
+                <!-- Role -->
+                <div class="flex flex-col text-left md:col-span-2">
+                    <label class="text-sm font-medium mb-1 text-gray-200">Role You’re Applying For</label>
+                    <input type="text" placeholder="e.g. Frontend Developer"
+                        class="w-full p-3 rounded-lg bg-transparent text-white border border-[#f5a222] placeholder-gray-400 focus:outline-none focus:border-white">
+                </div>
+
+                <!-- Resume Upload -->
+                <div class="flex flex-col text-left">
+                    <label class="text-sm font-medium mb-1 text-gray-200">Upload Resume (PDF/DOC)</label>
+                    <input type="file" accept=".pdf,.doc,.docx"
+                        class="w-full p-2 rounded-lg bg-white text-[#102e62] border border-[#f5a222] focus:outline-none">
+                </div>
+
+                <!-- Message -->
+                <div class="flex flex-col text-left">
+                    <label class="text-sm font-medium mb-1 text-gray-200">Message (Optional)</label>
+                    <textarea rows="3" placeholder="Write a short message..."
+                        class="w-full p-3 rounded-lg bg-transparent text-white border border-[#f5a222] placeholder-gray-400 focus:outline-none focus:border-white"></textarea>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="md:col-span-2 text-center">
+                    <button type="submit"
+                        class="bg-[#f5a222] hover:bg-transparent text-[#102e62] hover:text-[#f5a222] border border-[#f5a222] px-5 md:px-10 md:py-3 rounded-full transition-all duration-300 hover:scale-105 shadow-lg">
+                        Submit Application
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- ✨ Animations -->
+    <style>
+        .apply-slide-down {
+            opacity: 0;
+            transform: translateY(-40px);
+            transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.8s ease;
+        }
+
+        .apply-slide-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: transform 0.9s cubic-bezier(0.25, 1, 0.3, 1), opacity 0.9s ease;
+        }
+
+        .apply-visible {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+    </style>
+
+    <!-- 💡 Script -->
+    <script>
+        const applySection = document.querySelector("#apply-gvr");
+        const applyElements = applySection.querySelectorAll(".apply-slide-down, .apply-slide-up");
+
+        const applyObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    applyElements.forEach((el, i) => {
+                        setTimeout(() => el.classList.add("apply-visible"), i * 200);
+                    });
+                } else {
+                    applyElements.forEach(el => el.classList.remove("apply-visible"));
+                }
+            });
+        }, { threshold: 0.3 });
+
+        applyObserver.observe(applySection);
+    </script>
+
 
 
     <footer class="relative bg-gradient-to-b from-black to-[#102e62] w-full text-gray-300 pt-10 overflow-hidden">

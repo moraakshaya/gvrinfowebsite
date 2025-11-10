@@ -92,7 +92,7 @@
 
 
 <body class="relative min-h-screen bg-gray-100 text-white">
-        <nav x-data="{ 
+    <nav x-data="{ 
         open: false, 
         dropdowns: { company: false, products: false, services: false }, 
         activeLink: '', 
@@ -403,57 +403,74 @@
 
 
     <!-- CONTACT HOME BANNER SECTION -->
-    <section id="contact-banner"
-        class="relative w-full pt-10 pb-5 md:py-20 mb-5 rounded-b-[10px] flex flex-col items-center justify-center text-center overflow-hidden bg-cover bg-center bg-no-repeat"
-        style="background-image: url('./assests/gvrbackground.jpg');">
+<section id="careers-hero"
+  class="relative w-full max-h-screen md:h-[580px] mt-10 md:mt-0 py-20 md:py-0 flex flex-col items-center justify-center text-center overflow-hidden">
 
-        <!-- Dim Gradient Overlay -->
-        <div class="absolute inset-0 bg-[#102e62]/90 z-0"></div>
+  <!-- Background Video -->
+  <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover">
+    <source src="./assests/bannervideo.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
 
-        <div class="relative z-10 max-w-3xl px-6 py-14 md:pt-10 md:pb-0">
-            <!-- Title -->
-            <h2
-                class="contact-banner-title text-4xl md:text-5xl font-bold text-[#f5a222] drop-shadow-lg mt-8 mb-2 md:mb-4 contact-banner-pop-slide-down">
-                Contact Our Team
-            </h2>
-            <!-- Subtitle -->
-            <p
-                class="contact-banner-subtitle text-md sm:text-lg md:text-xl italic text-gray-300 contact-banner-pop-slide-down contact-banner-delay-200">
-                Get in Touch <span class="text-yellow-400">📩</span>
-            </p>
-        </div>
-    </section>
-    <style>
-        .contact-banner-pop-slide-down {
-            opacity: 0;
-            transform: translateY(-40px);
-            transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.9s ease;
-        }
+  <!-- Dark Overlay -->
+  <div class="absolute inset-0 bg-black/60"></div>
 
-        .contact-banner-delay-200 {
-            transition-delay: 0.2s;
-        }
+  <!-- Content -->
+  <div class="relative z-10 max-w-4xl px-6">
+    <!-- Title -->
+    <h2
+      class="careers-hero-slide-down text-2xl md:text-4xl font-bold text-[#f5a222] drop-shadow-lg mt-8 mb-2 md:mb-4">
+      Connect with the GVR Team
+    </h2>
 
-        .contact-banner-visible {
-            opacity: 1 !important;
-            transform: translateY(0) !important;
-        }
-    </style>
-    <script>
-        const contactBannerObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const elements = entry.target.querySelectorAll('.contact-banner-pop-slide-down');
-                    elements.forEach((el, i) => {
-                        setTimeout(() => el.classList.add('contact-banner-visible'), i * 200);
-                    });
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.3 });
+    <!-- Subtitle -->
+    <p
+      class="careers-hero-slide-down text-md sm:text-lg md:text-xl italic text-gray-300 delay-200">
+      Let’s collaborate to create powerful, scalable, and future-ready digital solutions for your business. 💼
+    </p>
 
-        contactBannerObserver.observe(document.querySelector('#contact-banner'));
-    </script>
+    <!-- CTA Button -->
+    <a href="#contactform-section"
+      class="careers-hero-slide-down inline-block mt-6 bg-[#f5a222] text-black  px-3 py-2 md:px-6 md:py-3 rounded-full shadow-lg hover:bg-white hover:text-[#102e62] transition-all duration-300 delay-400">
+      Get in Touch
+    </a>
+  </div>
+</section>
+
+<!-- Animation Styles -->
+<style>
+  .careers-hero-slide-down {
+    opacity: 0;
+    transform: translateY(-50px);
+    transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.9s ease;
+  }
+
+  .careers-hero-visible {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+</style>
+
+<!-- Animation Script -->
+<script>
+  const careersHeroObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      const elements = entry.target.querySelectorAll('.careers-hero-slide-down');
+      if (entry.isIntersecting) {
+        elements.forEach((el, i) => {
+          setTimeout(() => {
+            el.classList.add('careers-hero-visible');
+          }, i * 300); // staggered delay (300ms between each)
+        });
+      } else {
+        elements.forEach(el => el.classList.remove('careers-hero-visible'));
+      }
+    });
+  }, { threshold: 0.5 });
+
+  careersHeroObserver.observe(document.querySelector('#careers-hero'));
+</script>
+
 
 
 
@@ -467,24 +484,27 @@
             </p>
 
             <div class="grid md:grid-cols-3 gap-6 md:pt-5">
-                <div class="contactinfo-fade-up bg-gray-800 rounded-xl p-6 shadow hover:scale-105 transition-transform">
-                    <h3 class="text-xl text-[#f5a222] font-bold">Email Us</h3>
-                    <p class="text-gray-300 mt-2">
+                <div
+                    class="contactinfo-fade-up bg-[#102e62] text-white rounded-xl p-6 shadow-lg hover:scale-105 transition-transform duration-500">
+                    <h3 class="text-xl font-bold text-[#f5a222]">Email Us</h3>
+                    <p class="mt-2">
                         Send us an email at
-                        <a href="mailto:info@gvrinfosystems.com" class="text-[#f5a222]">info@gvrinfosystems.com</a>
+                        <a href="mailto:info@gvrinfosystems.com" class="text-[#f5a222] hover:underline">
+                            info@gvrinfosystems.com
+                        </a>
                     </p>
                 </div>
 
                 <div
-                    class="contactinfo-slide-left bg-gray-800 rounded-xl p-6 shadow hover:scale-105 transition-transform">
+                    class="contactinfo-slide-left bg-[#102e62] text-white rounded-xl p-6 shadow hover:scale-105 transition-transform">
                     <h3 class="text-xl text-[#f5a222] font-bold">Call Us</h3>
-                    <p class="text-gray-300 mt-2">Reach us at +91 6300279339</p>
+                    <p class=" mt-2">Reach us at +91 6300279339</p>
                 </div>
 
                 <div
-                    class="contactinfo-slide-right bg-gray-800 rounded-xl p-6 shadow hover:scale-105 transition-transform">
+                    class="contactinfo-slide-right bg-[#102e62] text-white rounded-xl p-6 shadow hover:scale-105 transition-transform">
                     <h3 class="text-xl text-[#f5a222] font-bold">Visit Us</h3>
-                    <p class="text-gray-300 mt-2">
+                    <p class="mt-2">
                         Plot No. 3, 3rd Floor, Sri Sai Enclave, Old Bowenpally, HYDERABAD, INDIA
                     </p>
                 </div>
@@ -546,20 +566,20 @@
 
 
     <!-- CONTACT FORM SECTION -->
-    <section id="contactform-section" class="relative w-full py-5 overflow-hidden">
+    <section id="contactform-section" class="relative w-full py-16 overflow-hidden">
         <div class="relative z-10 max-w-7xl mx-auto px-6 text-center">
             <h2 class="text-2xl md:text-3xl font-bold text-black contactform-fade-up mb-2">Send Us a Message</h2>
             <p class="text-gray-800 text-lg contactform-fade-up mb-2 md:mb-6">
                 Fill out the form below, and we'll get back to you as soon as possible.
             </p>
 
-            <form class="space-y-4 contactform-fade-up  p-8 rounded-2xl shadow-[0_0_5px_#000] max-w-lg mx-auto">
+            <form class="space-y-4 contactform-fade-up  p-8 rounded-2xl  shadow-[0_0_2px_#000] max-w-lg mx-auto">
                 <input type="text" placeholder="Your Name"
-                    class="w-full p-3 rounded-lg bg-[#102e62] text-white border border-[#102e62] focus:outline-none focus:border-[#102e62]">
+                    class="w-full p-3 rounded-lg bg-transparent text-black border border-[#102e62] focus:outline-none focus:border-[#102e62]">
                 <input type="email" placeholder="Your Email"
-                    class="w-full p-3 rounded-lg bg-[#102e62] text-white border border-[#102e62] focus:outline-none focus:border-[#102e62]">
+                    class="w-full p-3 rounded-lg bg-transparent text-black border border-[#102e62] focus:outline-none focus:border-[#102e62]">
                 <textarea placeholder="Your Message"
-                    class="w-full p-3 rounded-lg bg-[#102e62] text-white border border-[#102e62] focus:outline-none focus:border-[#102e62]"></textarea>
+                    class="w-full p-3 rounded-lg bg-transparent text-black border border-[#102e62] focus:outline-none focus:border-[#102e62]"></textarea>
                 <button type="submit"
                     class="bg-[#f5a222] text-black font-semibold px-3 py-1 md:px-6 md:py-3 rounded-lg hover:text-[#f5a222] hover:bg-transparent border border-[#f5a222] transition-all">
                     Send Message

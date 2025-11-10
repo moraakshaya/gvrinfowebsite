@@ -381,98 +381,82 @@
 
   <!-- Ayucare Home Banner Section -->
 
-  <section id="burserelehomebanner-section"
-    class="relative w-full pt-10 pb-5 md:py-20 mb-5  overflow-hidden bg-cover bg-center bg-no-repeat"
-    style="background-image: url('./assests/gvrbackground.jpg');">
+<section id="hero-ayucare"
+  class="relative w-full md:min-h-screen flex items-center justify-center text-center overflow-hidden">
 
-    <!-- Dim Gradient Overlay -->
-    <div class="absolute inset-0 bg-[#102e62]/90 z-0"></div>
+  <!-- Background Video -->
+  <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover">
+    <source src="./assets/ayucare-bg.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
 
-    <div class="relative z-10 max-w-6xl mx-auto px-6 py-14 md:pt-10 md:pb-0 text-center">
-      <p id="burserelehomebanner-subtitle"
-        class="italic text-white text-md md:text-lg mt-8 mb-1 md:mb-4 opacity-0 translate-y-10">
-        Product Details
-      </p>
-      <h2 id="burserelehomebanner-title"
-        class="text-2xl md:text-4xl font-bold text-[#f5a222] mb-2 md:mb-6 opacity-0 translate-y-10">
-        Hospital Management System (AYUCARE)
-      </h2>
-      <a href="https://your-website-link.com" target="_blank"
-        class="inline-flex items-center gap-2 text-white font-medium transition duration-300 hover:text-gray-300 opacity-0 translate-y-10"
-        id="burserelehomebanner-link">
-        <i class="fa-solid fa-hand-point-right text-white text-xl animate-pulse-slow"></i>
-        Visit Website
+  <!-- Overlay -->
+  <div class="absolute inset-0 bg-[#0d2f59]/75 z-0"></div>
+
+  <!-- Content -->
+  <div class="relative z-10 max-w-5xl mx-auto px-8 pt-[30%] pb-16 md:py-0 text-white">
+    <h1
+      class="text-2xl sm:text-4xl md:text-5xl font-bold mb-4 leading-snug sm:leading-tight opacity-0 translate-y-[-40px] transition-all duration-1000 ease-out animate-slide-down">
+      Ayucare — Smarter Hospital Management for Better Care
+    </h1>
+
+    <p
+      class="text-sm sm:text-base md:text-lg mb-8 text-gray-200 max-w-3xl mx-auto opacity-0 translate-y-[-30px] transition-all duration-1000 delay-300 ease-out animate-slide-down">
+      A next-generation Hospital Management System by <span class="text-[#f5a222] font-semibold">GVR</span> that
+      streamlines patient management, billing, doctor scheduling, and hospital operations — all in one secure
+      platform.
+    </p>
+
+    <!-- CTA Buttons -->
+    <div
+      class="flex flex-col sm:flex-row gap-4 justify-center items-center opacity-0 translate-y-[-20px] transition-all duration-1000 delay-500 ease-out animate-slide-down">
+      <!-- Primary Button -->
+      <a href="#requestdemo-section"
+        class="bg-[#102e62] text-[#fff] hover:bg-white hover:text-[#0d2f59] transition-all duration-300 font-semibold px-8 py-3 rounded-full shadow-lg text-sm sm:text-base">
+        Request a Demo
       </a>
     </div>
-  </section>
-  <style>
-    @keyframes bursereleSlideUp {
-      0% {
-        transform: translateY(30px);
-        opacity: 0;
-      }
+  </div>
 
-      100% {
-        transform: translateY(0);
-        opacity: 1;
-      }
+  <!-- Optional bottom fade -->
+  <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#0d2f59]/80 to-transparent z-0"></div>
+</section>
+
+<!-- Animation styles -->
+<style>
+  @keyframes slideDown {
+    0% {
+      opacity: 0;
+      transform: translateY(-50px);
     }
 
-    .animate-bursereleSlideUp {
-      animation: bursereleSlideUp 0.8s ease-out forwards;
+    100% {
+      opacity: 1;
+      transform: translateY(0);
     }
+  }
 
-    @keyframes pulseSlow {
+  .animate-slide-down {
+    animation: slideDown 1s ease-out forwards;
+  }
 
-      0%,
-      100% {
-        transform: scale(1);
-      }
+  .animate-slide-down:nth-child(1) {
+    animation-delay: 0.2s;
+  }
 
-      50% {
-        transform: scale(1.2);
-      }
-    }
+  .animate-slide-down:nth-child(2) {
+    animation-delay: 0.4s;
+  }
 
-    .animate-pulse-slow {
-      animation: pulseSlow 1.5s infinite;
-    }
-  </style>
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const bursereleSubtitle = document.getElementById("burserelehomebanner-subtitle");
-      const bursereleTitle = document.getElementById("burserelehomebanner-title");
-      const bursereleLink = document.getElementById("burserelehomebanner-link");
-      const bursereleSection = document.getElementById("burserelehomebanner-section");
-
-      const animateElements = () => {
-        bursereleSubtitle.classList.add("animate-bursereleSlideUp");
-        setTimeout(() => bursereleTitle.classList.add("animate-bursereleSlideUp"), 500);
-        setTimeout(() => bursereleLink.classList.add("animate-bursereleSlideUp"), 1000);
-      };
-
-      const bursereleObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            animateElements();
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.3 });
-
-      bursereleObserver.observe(bursereleSection);
-      const rect = bursereleSection.getBoundingClientRect();
-      if (rect.top < window.innerHeight && rect.bottom > 0) {
-        animateElements();
-        bursereleObserver.unobserve(bursereleSection);
-      }
-    });
-  </script>
+  .animate-slide-down:nth-child(3) {
+    animation-delay: 0.6s;
+  }
+</style>
 
 
 
   <!-- Features Section with Dark Overlay -->
-  <section id="featuressection-wrapper" class="relative w-full py-2 md:py-12 overflow-hidden">
+  <section id="featuressection-wrapper" class="relative w-full py-6 md:py-12 overflow-hidden">
   <div class="relative z-10 max-w-7xl mx-auto px-6">
 
     <!-- Title -->
@@ -486,7 +470,7 @@
       
       <!-- Card 1 -->
       <div id="featuressection-item1"
-        class="bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 p-8 rounded-3xl shadow-[0_10px_25px_rgba(16,46,98,0.5)] 
+        class="bg-[#102e62] p-8 rounded-3xl shadow-[0_10px_25px_rgba(16,46,98,0.5)] 
                hover:-translate-y-3 hover:shadow-[0_20px_35px_rgba(16,46,98,0.6)] transform transition-all duration-500
                opacity-0 translate-y-10">
         <div class="text-[#f5a222] mb-5 text-5xl"><i class="fas fa-user-injured"></i></div>
@@ -499,7 +483,7 @@
 
       <!-- Card 2 -->
       <div id="featuressection-item2"
-        class="bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 p-8 rounded-3xl shadow-[0_10px_25px_rgba(16,46,98,0.5)] 
+        class="bg-[#102e62] p-8 rounded-3xl shadow-[0_10px_25px_rgba(16,46,98,0.5)] 
                hover:-translate-y-3 hover:shadow-[0_20px_35px_rgba(16,46,98,0.6)] transform transition-all duration-500
                opacity-0 translate-y-10">
         <div class="text-[#f5a222] mb-5 text-5xl"><i class="fas fa-calendar-check"></i></div>
@@ -512,7 +496,7 @@
 
       <!-- Card 3 -->
       <div id="featuressection-item3"
-        class="bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 p-8 rounded-3xl shadow-[0_10px_25px_rgba(16,46,98,0.5)] 
+        class="bg-[#102e62] p-8 rounded-3xl shadow-[0_10px_25px_rgba(16,46,98,0.5)] 
                hover:-translate-y-3 hover:shadow-[0_20px_35px_rgba(16,46,98,0.6)] transform transition-all duration-500
                opacity-0 translate-y-10">
         <div class="text-[#f5a222] mb-5 text-5xl"><i class="fas fa-file-invoice-dollar"></i></div>
@@ -690,13 +674,13 @@
       <h2 class="text-3xl font-bold text-white mb-6 text-center">Request a Demo</h2>
       <form class="space-y-4">
         <input type="text" placeholder="Your Name"
-          class="w-full p-3 rounded-lg bg-gray-700 text-gray-200 border border-gray-600 focus:outline-none focus:border-yellow-400">
+          class="w-full p-3 rounded-lg bg-transparent text-white border border-[#102e62] placeholder-[#fff] focus:outline-none focus:border-[#102e62]">
         <input type="email" placeholder="Email"
-          class="w-full p-3 rounded-lg bg-gray-700 text-gray-200 border border-gray-600 focus:outline-none focus:border-yellow-400">
+          class="w-full p-3 rounded-lg bg-transparent text-white border border-[#102e62] placeholder-[#fff] focus:outline-none focus:border-[#102e62]">
         <input type="text" placeholder="Hospital Name"
-          class="w-full p-3 rounded-lg bg-gray-700 text-gray-200 border border-gray-600 focus:outline-none focus:border-yellow-400">
+          class="w-full p-3 rounded-lg bg-transparent text-white border border-[#102e62] placeholder-[#fff] focus:outline-none focus:border-[#102e62]">
         <textarea placeholder="Message"
-          class="w-full p-3 rounded-lg bg-gray-700 text-gray-200 border border-gray-600 focus:outline-none focus:border-yellow-400"></textarea>
+          class="w-full p-3 rounded-lg bg-transparent text-white border border-[#102e62] placeholder-[#fff] focus:outline-none focus:border-[#102e62]"></textarea>
         <button type="submit"
           class="bg-[#f5a222] text-black  px-6 py-3 rounded-lg hover:text- hover:bg-transparent hover:border-2 border-[#f5a222] transition-all w-full">Submit</button>
       </form>

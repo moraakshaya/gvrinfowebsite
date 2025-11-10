@@ -378,93 +378,78 @@
     </script>
 
     <!-- HOME BANNER SECTION -->
-    <section id="burserelehomebanner-section"
-        class="relative w-full pt-10 pb-5 md:py-20 mb-5  overflow-hidden bg-cover bg-center bg-no-repeat"
-        style="background-image: url('./assests/gvrbackground.jpg');">
+<section id="hero-empora"
+  class="relative w-full md:min-h-screen flex items-center justify-center text-center overflow-hidden">
 
-        <!-- Dim Gradient Overlay -->
-        <div class="absolute inset-0 bg-[#102e62]/90 z-0"></div>
+  <!-- Background Video -->
+  <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover">
+    <source src="./assets/empora-bg.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
 
-        <div class="relative z-10 max-w-6xl mx-auto px-6 py-14 md:pt-10 md:pb-0 text-center">
-            <p id="burserelehomebanner-subtitle"
-                class="italic text-white text-md md:text-lg mt-8 mb-1 md:mb-4 opacity-0 translate-y-10">
-                Product Details
-            </p>
-            <h2 id="burserelehomebanner-title"
-                class="text-2xl md:text-4xl font-bold text-[#f5a222] mb-2 md:mb-6 opacity-0 translate-y-10">
-                Empora(HRM)
-            </h2>
-            <a href="https://your-website-link.com" target="_blank"
-                class="inline-flex items-center gap-2 text-white font-medium transition duration-300 hover:text-gray-300 opacity-0 translate-y-10"
-                id="burserelehomebanner-link">
-                <i class="fa-solid fa-hand-point-right text-white text-xl animate-pulse-slow"></i>
-                Visit Website
-            </a>
-        </div>
-    </section>
-    <style>
-        @keyframes bursereleSlideUp {
-            0% {
-                transform: translateY(30px);
-                opacity: 0;
-            }
+  <!-- Overlay -->
+  <div class="absolute inset-0 bg-[#102e62]/75 z-0"></div>
 
-            100% {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
+  <!-- Content -->
+  <div class="relative z-10 max-w-5xl mx-auto px-8 pt-[30%] pb-16 md:py-0 text-white">
+    <h1
+      class="text-2xl sm:text-4xl md:text-5xl font-bold mb-4 leading-snug sm:leading-tight opacity-0 translate-y-[-40px] transition-all duration-1000 ease-out animate-slide-down">
+      Empora — Empower Your Workforce with Smart HR Solutions
+    </h1>
 
-        .animate-bursereleSlideUp {
-            animation: bursereleSlideUp 0.8s ease-out forwards;
-        }
+    <p
+      class="text-sm sm:text-base md:text-lg mb-8 text-gray-200 max-w-3xl mx-auto opacity-0 translate-y-[-30px] transition-all duration-1000 delay-300 ease-out animate-slide-down">
+      <span class="text-[#f5a222] font-semibold">Empora</span> by GVR is a modern Human Resource Management System
+      designed to simplify recruitment, attendance, payroll, and performance tracking — so your team can focus on
+      growth, not paperwork.
+    </p>
 
-        @keyframes pulseSlow {
+    <!-- CTA Buttons -->
+    <div
+      class="flex flex-col sm:flex-row gap-4 justify-center items-center opacity-0 translate-y-[-20px] transition-all duration-1000 delay-500 ease-out animate-slide-down">
+      <!-- Primary Button -->
+      <a href="#request-demo"
+        class="bg-[#f5a222] text-[#1a1f4d] hover:bg-white hover:text-[#1a1f4d] transition-all duration-300 font-semibold px-8 py-3 rounded-full shadow-lg text-sm sm:text-base">
+        Request a Demo
+      </a>
+    </div>
+  </div>
 
-            0%,
-            100% {
-                transform: scale(1);
-            }
+  <!-- Optional bottom gradient -->
+  <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#102e62]/80 to-transparent z-0"></div>
+</section>
 
-            50% {
-                transform: scale(1.2);
-            }
-        }
+<!-- Animation styles -->
+<style>
+  @keyframes slideDown {
+    0% {
+      opacity: 0;
+      transform: translateY(-50px);
+    }
 
-        .animate-pulse-slow {
-            animation: pulseSlow 1.5s infinite;
-        }
-    </style>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const bursereleSubtitle = document.getElementById("burserelehomebanner-subtitle");
-            const bursereleTitle = document.getElementById("burserelehomebanner-title");
-            const bursereleLink = document.getElementById("burserelehomebanner-link");
-            const bursereleSection = document.getElementById("burserelehomebanner-section");
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 
-            const animateElements = () => {
-                bursereleSubtitle.classList.add("animate-bursereleSlideUp");
-                setTimeout(() => bursereleTitle.classList.add("animate-bursereleSlideUp"), 500);
-                setTimeout(() => bursereleLink.classList.add("animate-bursereleSlideUp"), 1000);
-            };
+  .animate-slide-down {
+    animation: slideDown 1s ease-out forwards;
+  }
 
-            const bursereleObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        animateElements();
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.3 });
+  .animate-slide-down:nth-child(1) {
+    animation-delay: 0.2s;
+  }
 
-            bursereleObserver.observe(bursereleSection);
-            const rect = bursereleSection.getBoundingClientRect();
-            if (rect.top < window.innerHeight && rect.bottom > 0) {
-                animateElements();
-                bursereleObserver.unobserve(bursereleSection);
-            }
-        });
-    </script>
+  .animate-slide-down:nth-child(2) {
+    animation-delay: 0.4s;
+  }
+
+  .animate-slide-down:nth-child(3) {
+    animation-delay: 0.6s;
+  }
+</style>
+
 
 
 
