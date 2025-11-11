@@ -589,13 +589,13 @@
         <div class="relative z-10 w-full max-w-6xl text-left text-white flex flex-col space-y-3 md:space-y-4">
 
             <h2 class="text-lg md:text-xl font-medium opacity-0 animate-slide-in" style="animation-delay: 0.5s;">
-                Welcome to <span class="text-[#f5a222] text-2xl md:text-2xl font-bold animate-roll-down">GVR Tech</span>
+                Welcome To <span class="text-[#f5a222] text-2xl md:text-2xl font-bold animate-roll-down">GVR Tech</span>
             </h2>
 
             <h1 class="text-3xl md:text-5xl font-extrabold opacity-0 animate-slide-in"
                 style="animation-delay: 1.5s; line-height: 1.2;">
                 Driving Digital Success <br>
-                with
+                With
                 Smart Technology & Strategy
             </h1>
 
@@ -900,12 +900,12 @@
 
             <!-- Subtitle -->
             <h3 class="text-2xl md:text-3xl font-semibold text-white mb-3">
-                We are <span class="text-[#f5a222]">GVR</span>
+                We Are <span class="text-[#f5a222]">GVR</span>
             </h3>
 
             <!-- Title -->
             <h2 class="text-3xl md:text-5xl font-bold text-white leading-snug mb-5 drop-shadow-lg">
-                Our Commitment to Client Satisfaction
+                Our Commitment To Client Satisfaction
             </h2>
 
             <!-- Paragraph -->
@@ -1365,7 +1365,7 @@
             <!-- LEFT CONTENT -->
             <div class="md:w-[30%] flex flex-col justify-center text-center md:text-left space-y-2 md:space-y-4">
                 <h3 class="text-md md:text-lg font-bold text-black text-animate">
-                    <span class="text-[#f5a222]">Crafting</span> Success with our products
+                    <span class="text-[#f5a222]">Crafting</span> Success With Our Products
                 </h3>
                 <h2 class="text-4xl md:text-5xl font-bold text-black drop-shadow-lg text-animate">
                     Our Products
@@ -2084,121 +2084,135 @@
 
 
     <!-- CLIENT STORIES -->
+
     <style>
-        #client-cards {
-            display: flex;
-            width: max-content;
-            animation: client-carousel 35s linear infinite;
-        }
+  #client-cards {
+    display: flex;
+    width: max-content;
+    animation: client-carousel 35s linear infinite;
+  }
 
-        @keyframes client-carousel {
-            0% {
-                transform: translateX(0);
-            }
+  @keyframes client-carousel {
+    0% {
+      transform: translateX(0);
+    }
 
-            100% {
-                transform: translateX(-50%);
-            }
-        }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
 
-        #client-cards:hover {
-            animation-play-state: paused;
-        }
+  #client-cards:hover {
+    animation-play-state: paused;
+  }
 
-        .client-card:hover {
-            box-shadow: 4px 4px 10px #102e62;
-            border-color: #102e62;
-        }
+  .client-card:hover {
+    box-shadow: 4px 4px 10px #102e62;
+    border-color: #102e62;
+  }
 
-        @keyframes slideDown {
-            0% {
-                transform: translateY(-50px);
-                opacity: 0;
-            }
+  /* Slide-in animations */
+  @keyframes slideInLeft {
+    0% {
+      transform: translateX(-60px);
+      opacity: 0;
+    }
 
-            100% {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
 
-        .animate-title {
-            animation: slideDown 1.2s ease forwards;
-        }
+  .slide-in {
+    animation: slideInLeft 1s ease forwards;
+  }
 
-        .animate-cards {
-            transition: opacity 1s ease;
-            opacity: 1 !important;
-        }
+  .slide-in.delay-1 {
+    animation-delay: 0.3s;
+  }
 
-        @media (max-width: 768px) {
-            #client-cards {
-                animation: client-carousel 25s linear infinite;
-            }
-        }
-    </style>
-    <section id="client-stories" class="relative w-full py-5 overflow-hidden">
-        <div class="relative max-w-7xl mx-auto px-6">
-            <h2 id="client-title"
-                class="text-2xl md:text-4xl font-bold text-black text-center translate-y-[-50px] opacity-0 drop-shadow-lg">
-                Few Stories from our Client
-            </h2>
-            <!-- Cards Wrapper -->
-            <div id="client-cards" class="mt-8 md:mt-12 flex gap-6 opacity-0 flex-wrap justify-center">
-                <!-- Card 1 -->
+  .slide-in.delay-2 {
+    animation-delay: 0.6s;
+  }
+
+  .animate-cards {
+    transition: opacity 1s ease;
+    opacity: 1 !important;
+  }
+
+  @media (max-width: 768px) {
+    #client-cards {
+      animation: client-carousel 25s linear infinite;
+    }
+  }
+</style>
+
+<section id="client-stories" class="relative w-full py-16 md:py-20 overflow-hidden bg-gradient-to-b from-white to-[#f8fafc]">
+  <div class="relative max-w-7xl mx-auto px-6 text-center">
+    <h2 id="client-title"
+      class="text-2xl md:text-4xl font-bold text-[#102e62] translate-x-[-60px] opacity-0 drop-shadow-lg">
+      Trusted Voices Of Our Clients
+    </h2>
+
+    <p id="client-subtitle"
+      class="text-gray-700 text-base md:text-lg mt-3 max-w-3xl mx-auto leading-relaxed translate-x-[-60px] opacity-0">
+      Hear directly from our valued partners who have experienced growth, innovation, and reliability with GVR’s
+      tailored digital solutions.
+    </p>
+
+    <!-- Cards Wrapper -->
+    <div id="client-cards" class="mt-10 flex gap-6 opacity-0 flex-wrap justify-center">
+      <!-- Card 1 -->
+      <div
+        class="client-card w-80 flex-shrink-0 border border-blue-500 shadow-sm rounded-xl p-6 bg-gray-900/95 hover:scale-105 transition-transform">
+        <div class="client-stars flex text-yellow-400 mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+            class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <p class="text-gray-300 text-start text-sm leading-relaxed mb-4">"The team at GVR Infosystems transformed our digital
+          presence with precision and creativity!"</p>
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white text-lg">
+            <i class="fas fa-user"></i>
+          </div>
+          <div class="text-start">
+            <h4 class="font-semibold text-white">Karthik</h4>
+            <p class="text-sm text-gray-400">Marketing Manager</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div
+        class="client-card w-80 flex-shrink-0 border border-blue-500 shadow-sm rounded-xl p-6 bg-gray-900/95 hover:scale-105 transition-transform">
+        <div class="client-stars flex text-yellow-400 mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+            class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <p class="text-gray-300 text-start text-sm leading-relaxed mb-4">"Their IT expertise and strategic approach gave our
+          operations a new edge."</p>
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white text-lg">
+            <i class="fas fa-user-tie"></i>
+          </div>
+          <div class="text-start">
+            <h4 class="font-semibold text-white">Prakash</h4>
+            <p class="text-sm text-gray-400">Delivery Manager</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
                 <div
                     class="client-card w-80 flex-shrink-0 border border-blue-500 shadow-sm rounded-xl p-6 bg-gray-900/95">
                     <div class="client-stars flex text-yellow-400 mb-4"><i class="fas fa-star"></i><i
                             class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
                             class="fas fa-star"></i></div>
-                    <p class="text-gray-300 text-sm leading-relaxed mb-4">"The team at GVR Infosystems was exceptional
-                        in delivering a tailored product on time!"</p>
-                    <div class="flex items-center gap-4">
-                        <div
-                            class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white text-lg">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-semibold text-white">Karthik</h4>
-                            <p class="text-sm text-gray-400">Marketing Manager</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 2 -->
-                <div
-                    class="client-card w-80 flex-shrink-0 border border-blue-500 shadow-sm rounded-xl p-6 bg-gray-900/95">
-                    <div class="client-stars flex text-yellow-400 mb-4"><i class="fas fa-star"></i><i
-                            class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                            class="fas fa-star"></i></div>
-                    <p class="text-gray-300 text-sm leading-relaxed mb-4">"Impressed with their expertise in IT
-                        Solutions. Great customer service as well."</p>
-                    <div class="flex items-center gap-4">
-                        <div
-                            class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white text-lg">
-                            <i class="fas fa-user-tie"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-semibold text-white">Prakash</h4>
-                            <p class="text-sm text-gray-400">Delivery Manager</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 3 -->
-                <div
-                    class="client-card w-80 flex-shrink-0 border border-blue-500 shadow-sm rounded-xl p-6 bg-gray-900/95">
-                    <div class="client-stars flex text-yellow-400 mb-4"><i class="fas fa-star"></i><i
-                            class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                            class="fas fa-star"></i></div>
-                    <p class="text-gray-300 text-sm leading-relaxed mb-4">"They took the time to understand our unique
+                    <p class="text-gray-300 text-start text-sm leading-relaxed mb-4">"They took the time to understand our unique
                         business needs and tailored their solutions."</p>
                     <div class="flex items-center gap-4">
                         <div
                             class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white text-lg">
                             <i class="fas fa-user-cog"></i>
                         </div>
-                        <div>
+                        <div class="text-start">
                             <h4 class="font-semibold text-white">Durgaprashad</h4>
                             <p class="text-sm text-gray-400">Operations Manager</p>
                         </div>
@@ -2211,14 +2225,14 @@
                     <div class="client-stars flex text-yellow-400 mb-4"><i class="fas fa-star"></i><i
                             class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
                             class="fas fa-star"></i></div>
-                    <p class="text-gray-300 text-sm leading-relaxed mb-4">"We are thrilled to share that GVR Infosystems
+                    <p class="text-gray-300 text-start text-sm leading-relaxed mb-4">"We are thrilled to share that GVR Infosystems
                         provided the perfect solution!"</p>
                     <div class="flex items-center gap-4">
                         <div
                             class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white text-lg">
                             <i class="fas fa-user-shield"></i>
                         </div>
-                        <div>
+                        <div class="text-start">
                             <h4 class="font-semibold text-white">Satya</h4>
                             <p class="text-sm text-gray-400">Director</p>
                         </div>
@@ -2231,14 +2245,14 @@
                     <div class="client-stars flex text-yellow-400 mb-4"><i class="fas fa-star"></i><i
                             class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
                             class="fas fa-star"></i></div>
-                    <p class="text-gray-300 text-sm leading-relaxed mb-4">"Working with GVR Infosystems transformed how
+                    <p class="text-gray-300 text-start text-sm leading-relaxed mb-4">"Working with GVR Infosystems transformed how
                         we manage operations."</p>
                     <div class="flex items-center gap-4">
                         <div
                             class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white text-lg">
                             <i class="fas fa-user-edit"></i>
                         </div>
-                        <div>
+                        <div class="text-start">
                             <h4 class="font-semibold text-white">Praveen</h4>
                             <p class="text-sm text-gray-400">Delivery Head</p>
                         </div>
@@ -2251,14 +2265,14 @@
                     <div class="client-stars flex text-yellow-400 mb-4"><i class="fas fa-star"></i><i
                             class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
                             class="fas fa-star"></i></div>
-                    <p class="text-gray-300 text-sm leading-relaxed mb-4">"The team delivered on time with dedication
+                    <p class="text-gray-300 text-start text-sm leading-relaxed mb-4">"The team delivered on time with dedication
                         and professionalism."</p>
                     <div class="flex items-center gap-4">
                         <div
                             class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white text-lg">
                             <i class="fas fa-user-tie"></i>
                         </div>
-                        <div>
+                        <div class="text-start">
                             <h4 class="font-semibold text-white">Vamshi</h4>
                             <p class="text-sm text-gray-400">HR Manager</p>
                         </div>
@@ -2271,61 +2285,45 @@
                     <div class="client-stars flex text-yellow-400 mb-4"><i class="fas fa-star"></i><i
                             class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
                             class="fas fa-star"></i></div>
-                    <p class="text-gray-300 text-sm leading-relaxed mb-4">"They provided innovative solutions that
+                    <p class="text-gray-300 text-start text-sm leading-relaxed mb-4">"They provided innovative solutions that
                         improved our business."</p>
                     <div class="flex items-center gap-4">
                         <div
                             class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white text-lg">
                             <i class="fas fa-user-cog"></i>
                         </div>
-                        <div>
+                        <div class="text-start">
                             <h4 class="font-semibold text-white">Zain</h4>
                             <p class="text-sm text-gray-400">Tech Manager</p>
                         </div>
                     </div>
                 </div>
+    </div>
+  </div>
+</section>
 
-            </div>
-        </div>
-    </section>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const section = document.querySelector("#client-stories");
-            const title = document.querySelector("#client-title");
-            const cards = document.querySelector("#client-cards");
-            cards.innerHTML += cards.innerHTML;
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        title.classList.add("animate-title");
-                        cards.classList.add("animate-cards");
-                    } else {
-                        title.classList.remove("animate-title");
-                        cards.classList.remove("animate-cards");
-                    }
-                });
-            }, { threshold: 0.3 });
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const section = document.querySelector("#client-stories");
+    const title = document.querySelector("#client-title");
+    const subtitle = document.querySelector("#client-subtitle");
+    const cards = document.querySelector("#client-cards");
 
-            observer.observe(section);
-        });
-    </script>
-    <style>
-        .fade-in {
-            animation: fadeIn 0.5s ease-in-out forwards;
+    cards.innerHTML += cards.innerHTML; // Duplicate for infinite loop
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          title.classList.add("slide-in");
+          subtitle.classList.add("slide-in", "delay-1");
+          cards.classList.add("animate-cards");
         }
+      });
+    }, { threshold: 0.3 });
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(5px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-    </style>
+    observer.observe(section);
+  });
+</script>
 
 
 
